@@ -1,0 +1,29 @@
+html,body,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,button,p{
+    margin: 0;
+    padding: 0;
+}
+
+ul,ol{
+    list-style: none;
+}
+
+a{
+    color: #000;
+    text-decoration: none;
+}
+
+img{
+    border: none;
+    /* 이미지 링크시 기본보더 없앰
+    - 서버 배포시 나올 수 있음 */
+    vertical-align: top;
+    /*  블록박스안에 이미지가 단독으로 들어간 경우
+    하단간극이 생긴다(약4px) 이것을 없애려면
+    세로정렬옵션을 top/middle/bottom 셋중 어떤값이어도
+    효과가 있음!(단, 블록박스의 높이값은 auto이며
+    이미지에 의하여 높이값이 결정되는 경우임! */
+}
+
+*{
+    box-sizing: border-box;
+}
