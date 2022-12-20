@@ -1,5 +1,6 @@
 /* eslint no-use-before-define: 0 */
 import './App.css';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
         </aside>
         <section id="section"></section>
       </main>
-      <footer id="footer"></footer>
+      <footer id="footer">
+        <Footer />
+      </footer>
     </div>
   );
 }
