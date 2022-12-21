@@ -5,11 +5,12 @@ const Layout = styled.div`
   display: flex;
 
   .flex_3 {
-    flex: 3;
-    background-color: gray;
+    flex: 5;
+    
   }
   .flex_1 {
-    flex: 1;
+    flex: 2;
+    margin-left:20px;
     background-color: rgba(255, 255, 0, 0.5);
   }
 `;
@@ -19,7 +20,7 @@ const Header = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    padding-bottom: 30px;
   }
 
   .tap {
@@ -32,6 +33,28 @@ const Header = styled.header`
   .tap_ul {
     display: flex;
   }
+
+  .crate{
+    background-color: rgb(21,126,255);
+    padding:10px;
+    border-radius:5px;
+    border-top: 1px inset white;
+
+    a{
+        color: white; 
+    }
+  }
+
+  .tap_ul{
+    background-color: red;
+
+    li{
+        
+        button{
+            padding:5px 10px;
+        }
+    }
+  }
 `;
 
 const Main = styled.div``;
@@ -42,13 +65,13 @@ export const Questios = () => {
       <div className="flex_3">
         <Header>
           <div className="title">
-            <div>
+            <div className="">
               {/* 기본제목 & 검색시 제목 */}
               <h2>All Questions</h2>
             </div>
-            <div>
+            <div className="crate">
               {/* 클릭시 질문작성 페이지 (비로그인시 로그인창으로) */}
-              <button>Ask Question</button>
+              <a href="#">Ask Question</a>
             </div>
           </div>
           <div className="tap">
