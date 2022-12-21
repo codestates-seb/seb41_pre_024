@@ -1,8 +1,22 @@
-/* eslint no-use-before-define: 0 */
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Questios } from "./components/Questions";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QuestionsCrate } from "./components/QuestionsCrate";
+
+const Content = () => {
+  return (
+    <main id="main">
+      <aside id="aside">
+        <div id="scroll"></div>
+      </aside>
+      <section id="section">
+        <Questios />
+      </section>
+    </main>
+  );
+};
 
 function App() {
   return (
@@ -10,14 +24,12 @@ function App() {
       <header id="header">
         <Header />
       </header>
-      <main id="main">
-        <aside id="aside">
-          <div id="scroll"></div>
-        </aside>
-        <section id="section">
-          <Questios/>
-        </section>
-      </main>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Content/>}/>
+          <Route path="/ask" element={<QuestionsCrate/>}/>
+        </Routes>
+      </BrowserRouter>
       <footer id="footer">
         <Footer />
       </footer>
@@ -26,3 +38,6 @@ function App() {
 }
 
 export default App;
+
+
+
