@@ -13,10 +13,6 @@ function App() {
     <BrowserRouter>
       <div id="layout">
         <Header />
-        {/* <main id="main">
-          <aside id="aside">
-            <scroll id="scroll"></scroll>
-          </aside> */}
         <section id="section">
           <Routes>
             <Route path="/" exact={true} element={<Home />} />
@@ -25,7 +21,6 @@ function App() {
             <Route path="/question" element={<DetailPage />} />
           </Routes>
         </section>
-        {/* </main> */}
       </div>
     </BrowserRouter>
   );
