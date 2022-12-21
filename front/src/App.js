@@ -2,8 +2,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-import QandA from './components/QandA';
 import Footer from './components/Footer';
+import Question from './pages/Question';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <section id="section">
             <Routes>
               <Route path="/" />
-              <Route path="/questions" element={<QandA />} />
+              <Route path="/questions" element={<Question />} />
             </Routes>
           </section>
         </main>
