@@ -1,19 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import Footer from '../components/Footer';
 
 export default function detailPage() {
   return (
-    <DetailPageContainer>
-      <NavBar />
-      <DetailContent>
-        <hr />
-      </DetailContent>
-    </DetailPageContainer>
+    <>
+      <DetailPageContainer>
+        <NavBar />
+        <DetailContent>
+          <hr />
+        </DetailContent>
+      </DetailPageContainer>
+      <Footer />
+    </>
   );
 }
 
 const DetailPageContainer = styled.div`
-  height: 800px;
+  height: 1000px;
   display: flex;
   justify-content: center;
 `;

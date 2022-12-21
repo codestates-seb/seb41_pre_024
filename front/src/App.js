@@ -13,19 +13,19 @@ function App() {
     <BrowserRouter>
       <div id="layout">
         <Header />
-        <main id="main">
+        {/* <main id="main">
           <aside id="aside">
             <scroll id="scroll"></scroll>
-          </aside>
-          <section id="section">
-            <Routes>
-              <Route path="/" exact={true} element={<Home />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/question" element={<DetailPage />}></Route>
-            </Routes>
-          </section>
-        </main>
+          </aside> */}
+        <section id="section">
+          <Routes>
+            <Route path="/" exact={true} element={<Home />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/question" element={<DetailPage />} />
+          </Routes>
+        </section>
+        {/* </main> */}
       </div>
     </BrowserRouter>
   );
