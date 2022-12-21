@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import logo from '../assets/stackoverflow_small.png';
+import styled from "styled-components";
+import logo from "../assets/stackoverflow_small.png";
 
 export default function Footer() {
   return (

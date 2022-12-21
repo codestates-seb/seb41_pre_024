@@ -1,12 +1,15 @@
 /* eslint no-use-before-define: 0 */
-import './App.css';
-import { Questios } from './components/Questions';
-import Footer from './components/Footer';
+import "./App.css";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import { Questios } from "./components/Questions";
 
 function App() {
   return (
     <div id="layout">
-      <header id="header"></header>
+      <header id="header">
+        <Header />
+      </header>
       <main id="main">
         <aside id="aside">
           <div id="scroll"></div>

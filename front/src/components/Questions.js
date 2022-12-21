@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useState from "react";
+import Tap from "./Tap"
 
 const Layout = styled.div`
   display: flex;
@@ -30,34 +31,24 @@ const Header = styled.header`
     margin-bottom: 12px;
   }
 
-  .tap_ul {
-    display: flex;
-  }
 
   .crate{
     background-color: rgb(21,126,255);
     padding:10px;
     border-radius:5px;
     border-top: 1px inset white;
-
     a{
         color: white; 
     }
   }
 
-  .tap_ul{
-    background-color: red;
+  .tap_ul {
+    display: flex;
 
-    li{
-        
-        button{
-            padding:5px 10px;
-        }
-    }
   }
 `;
 
-const Main = styled.div``;
+
 
 export const Questios = () => {
   return (
@@ -81,22 +72,11 @@ export const Questios = () => {
             </div>
             {/* 탭 버튼 */}
             <div>
-              <ul className="tap_ul">
-                <li>
-                  <button>Recent</button>
-                </li>
-                <li>
-                  <button>AnswerUp</button>
-                </li>
-                <li>
-                  <button>AnswerDown</button>
-                </li>
-              </ul>
             </div>
           </div>
         </Header>
 
-        <Main>리스트부분</Main>
+        <main>리스트부분</main>
         <footer>페이지 네이션</footer>
       </div>
       <aside className="flex_1">사이드부분</aside>
