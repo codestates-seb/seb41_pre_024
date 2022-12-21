@@ -1,5 +1,6 @@
 /* eslint no-use-before-define: 0 */
 import './App.css';
+import { Questios } from './components/Questions';
 import Footer from './components/Footer';
 
 function App() {
@@ -10,7 +11,9 @@ function App() {
         <aside id="aside">
           <div id="scroll"></div>
         </aside>
-        <section id="section"></section>
+        <section id="section">
+          <Questios/>
+        </section>
       </main>
       <footer id="footer">
         <Footer />
