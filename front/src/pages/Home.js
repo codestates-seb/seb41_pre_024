@@ -1,23 +1,10 @@
-import "../App.css";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import React from 'react';
+import Footer from '../components/Footer';
 
-const Home = () => {
+export default function Home() {
   return (
-    <div id="layout">
-      <header id="header">
-        <Header />
-      </header>
-      <main id="main">
-        <aside id="aside">
-          <div id="scroll"></div>
-        </aside>
-        <section id="section"></section>
-      </main>
-      <footer id="footer">
-        <Footer />
-      </footer>
-    </div>
+    <>
+      <Footer />
+    </>
   );
-};
-export default Home;
+}

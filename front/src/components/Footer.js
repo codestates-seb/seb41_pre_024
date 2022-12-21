@@ -72,6 +72,10 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 const LogoAndLightMode = styled.div`
