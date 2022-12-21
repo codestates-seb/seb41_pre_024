@@ -1,20 +1,32 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { IoSearchOutline } from "react-icons/io5";
-import logo from "../assets/logo-stackoverflow.png";
-import { VscAccount } from "react-icons/vsc";
-import { BsFillInboxFill } from "react-icons/bs";
-import { AiFillTrophy } from "react-icons/ai";
-import { AiFillQuestionCircle } from "react-icons/ai";
-import { FaRegSnowflake } from "react-icons/fa";
-import { BsFillChatSquareTextFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import styled from 'styled-components';
+import { IoSearchOutline } from 'react-icons/io5';
+import logo from '../assets/logo-stackoverflow.png';
+import { VscAccount } from 'react-icons/vsc';
+import { BsFillInboxFill } from 'react-icons/bs';
+import { AiFillTrophy } from 'react-icons/ai';
+import { AiFillQuestionCircle } from 'react-icons/ai';
+import { FaRegSnowflake } from 'react-icons/fa';
+import { BsFillChatSquareTextFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 50px;
+
+  background-color: rgb(247, 247, 247);
+  height: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  border-top: 3px solid #f48225;
+  display: flex;
+  justify-content: center;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
 `;
 
 const Logo = styled.img`

@@ -1,20 +1,32 @@
-/* eslint no-use-before-define: 0 */
 import './App.css';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+
+import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import Home from './pages/Home';
-import Question from './pages/Question';
+import DetailPage from './pages/DetailPage';
+
+import Header from './components/Header';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" exact={true} element={<Home />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/questions" element={<Question />} />
-      </Routes>
+      <div id="layout">
+        <Header />
+        <main id="main">
+          <aside id="aside">
+            <scroll id="scroll"></scroll>
+          </aside>
+          <section id="section">
+            <Routes>
+              <Route path="/" exact={true} element={<Home />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/question" element={<DetailPage />}></Route>
+            </Routes>
+          </section>
+        </main>
+      </div>
     </BrowserRouter>
   );
 }
