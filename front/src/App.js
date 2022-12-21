@@ -4,12 +4,15 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import Footer from './components/Footer';
 import Question from './pages/Question';
+import Header from './components/Header';
 
 function App() {
   return (
     <BrowserRouter>
       <div id="layout">
-        <header id="header"></header>
+        <header id="header">
+          <Header />
+        </header>
         <main id="main">
           <aside id="aside">
             <div id="scroll"></div>
