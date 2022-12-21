@@ -8,6 +8,7 @@ import { AiFillTrophy } from "react-icons/ai";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { FaRegSnowflake } from "react-icons/fa";
 import { BsFillChatSquareTextFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -20,6 +21,8 @@ const Logo = styled.img`
   width: 150px;
   height: 32px;
   margin-right: 20px;
+  display: flex;
+  justify-content: center;
 `;
 
 const SearchForm = styled.form`
@@ -90,14 +93,16 @@ const Header = () => {
 
   return (
     <Container>
-      <Logo src={logo}></Logo>
+      <Link to="/">
+        <Logo src={logo}></Logo>
+      </Link>
       <SearchForm>
         <div>
           <IoSearchOutline />
           <input type="text" placeholder="Search..." />
         </div>
       </SearchForm>
-      {isClick ? (
+      {/* {isClick ? (
         <IconContainer>
           <VscAccount className="icon" />
           <BsFillInboxFill className="icon" />
@@ -109,9 +114,17 @@ const Header = () => {
       ) : (
         <div>
           <Button onClick={onClickBtn}>Log in</Button>
-          <SignupButton>Sign up</SignupButton>
+          <Link to="/login">
+            <SignupButton>Sign up</SignupButton>
+          </Link>
         </div>
-      )}
+      )} */}
+      <Link to="/login">
+        <Button>Log in</Button>
+      </Link>
+      <Link to="/signup">
+        <SignupButton>Sign up</SignupButton>
+      </Link>
     </Container>
   );
 };
