@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import logo from '../assets/stackoverflow_small.png';
+import styled from "styled-components";
+import logo from "../assets/stackoverflow_small.png";
 
 export default function Footer() {
   return (
@@ -76,7 +76,7 @@ const FooterContainer = styled.div`
 
 const LogoAndLightMode = styled.div`
   width: 5rem;
-  height: 32vh;
+  height: 260px;
   padding: 0 12 24 0px;
   display: flex;
   flex-direction: column;
@@ -110,7 +110,7 @@ const LightMode = styled.div`
 `;
 
 const Category = styled.div`
-  height: 32vh;
+  height: 260px;
   padding: 0 12 24 0px;
   margin: 0 50px;
 
@@ -130,7 +130,7 @@ const Menu = styled.p`
 
 const SnsAndCopyright = styled.div`
   width: 15rem;
-  height: 32vh;
+  height: 260px;
   padding: 0 12 24 0px;
   display: flex;
   flex-direction: column;
