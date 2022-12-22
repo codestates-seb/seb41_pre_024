@@ -1,5 +1,8 @@
 package preproject.back.Answer.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import preproject.back.Answer.Entity.Answer;
 import preproject.back.Answer.Exception.BusinessLogicException;
@@ -7,7 +10,6 @@ import preproject.back.Answer.Exception.ExceptionCode;
 import preproject.back.Answer.Repository.AnswerRepository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -22,7 +24,6 @@ public class AnswerService {
 
     //답변 생성기능
     public Answer createAnswer(Answer answer){
-        //TODO 검증로직
 
         Answer savedAnswer = answerRepository.save(answer);
 
@@ -45,9 +46,14 @@ public class AnswerService {
     }
 
     //답변 전체 찾아오는 기능
-    public List<Answer> findAnswerList() {
-        return answerRepository.findAll(); }//Todo 추후 시간이 된다면 페이지네이션 구현
+//    public List<Answer> findAnswerList() {
+//        return answerRepository.findAll(); }
 
+    //페이지네이션 버전
+    public Page<Answer> findAnswers(int page, int size) {
+        return answerRepository.findAll(PageRequest.of(page, size,
+                Sort.by("answerId").descending())); //최신순 정렬
+    }
     //답변 삭제 기능
     public void deleteAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId);
@@ -74,11 +80,10 @@ public class AnswerService {
 
     }
 
-    //Todo 답변 채택 기능
     public Answer adoptAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId);
 
-        //TODO Answer가 채택 상태이면 예외발생
+        verifyChosenAnswer(findAnswer);
 
         findAnswer.setChoose(true);
 
@@ -89,9 +94,13 @@ public class AnswerService {
 
     /*검증로직*/
 
-    //TODO Answer가 존재하면 예외발생
 
-    //TODO Answer가 채택 상태이면 예외발생
+    //Answer가 채택 상태이면 예외발생
+    //TODO Question 객체의 answerList에 채택상태(true)인 Answer객체가 있으면 예외발생하는 것으로 변환
+    private void verifyChosenAnswer(Answer answer){
+
+        if(answer.isChoose() == false) new BusinessLogicException(ExceptionCode.ALREADY_CHOSEN_ANSWER);
+    }
 
 
 

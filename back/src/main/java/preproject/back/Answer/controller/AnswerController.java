@@ -1,6 +1,7 @@
 package preproject.back.Answer.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -8,13 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import preproject.back.Answer.Entity.Answer;
 import preproject.back.Answer.dto.AnswerPatchDto;
 import preproject.back.Answer.dto.AnswerPostDto;
-import preproject.back.Answer.dto.AnswerResponseDto;
 import preproject.back.Answer.mapper.AnswerMapper;
 import preproject.back.Answer.service.AnswerService;
+import preproject.back.Answer.pagedto.MultiResponseDto;
 
 import javax.validation.constraints.Positive;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -38,6 +38,7 @@ public class AnswerController {
 
         Answer answer =this.answerService.createAnswer(this.mapper.AnswerPostToAnswer(answerPostDto));
         return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer),HttpStatus.CREATED);
+
     }
 
 
@@ -52,13 +53,23 @@ public class AnswerController {
 
     //답변 리스트 조회 기능0
     @GetMapping
-    public ResponseEntity getAnswerList(){
-        List<Answer> AnswerList = this.answerService.findAnswerList();
-        List<AnswerResponseDto> responseAnswerList = (List)AnswerList.stream().map((answer) -> {
-            return this.mapper.AnswerToAnswerResponseDto(answer);
-        }).collect(Collectors.toList());
-        return new ResponseEntity(responseAnswerList, HttpStatus.OK);
-    }
+    public ResponseEntity getAnswerList(@Positive @RequestParam int page,
+                                        @Positive @RequestParam int size){
+//        List<Answer> AnswerList = this.answerService.findAnswerList();
+//        List<AnswerResponseDto> responseAnswerList = (List)AnswerList.stream().map((answer) -> {
+//            return this.mapper.AnswerToAnswerResponseDto(answer);
+//        }).collect(Collectors.toList());
+//        return new ResponseEntity(responseAnswerList, HttpStatus.OK);
+//    }
+
+        //페이지네이션 버전
+            Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
+            List<Answer> answers = pageAnswers.getContent();
+            return new ResponseEntity<>(
+                    new MultiResponseDto<>(mapper.AnswersToAnswerResponses(answers),
+                            pageAnswers),
+                    HttpStatus.OK);
+        }
 
     //답변 삭제 기능0
     @DeleteMapping("/{answer_id}")
@@ -66,6 +77,7 @@ public class AnswerController {
         this.answerService.deleteAnswer(answerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 
     //답변 추천(up) 기능0
     @PatchMapping("/recommend/up/{answer_id}")
