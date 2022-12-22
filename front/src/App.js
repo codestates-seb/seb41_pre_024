@@ -6,6 +6,8 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import DetailPage from './pages/DetailPage';
 import Header from './components/Header';
+import { QuestionsList } from './components/QuestionsList';
+import { QuestionsCrate } from './components/QuestionsCrate';
 
 function App() {
   return (
@@ -22,7 +24,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
-              <Route path="/question" element={<DetailPage />}></Route>
+              <Route path="/question" element={<DetailPage />} />
+              <Route path="/ask" element={<QuestionsCrate/>}/>
             </Routes>
           </section>
         </main>

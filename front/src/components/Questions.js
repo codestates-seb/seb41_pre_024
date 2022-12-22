@@ -1,15 +1,14 @@
 import styled from "styled-components";
 import {QuestionsTap} from "./QuestionsTap";
+import {QuestionsSub} from "./QuestionsSub"
 
 const Layout = styled.div`
   display:flex;
 
   .listLine{
-    // background-color: red;
     flex:5;
   }
   .subLine{
-    // background-color: blue;
     margin-left: 15px;
     height: 100vh;
     flex:2;
@@ -51,13 +50,14 @@ export default function Questios() {
         <div className="crateBtn"><a href="/ask">Ask Question</a></div>
       </div>
       <div className="serachLang">Results for ㄴㄴ</div>
-      <div className="serachList"><QuestionsTap/></div>
+      <div className="serachList">
+        <QuestionsTap/>
+      </div>
     </div>
-
 
     {/* 검색과 무관 */}
     <div className="subLine">
-      서브창
+      <QuestionsSub/>
     </div>
   </Layout>
   )

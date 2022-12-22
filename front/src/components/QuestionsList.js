@@ -4,7 +4,8 @@ import { ImUser } from "react-icons/im";
 
 const List = styled.div`
   display: flex;
-  padding: 15px;
+  padding: 17px;
+  border-bottom: 1px solid gray;
 
   .head {
     flex-basis: 80px;
