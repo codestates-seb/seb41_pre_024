@@ -1,18 +1,26 @@
 package preproject.back.Question.Entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import preproject.back.Answer.Entity.Answer;
 import preproject.back.Member.Entity.Member;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "question_id")
     private long questionId;
 
     @Column(name = "question_title")
