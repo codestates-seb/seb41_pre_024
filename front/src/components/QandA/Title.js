@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Title() {
@@ -20,7 +21,9 @@ export default function Title() {
           </span>
         </QuestionInfo>
       </TitleAndInfo>
-      <AskQuestionBtn>Ask Question</AskQuestionBtn>
+      <Link to="/questions/ask">
+        <AskQuestionBtn>Ask Question</AskQuestionBtn>
+      </Link>
     </TitieContainer>
   );
 }

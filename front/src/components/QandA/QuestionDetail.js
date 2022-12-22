@@ -1,8 +1,7 @@
 import React from 'react';
-
 import styled from 'styled-components';
-
 import AdditionalFunction from './AdditionalFunc';
+import userIcon from '../../assets/userIcon.png';
 
 export default function QuestionDetail() {
   return (
@@ -40,10 +39,17 @@ export default function QuestionDetail() {
             <button className="shareAndFollow">Follow</button>
           </ShareAndFollow>
           <Author>
-            <div>asked Dec 21, 2021 at 19:33</div>
-            <div>
-              <img src="https://stackoverflow.com/users/15350294/stephan-bazbaz"></img>
-              <span>stephan bazbaz</span>
+            <div className="createdAt">asked Dec 21, 2021 at 19:33</div>
+            <div className="user">
+              <img
+                src={userIcon}
+                className="userIcon userInfo"
+                alt="userIcon"
+              ></img>
+              <div className="userInfoText">
+                <div className="userName userInfo">Martin Thompson</div>
+                <div className="userreputation userInfo">3,205</div>
+              </div>
             </div>
           </Author>
         </DetailFooter>
@@ -56,32 +62,33 @@ const DetailContainer = styled.div`
   display: flex;
   justify-content: space-between;
   color: #3b4044;
-  border: 3px solid gold;
+  /* border: 3px solid gold; */
 `;
 
 const DetailBody = styled.div`
   flex: 1;
-  border: 3px solid gray;
+  /* border: 3px solid gray; */
 `;
 
 const DetailText = styled.div`
-  border: 3px solid gray;
+  /* border: 3px solid gray; */
   line-height: 24px;
 `;
 
 const DetailFooter = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 3px solid gray;
+  /* border: 3px solid gray; */
   padding: 20px 0;
 `;
 
 const ShareAndFollow = styled.div`
-  border: 3px solid gray;
+  /* border: 3px solid gray; */
 
   .shareAndFollow {
     border: none;
     margin-right: 20px;
+    color: #6a737c;
 
     :hover {
       cursor: pointer;
@@ -90,5 +97,37 @@ const ShareAndFollow = styled.div`
 `;
 
 const Author = styled.div`
-  border: 3px solid gray;
+  padding: 8px 30px 8px 8px;
+  background-color: #d9e9f7;
+  font-size: 14px;
+  color: #6a737c;
+
+  .createdAt {
+    font-size: 12px;
+    padding: 3px;
+  }
+  .user {
+    display: flex;
+  }
+
+  .userInfo {
+    margin: 3px;
+  }
+
+  .userIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .userName {
+    color: #0995ff;
+
+    :hover {
+      color: #4066b2;
+    }
+  }
+
+  .userreputation {
+    font-weight: 900;
+  }
 `;
