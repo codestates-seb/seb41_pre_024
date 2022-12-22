@@ -47,7 +47,7 @@ public class AnswerController {
     public ResponseEntity patchAnswer(@PathVariable("answer_id") @Positive long answerId,
                                       @RequestBody AnswerPatchDto answerPatchDto){
         Answer answer = this.answerService.updateAnswer(answerId, this.mapper.AnswerPatchToAnswer(answerPatchDto));
-        return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer),HttpStatus.CREATED);
+        return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer),HttpStatus.OK);
     }
 
 

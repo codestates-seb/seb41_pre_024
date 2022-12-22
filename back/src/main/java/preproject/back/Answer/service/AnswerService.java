@@ -22,7 +22,7 @@ public class AnswerService {
         this.answerRepository = answerRepository;
     }
 
-    //답변 생성기능
+    //답변 생성기능 postman ok
     public Answer createAnswer(Answer answer){
 
         Answer savedAnswer = answerRepository.save(answer);
@@ -30,7 +30,7 @@ public class AnswerService {
         return savedAnswer;
     }
 
-    //답변 업데이트 기능
+    //답변 업데이트 기능 postman ok
     public Answer updateAnswer(long answerId, Answer answer){
         //존재하는 답변인지 확인
         Answer findAnswer = verifyAnswer(answerId);
@@ -45,22 +45,24 @@ public class AnswerService {
         return answerRepository.save(findAnswer); //저장하고 리턴
     }
 
-    //답변 전체 찾아오는 기능
+    //답변 전체 찾아오는 기능 postman ok
 //    public List<Answer> findAnswerList() {
 //        return answerRepository.findAll(); }
 
-    //페이지네이션 버전
+    //페이지네이션 버전 postman ok
     public Page<Answer> findAnswers(int page, int size) {
         return answerRepository.findAll(PageRequest.of(page, size,
                 Sort.by("answerId").descending())); //최신순 정렬
     }
-    //답변 삭제 기능
+    //답변 삭제 기능 postman ok
     public void deleteAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId);
         answerRepository.delete(findAnswer);
+        System.out.println("삭제되었습니다");
     }
 
-    //답변 추천(up) 기능
+
+    //답변 추천(up) 기능 postman ok
     public Answer recommendUpAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
 
@@ -70,7 +72,7 @@ public class AnswerService {
 
     }
 
-    //답변 추천(down) 기능
+    //답변 추천(down) 기능 postman ok
     public Answer recommendDownAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
 
@@ -79,7 +81,7 @@ public class AnswerService {
         return answerRepository.save(findAnswer);
 
     }
-
+//답변 채택 기능 //이미 true값이어도 예외 발생이 안됨
     public Answer adoptAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId);
 
@@ -97,9 +99,10 @@ public class AnswerService {
 
     //Answer가 채택 상태이면 예외발생
     //TODO Question 객체의 answerList에 채택상태(true)인 Answer객체가 있으면 예외발생하는 것으로 변환
+    //question Id가 같으면 예외발생(이미 채택완료한 질문)
     private void verifyChosenAnswer(Answer answer){
 
-        if(answer.isChoose() == false) new BusinessLogicException(ExceptionCode.ALREADY_CHOSEN_ANSWER);
+        if(answer.isChoose() == true) new BusinessLogicException(ExceptionCode.ALREADY_CHOSEN_ANSWER);
     }
 
 
