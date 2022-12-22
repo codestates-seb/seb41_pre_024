@@ -1,5 +1,8 @@
 package preproject.back.Member.Entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import preproject.back.Answer.Entity.Answer;
 import preproject.back.Question.Entity.Question;
 
@@ -7,11 +10,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private long memberId;
 
     @Column(name = "member_email")

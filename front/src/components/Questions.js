@@ -41,7 +41,7 @@ const Layout = styled.div`
   }
 `
 
-export const Questios = () => {
+export default function Questios() {
   return (
   <Layout>
     {/* 검색에 영향을 받는영역 */}
