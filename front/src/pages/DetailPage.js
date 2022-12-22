@@ -2,27 +2,50 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Title from '../components/QandA/Title';
-import Content from '../components/QandA/Content';
+import Contents from '../components/QandA/Contents';
 import Footer from '../components/Footer';
 
-export default function detailPage() {
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
+export default function DetailPage() {
+  const [questionData, setQuestionData] = useState();
+  const { id } = useParams();
+  console.log(id);
+
+  useEffect(() => {
+    async function request() {
+      const response = await axios.get(`http://localhost:3001/questions`);
+      const { data } = response;
+      const question = data.filter((el) => el.question_id === Number(id))[0]; // 해당 페이지 데이터만 가져오기
+      console.log(question);
+      setQuestionData(question);
+    }
+    request();
+  }, []);
+
   return (
     <>
-      <Main>
-        <Aside></Aside>
-        <Section>
-          <DetailContainer>
-            <Title />
-            <hr />
-            <ContentAndSideBox>
-              <ContentContainer>
-                <Content />
-              </ContentContainer>
-              <SideBox />
-            </ContentAndSideBox>
-          </DetailContainer>
-        </Section>
-      </Main>
+      {questionData && (
+        <div>
+          <Main>
+            <Aside></Aside>
+            <Section>
+              <DetailContainer>
+                <Title data={questionData} />
+                <hr />
+                <ContentsAndSideBox>
+                  <ContentsContainer>
+                    <Contents data={questionData} />
+                  </ContentsContainer>
+                  <SideBox />
+                </ContentsAndSideBox>
+              </DetailContainer>
+            </Section>
+          </Main>
+        </div>
+      )}
       <Footer />
     </>
   );
@@ -33,7 +56,7 @@ const Main = styled.div`
   display: flex;
   margin: 0 auto;
   background-color: rgba(128, 128, 128, 0.098);
-  border: 3px solid green;
+  /* border: 3px solid green; */
   justify-content: center;
 `;
 
@@ -42,7 +65,8 @@ const Aside = styled.div`
   flex-basis: 164px;
   min-height: calc(100vh - 372px);
   position: relative;
-  border: 3px solid violet;
+  /* border: 3px solid violet; */
+  background-color: #f48224;
   border-right: 1px solid black;
 `;
 
@@ -50,7 +74,7 @@ const Section = styled.div`
   background-color: (255, 255, 255);
   flex: 0.5;
   padding: 24px;
-  border: 3px solid goldenrod;
+  /* border: 3px solid goldenrod; */
 `;
 
 // const Scroll = styled.div`
@@ -63,24 +87,26 @@ const Section = styled.div`
 
 const DetailContainer = styled.div`
   width: 1100px;
-  height: 700px;
-  border: 1px solid blue;
+  /* height: 700px;
+  border: 1px solid blue; */
 `;
 
-const ContentAndSideBox = styled.div`
-  border: 3px solid aliceblue;
+const ContentsAndSideBox = styled.div`
+  /* border: 3px solid aliceblue; */
   display: flex;
   justify-content: space-between;
 `;
 
-const ContentContainer = styled.div`
+const ContentsContainer = styled.div`
   width: 780px;
-  height: 700px;
-  border: 3px solid yellowgreen;
+  /* height: 700px;
+  border: 3px solid yellowgreen; */
 `;
 
 const SideBox = styled.div`
   width: 320px;
-  height: 700px;
-  border: 3px solid sandybrown;
+  /* height: 700px; */
+  margin: 24px;
+  /* border: 3px solid sandybrown; */
+  background-color: #fbf3d5;
 `;

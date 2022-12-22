@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { ReactComponent as Vote } from '../../assets/sprites.svg';
 import { GoTriangleUp } from 'react-icons/go';
 import { GoTriangleDown } from 'react-icons/go';
 import { FiBookmark } from 'react-icons/fi';

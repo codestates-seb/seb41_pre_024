@@ -2,19 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function Title() {
+export default function Title({ data }) {
+  console.log('props data', data);
   return (
     <TitieContainer>
       <TitleAndInfo>
-        <TitleText>
-          Merge two videos on the client or backend side using javascript
-        </TitleText>
+        <TitleText>{data.question_title}</TitleText>
         <QuestionInfo>
           <span className="infoTitle">
-            Asked<span className="infoText">11 days ago</span>
+            Asked<span className="infoText">{data.question_time}</span>
           </span>
           <span className="infoTitle">
-            Modified<span className="infoText">today</span>
+            Modified<span className="infoText">4 days ago</span>
           </span>
           <span className="infoTitle">
             Viewed<span className="infoText">235 times</span>
