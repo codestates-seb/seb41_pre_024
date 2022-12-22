@@ -27,7 +27,7 @@ export default function Contents({ data }) {
             </div>
           </AnswerHeader>
           <AnswerList data={data} />
-          <AnswerSubmit />
+          <AnswerSubmit data={data} />
         </div>
       )}
     </div>

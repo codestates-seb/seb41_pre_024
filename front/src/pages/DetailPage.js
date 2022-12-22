@@ -16,10 +16,9 @@ export default function DetailPage() {
 
   useEffect(() => {
     async function request() {
-      const response = await axios.get(`http://localhost:3001/questions`);
+      const response = await axios.get(`http://localhost:3001/questions/${id}`);
       const { data } = response;
-      const question = data.filter((el) => el.question_id === Number(id))[0];
-      setQuestionData(question);
+      setQuestionData(data);
     }
     request();
   }, []);
