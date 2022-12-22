@@ -1,21 +1,33 @@
-/* eslint no-use-before-define: 0 */
 import './App.css';
-import Footer from './components/Footer';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+
+import Home from './pages/Home';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import DetailPage from './pages/DetailPage';
+
+import Header from './components/Header';
 
 function App() {
   return (
-    <div id="layout">
-      <header id="header"></header>
-      <main id="main">
-        <aside id="aside">
-          <div id="scroll"></div>
-        </aside>
-        <section id="section"></section>
-      </main>
-      <footer id="footer">
-        <Footer />
-      </footer>
-    </div>
+    <BrowserRouter>
+      <div id="layout">
+        <Header />
+        <main id="main">
+          <aside id="aside">
+            <scroll id="scroll"></scroll>
+          </aside>
+          <section id="section">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/question" element={<DetailPage />}></Route>
+            </Routes>
+          </section>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
