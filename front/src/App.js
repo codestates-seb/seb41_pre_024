@@ -18,7 +18,7 @@ function App() {
             <Route path="/" exact={true} element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/question" element={<DetailPage />} />
+            <Route path="/questions/:id" element={<DetailPage />} />
           </Routes>
         </section>
       </div>
