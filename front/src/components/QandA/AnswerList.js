@@ -2,9 +2,41 @@ import React from 'react';
 import styled from 'styled-components';
 import AdditionalFunction from './AdditionalFunc';
 import userIcon2 from '../../assets/userIcon_02.png';
+import { useParams } from 'react-router-dom';
 
 export default function AnswerList({ data }) {
   console.log(data);
+  const { id } = useParams();
+
+  function handleAnswerDelete(e, answer_id) {
+    const newAnswerList = data.answers.filter(
+      (el) => el.answer_id !== answer_id
+    );
+    e.preventDefault();
+    fetch(`http://localhost:3001/questions/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        answers: newAnswerList,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error('could not fetch the data for that resource');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+
+        window.location.reload(); // 새로고침
+      })
+      .catch((err) => {
+        console.error('Error', err);
+      });
+  }
 
   return (
     <div>
@@ -18,10 +50,17 @@ export default function AnswerList({ data }) {
             <DetailBody>
               <DetailText>{answer.answer_content}</DetailText>
               <DetailFooter>
-                <ShareAndFollow>
-                  <button className="shareAndFollow">Share</button>
-                  <button className="shareAndFollow">Follow</button>
-                </ShareAndFollow>
+                <Menu>
+                  <button className="menu">Share</button>
+                  <button className="menu">Follow</button>
+                  <button className="menu">Edit</button>
+                  <button
+                    onClick={(e) => handleAnswerDelete(e, answer.answer_id)}
+                    className="menu"
+                  >
+                    Delete
+                  </button>
+                </Menu>
                 <Author>
                   <div className="createdAt">asked {answer.answer_time}</div>
                   <div className="user">
@@ -72,10 +111,10 @@ const DetailFooter = styled.div`
   padding: 20px 0;
 `;
 
-const ShareAndFollow = styled.div`
+const Menu = styled.div`
   /* border: 3px solid gray; */
 
-  .shareAndFollow {
+  .menu {
     border: none;
     margin-right: 20px;
     color: #6a737c;

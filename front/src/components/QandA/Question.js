@@ -4,8 +4,6 @@ import AdditionalFunction from './AdditionalFunc';
 import userIcon from '../../assets/userIcon.png';
 
 export default function Question({ data }) {
-  console.log('fksjflsd', data.question_recommend);
-
   return (
     <>
       {data && (
@@ -25,10 +23,12 @@ export default function Question({ data }) {
       */}
             </DetailText>
             <DetailFooter>
-              <ShareAndFollow>
-                <button className="shareAndFollow">Share</button>
-                <button className="shareAndFollow">Follow</button>
-              </ShareAndFollow>
+              <Menu>
+                <button className="menu">Share</button>
+                <button className="menu">Follow</button>
+                <button className="menu">Edit</button>
+                <button className="menu">Delete</button>
+              </Menu>
               <Author>
                 <div className="createdAt">asked Dec 21, 2021 at 19:33</div>
                 <div className="user">
@@ -77,10 +77,10 @@ const DetailFooter = styled.div`
   padding: 20px 0;
 `;
 
-const ShareAndFollow = styled.div`
+const Menu = styled.div`
   /* border: 3px solid gray; */
 
-  .shareAndFollow {
+  .menu {
     border: none;
     margin-right: 20px;
     color: #6a737c;
