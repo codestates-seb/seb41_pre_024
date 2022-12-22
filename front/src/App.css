@@ -6,6 +6,7 @@
 
 * {
   font-family: "Apple SD Sandol Gothic Neo";
+  
 }
 
 #layout {
@@ -23,6 +24,7 @@
   border-top: 3px solid #f48225;
   display: flex;
   justify-content: center;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
 }
 
 #main {

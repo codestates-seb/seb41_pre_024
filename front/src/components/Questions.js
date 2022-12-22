@@ -1,20 +1,15 @@
 import styled from "styled-components";
-import { QuestionsCrate } from "./QuestionsCrate";
 import {QuestionsTap} from "./QuestionsTap";
-import {Link} from "react-router-dom";
-
-
-
 
 const Layout = styled.div`
   display:flex;
 
   .listLine{
-    background-color: red;
+    // background-color: red;
     flex:5;
   }
   .subLine{
-    background-color: blue;
+    // background-color: blue;
     margin-left: 15px;
     height: 100vh;
     flex:2;
@@ -22,18 +17,28 @@ const Layout = styled.div`
   .searchTitle{
     display: flex;
     justify-content:space-between;
-    align-items: 
-    
-    a{
-      background-color:yellow;
-      padding:10px;
-    }
+    align-items: center;
+    margin-bottom: 15px;
   }
 
   .crateBtn{
-    
+    padding:10px;
+    background-color:#0a95ff;
+    border-radius: 3px;
+    margin-right:12px;
+
+    a{
+      padding:5px;
+      color: white;
+      font-size:13px;
+
+    }
   }
 
+  .serachLang{
+    font-size:14px;
+    margin-bottom: 45px;
+  }
 `
 
 export const Questios = () => {
@@ -43,12 +48,10 @@ export const Questios = () => {
     <div className="listLine">
       <div className="searchTitle">
         <h2>Search Results</h2>
-        <div className="crateBtn"><Link to="/ask">Ask Question</Link></div>
+        <div className="crateBtn"><a href="/ask">Ask Question</a></div>
       </div>
-
-      <div className="serachLang">검색언어</div>
+      <div className="serachLang">Results for ㄴㄴ</div>
       <div className="serachList"><QuestionsTap/></div>
-
     </div>
 
 
