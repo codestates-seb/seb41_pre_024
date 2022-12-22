@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import AdditionalFunction from './AdditionalFunc';
-import userIcon from '../../assets/userIcon.png';
+import userIcon2 from '../../assets/userIcon_02.png';
 
 export default function AnswerList({ data }) {
   console.log(data);
@@ -10,8 +10,11 @@ export default function AnswerList({ data }) {
     <div>
       {data &&
         data.answers.map((answer) => (
-          <DetailContainer>
-            <AdditionalFunction />
+          <DetailContainer key={answer.answer_id}>
+            <AdditionalFunction
+              likes={answer.answer_recommend}
+              checked={answer.answer_choose}
+            />
             <DetailBody>
               <DetailText>{answer.answer_content}</DetailText>
               <DetailFooter>
@@ -23,7 +26,7 @@ export default function AnswerList({ data }) {
                   <div className="createdAt">asked {answer.answer_time}</div>
                   <div className="user">
                     <img
-                      src={userIcon}
+                      src={userIcon2}
                       className="userIcon userInfo"
                       alt="userIcon"
                     ></img>
@@ -58,6 +61,7 @@ const DetailBody = styled.div`
 
 const DetailText = styled.div`
   /* border: 3px solid gray; */
+  padding: 10px 0;
   line-height: 24px;
 `;
 
@@ -103,6 +107,7 @@ const Author = styled.div`
   .userIcon {
     width: 32px;
     height: 32px;
+    margin-right: 8px;
   }
 
   .userName {

@@ -4,11 +4,13 @@ import AdditionalFunction from './AdditionalFunc';
 import userIcon from '../../assets/userIcon.png';
 
 export default function Question({ data }) {
+  console.log('fksjflsd', data.question_recommend);
+
   return (
     <>
       {data && (
         <DetailContainer>
-          <AdditionalFunction />
+          <AdditionalFunction likes={data.question_recommend} />
           <DetailBody>
             <DetailText>
               {data.question_content}
@@ -64,6 +66,7 @@ const DetailBody = styled.div`
 
 const DetailText = styled.div`
   /* border: 3px solid gray; */
+  padding: 10px 0;
   line-height: 24px;
 `;
 
@@ -109,6 +112,7 @@ const Author = styled.div`
   .userIcon {
     width: 32px;
     height: 32px;
+    margin-right: 8px;
   }
 
   .userName {

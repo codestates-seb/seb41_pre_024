@@ -3,27 +3,32 @@ import styled from 'styled-components';
 import { GoTriangleUp } from 'react-icons/go';
 import { GoTriangleDown } from 'react-icons/go';
 import { FiBookmark } from 'react-icons/fi';
+import { FaCheck } from 'react-icons/fa';
 import { RxCounterClockwiseClock } from 'react-icons/rx';
 
-export default function AdditionalFunc() {
+export default function AdditionalFunc({ likes, checked }) {
+  console.log('likes', likes);
   return (
-    <>
-      <Container>
-        <Up>
-          <GoTriangleUp className="vote" />
-        </Up>
-        <Likes>3</Likes>
-        <Down>
-          <GoTriangleDown className="vote" />
-        </Down>
+    <Container>
+      <Up>
+        <GoTriangleUp className="vote" />
+      </Up>
+      <Likes>{likes}</Likes>
+      <Down>
+        <GoTriangleDown className="vote" />
+      </Down>
+      <Icons>
+        <FiBookmark className="icon" />
+      </Icons>
+      {checked && (
         <Icons>
-          <FiBookmark className="icon" />
+          <FaCheck className="icon check" />
         </Icons>
-        <Icons>
-          <RxCounterClockwiseClock className="icon" />
-        </Icons>
-      </Container>
-    </>
+      )}
+      <Icons>
+        <RxCounterClockwiseClock className="icon" />
+      </Icons>
+    </Container>
   );
 }
 
@@ -41,13 +46,14 @@ const Up = styled.button`
   border: none;
   background-color: inherit;
 
-  :hover {
-    cursor: pointer;
-  }
-
   .vote {
     font-size: 40px;
     color: #babfc3;
+
+    :hover {
+      cursor: pointer;
+      color: #f48224;
+    }
   }
 `;
 
@@ -63,5 +69,10 @@ const Icons = styled(Up)`
     font-size: 20px;
     color: #babfc3;
     margin-bottom: 6px;
+  }
+
+  .check {
+    font-size: 35px;
+    color: #2e6f44;
   }
 `;

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Title({ data }) {
-  console.log('props data', data);
   return (
     <TitieContainer>
       <TitleAndInfo>

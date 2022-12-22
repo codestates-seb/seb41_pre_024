@@ -18,8 +18,7 @@ export default function DetailPage() {
     async function request() {
       const response = await axios.get(`http://localhost:3001/questions`);
       const { data } = response;
-      const question = data.filter((el) => el.question_id === Number(id))[0]; // 해당 페이지 데이터만 가져오기
-      console.log(question);
+      const question = data.filter((el) => el.question_id === Number(id))[0];
       setQuestionData(question);
     }
     request();
