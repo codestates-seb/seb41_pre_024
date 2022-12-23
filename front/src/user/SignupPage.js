@@ -1,4 +1,8 @@
+<<<<<<< HEAD:front/src/pages/SignupPage.js
 import Header from '../components/Header';
+=======
+import Header from '../Header';
+>>>>>>> dev:front/src/user/SignupPage.js
 import styled from 'styled-components';
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
