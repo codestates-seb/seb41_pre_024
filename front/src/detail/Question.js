@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import AdditionalFunction from './AdditionalFunc';
-import userIcon from '../../assets/userIcon.png';
+// import userIcon from '../../assets/userIcon.png';
 
 export default function Question({ data }) {
   return (
@@ -33,7 +33,7 @@ export default function Question({ data }) {
                 <div className="createdAt">asked Dec 21, 2021 at 19:33</div>
                 <div className="user">
                   <img
-                    src={userIcon}
+                    // src={userIcon}
                     className="userIcon userInfo"
                     alt="userIcon"
                   ></img>

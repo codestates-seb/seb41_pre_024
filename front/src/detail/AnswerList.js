@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import AdditionalFunction from './AdditionalFunc';
-import userIcon2 from '../../assets/userIcon_02.png';
+// import userIcon2 from '../../assets/userIcon_02.png';
 import { useParams } from 'react-router-dom';
 
 export default function AnswerList({ data }) {
@@ -65,7 +65,7 @@ export default function AnswerList({ data }) {
                   <div className="createdAt">asked {answer.answer_time}</div>
                   <div className="user">
                     <img
-                      src={userIcon2}
+                      // src={userIcon2}
                       className="userIcon userInfo"
                       alt="userIcon"
                     ></img>

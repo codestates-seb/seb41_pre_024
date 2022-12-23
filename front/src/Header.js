@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { IoSearchOutline } from 'react-icons/io5';
-import logo from '../assets/logo-stackoverflow.png';
+// import logo from '../assets/logo-stackoverflow.png';
 import { VscAccount } from 'react-icons/vsc';
 import { BsFillInboxFill } from 'react-icons/bs';
 import { AiFillTrophy } from 'react-icons/ai';
@@ -106,7 +106,7 @@ const Header = () => {
   return (
     <Container>
       <Link to="/">
-        <Logo src={logo}></Logo>
+        {/* <Logo src={logo}></Logo> */}
       </Link>
       <SearchForm>
         <div>

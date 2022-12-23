@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
-import MypageContent from "../components/mypage/MypageContent";
-import UserInfo from "../components/mypage/MypageInfo";
+import MypageContent from "./MypageContent";
+import UserInfo from "./MypageInfo";
 import Aside from "../components/Aside";
 
 const UserPage = () => {

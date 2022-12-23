@@ -1,16 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Title from '../components/QandA/Title';
-import Contents from '../components/QandA/Contents';
-import Footer from '../components/Footer';
+import Title from './Title';
+import Contents from './Contents';
+import Footer from '../Footer';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-import Aside from '../components/Aside';
-import SideNavbar from '../components/Navbar';
+// import SideNavbar from '../Navbar';
 
 export default function DetailPage() {
   const [questionData, setQuestionData] = useState();
@@ -33,7 +32,7 @@ export default function DetailPage() {
           <Main>
             <AsideContainer>
               <div id="scroll">
-                <SideNavbar />
+                {/* <SideNavbar /> */}
               </div>
             </AsideContainer>
             <Section>
@@ -45,7 +44,6 @@ export default function DetailPage() {
                     <Contents data={questionData} />
                   </ContentsContainer>
                   <SideBox>
-                    <Aside />
                   </SideBox>
                 </ContentsAndSideBox>
               </DetailContainer>

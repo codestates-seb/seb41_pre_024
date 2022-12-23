@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useInput from '../../hooks/useInput';
+import useInput from '../hooks/useInput';
 import { useParams } from 'react-router-dom';
 
 export default function AnswerSubmit({ data }) {
