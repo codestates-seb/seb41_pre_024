@@ -1,5 +1,5 @@
-import SideNavbar from "./Navbar";
-import styled from "styled-components";
+import SideNavbar from './Navbar';
+import styled from 'styled-components';
 
 const Sidebar = styled.aside`
   #aside {
@@ -8,6 +8,7 @@ const Sidebar = styled.aside`
     min-height: calc(100vh - 372px);
     position: relative;
     border-right: 1px solid black;
+    border: 3px solid red;
   }
 
   #scroll {
@@ -21,9 +22,9 @@ const Sidebar = styled.aside`
 
 const Aside = () => {
   <Sidebar id="aside">
-    <scroll id="scroll">
+    <div id="scroll">
       <SideNavbar />
-    </scroll>
+    </div>
   </Sidebar>;
 };
 export default Aside;
