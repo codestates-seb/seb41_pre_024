@@ -1,8 +1,9 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { IoEarthSharp } from 'react-icons/io5';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { IoEarthSharp } from "react-icons/io5";
 
 const Container = styled.ol`
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   margin-left: 15px;
@@ -18,9 +19,9 @@ const Container = styled.ol`
     }
 
     li {
-      margin-left: 15px;
+      /* margin-left: 15px; */
       color: #525960;
-      padding-top: 10px;
+      padding: 10px 0 10px 10px;
     }
 
     li:active {
@@ -32,7 +33,7 @@ const Container = styled.ol`
 `;
 
 const SideNavbar = () => {
-  if (window.location.pathname === '/login') return null;
+  if (window.location.pathname === "/login") return null;
   return (
     <>
       <Container>
