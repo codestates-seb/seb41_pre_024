@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { IoSearchOutline } from 'react-icons/io5';
-// import logo from '../assets/logo-stackoverflow.png';
-import { VscAccount } from 'react-icons/vsc';
-import { BsFillInboxFill } from 'react-icons/bs';
-import { AiFillTrophy } from 'react-icons/ai';
-import { AiFillQuestionCircle } from 'react-icons/ai';
-import { FaRegSnowflake } from 'react-icons/fa';
-import { BsFillChatSquareTextFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import styled from "styled-components";
+import { IoSearchOutline } from "react-icons/io5";
+// import logo from "logo-stackoverflow.png";
+import { VscAccount } from "react-icons/vsc";
+import { BsFillInboxFill } from "react-icons/bs";
+import { AiFillTrophy } from "react-icons/ai";
+import { AiFillQuestionCircle } from "react-icons/ai";
+import { FaRegSnowflake } from "react-icons/fa";
+import { BsFillChatSquareTextFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -106,7 +106,9 @@ const Header = () => {
   return (
     <Container>
       <Link to="/">
-        {/* <Logo src={logo}></Logo> */}
+        <Logo
+          src={`${process.env.PUBLIC_URL}/assets/logo-stackoverflow.png`}
+        ></Logo>
       </Link>
       <SearchForm>
         <div>

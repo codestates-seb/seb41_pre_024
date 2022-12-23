@@ -9,6 +9,7 @@ import { QuestionsCrate } from './home/QuestionsCrate';
 import Footer from './Footer';
 import { Route, Routes, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import UserPage from './user/UserPage';
 
 const Common = styled.div`
   display: flex;
@@ -69,6 +70,7 @@ function App() {
           <Route element={<OverlapHssf />}>
             <Route path="/" element={<Question />} />
             <Route path="/questions/:id" element={<DetailPage />} />
+            <Route path="/user" element={<UserPage />} />
           </Route>
           <Route element={<OverlapHsf />}>
             <Route path="/ask" element={<QuestionsCrate />} />

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-// import logo from '../assets/stackoverflow_small.png';
-// import logo from 'process.env.PUBLIC_URL/assets';
+import styled from "styled-components";
+// import logo from "../assets/stackoverflow_small.png";
+// import logo from "process.env.PUBLIC_URL/assets";
 
 export default function Footer() {
   return (

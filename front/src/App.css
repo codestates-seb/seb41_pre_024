@@ -25,7 +25,8 @@
 }
 
 #scroll {
-  width: 100px;
+  width: 100%;
+  /* width: 100px; */
   height: 100px;
   position: sticky;
   top: 74px;
