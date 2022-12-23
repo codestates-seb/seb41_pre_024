@@ -53,6 +53,10 @@ export const QuestionsTap = () => {
         <QuestionsList/>
         <QuestionsList/>
         <QuestionsList/>
+        <QuestionsList/>
+        <QuestionsList/>
+        <QuestionsList/>
+        <QuestionsList/>
       </div>
     </div>
   );

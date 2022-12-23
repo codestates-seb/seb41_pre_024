@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { IoEarthSharp } from "react-icons/io5";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { IoEarthSharp } from 'react-icons/io5';
 
 const Container = styled.ol`
   display: flex;
@@ -32,7 +32,7 @@ const Container = styled.ol`
 `;
 
 const SideNavbar = () => {
-  if (window.location.pathname === "/login") return null;
+  if (window.location.pathname === '/login') return null;
   return (
     <>
       <Container>
@@ -42,7 +42,7 @@ const SideNavbar = () => {
         <li>
           <ol>
             <span>Public</span>
-            <Link to="/question">
+            <Link to="/questions">
               <li>
                 <IoEarthSharp /> Questions
               </li>

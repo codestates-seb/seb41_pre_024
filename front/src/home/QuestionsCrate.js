@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const Layout = styled.div`
   // display:flex;
@@ -34,6 +34,10 @@ const Layout = styled.div`
   h5{
     padding: 5px;
     font-size:14px;
+  }
+
+  #aside{
+    display:none;
   }
 `;
 

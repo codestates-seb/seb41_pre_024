@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import logo from '../assets/stackoverflow_small.png';
+// import logo from '../assets/stackoverflow_small.png';
+// import logo from 'process.env.PUBLIC_URL/assets';
 
 export default function Footer() {
   return (
     <FooterContainer>
       <LogoAndLightMode>
-        <Logo src={logo} />
+        {/* <Logo src={process.env.PUBLIC_URL + `/assets/stackoverflow_small.png`} /> */}
         <LightMode>
           <p className="mode selected">Light</p>
           <p className="mode">Dark</p>
@@ -72,10 +73,6 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
 `;
 
 const LogoAndLightMode = styled.div`

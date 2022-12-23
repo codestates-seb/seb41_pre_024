@@ -4,6 +4,7 @@ import {QuestionsSub} from "./QuestionsSub"
 
 const Layout = styled.div`
   display:flex;
+  
 
   .listLine{
     flex:5;
