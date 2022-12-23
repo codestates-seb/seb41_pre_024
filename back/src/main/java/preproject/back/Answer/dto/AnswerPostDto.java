@@ -15,10 +15,10 @@ public class AnswerPostDto {
 //    @Positive
 //    private long memberId;
 
-    @NotBlank(message = "not null")
+    @NotBlank(message = "제목은 공백이 아니여야 합니다.")
     private String title;
 
-    @NotBlank(message = "not null")
+    @NotBlank(message = "본문 내용은 공백이 아니어야 합니다.")
     private String content;
 
 }

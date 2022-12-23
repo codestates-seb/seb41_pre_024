@@ -18,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value ="/answer")
+@RequestMapping(value ="/answers")
 @Validated
 @Slf4j
 public class AnswerController {
