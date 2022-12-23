@@ -32,7 +32,7 @@ public class AnswerController {
         this.mapper = mapper;
     }
 
-    //답변 작성 기능0
+    //답변 작성 기능 0 t -0
     @PostMapping
     public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
 
@@ -42,7 +42,7 @@ public class AnswerController {
     }
 
 
-    //답변 수정 기능0
+    //답변 수정 기능0 t-0
     @PatchMapping("/{answer_id}")
     public ResponseEntity patchAnswer(@PathVariable("answer_id") @Positive long answerId,
                                       @RequestBody AnswerPatchDto answerPatchDto){
@@ -51,7 +51,7 @@ public class AnswerController {
     }
 
 
-    //답변 리스트 조회 기능0
+    //답변 리스트 조회 기능0 t-o
     @GetMapping
     public ResponseEntity getAnswerList(@Positive @RequestParam int page,
                                         @Positive @RequestParam int size){
@@ -71,7 +71,7 @@ public class AnswerController {
                     HttpStatus.OK);
         }
 
-    //답변 삭제 기능0
+    //답변 삭제 기능0 t-o
     @DeleteMapping("/{answer_id}")
     public ResponseEntity deleteAnswer(@PathVariable("answer_id") @Positive long answerId){
         this.answerService.deleteAnswer(answerId);
