@@ -11,7 +11,7 @@ const Layout = styled.div`
   }
   .subLine{
     margin-left: 15px;
-    height: 100vh;
+    // height: 100vh;
     flex:2;
   }
   .searchTitle{
