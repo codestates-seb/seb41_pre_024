@@ -1,14 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 export default function detailPage() {
   return (
-    <DetailPageContainer>
-      <NavBar />
-      <DetailContent>
-        <hr />
-      </DetailContent>
-    </DetailPageContainer>
+    <>
+      <DetailPageContainer>
+        <NavBar />
+        <DetailContent>
+          <hr />
+        </DetailContent>
+      </DetailPageContainer>
+    </>
   );
 }
 
