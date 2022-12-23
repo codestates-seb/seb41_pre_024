@@ -6,7 +6,6 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import DetailPage from './pages/DetailPage';
 import Header from './components/Header';
-import { QuestionsList } from './components/QuestionsList';
 import { QuestionsCrate } from './components/QuestionsCrate';
 
 function App() {
@@ -15,10 +14,10 @@ function App() {
       <div id="layout">
         <Header />
         <main id="main">
-          <aside id="aside">
+          {/* <aside id="aside">
             <scroll id="scroll">
             </scroll>
-          </aside>
+          </aside> */}
           <section id="section">
             <Routes>
               <Route path="/" element={<Home />} />
