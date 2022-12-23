@@ -1,33 +1,87 @@
 import './App.css';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Header from './Header';
+import Navbar from './Navbar';
+import Question from './home/Questions';
+import LoginPage from './user/LoginPage';
+import DetailPage from './detail/DetailPage';
+import SignupPage from './user/SignupPage';
+import { QuestionsCrate } from './home/QuestionsCrate';
+import Footer from './Footer';
+import { Route, Routes, Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+import UserPage from './user/UserPage';
 
-import Home from './pages/Home';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import DetailPage from './pages/DetailPage';
+const Common = styled.div`
+  display: flex;
+  width: 1264px;
+  margin: 0 auto;
 
-import Header from './components/Header';
+  & > div {
+    flex: 1;
+    padding: 24px;
+  }
+`;
+
+const Aside = () => {
+  return (
+    <>
+      <aside id="aside">
+        <div id="scroll">
+          <Navbar />
+        </div>
+      </aside>
+    </>
+  );
+};
+
+const OverlapHssf = () => {
+  return (
+    <>
+      <Common>
+        <Aside />
+        <Outlet />
+      </Common>
+      <Footer />
+    </>
+  );
+};
+const OverlapHsf = () => {
+  return (
+    <>
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
+const OverlapSs = () => {
+  return (
+    <>
+      <Outlet />
+    </>
+  );
+};
 
 function App() {
   return (
-    <BrowserRouter>
-      <div id="layout">
-        <Header />
-        <main id="main">
-          <aside id="aside">
-            <scroll id="scroll"></scroll>
-          </aside>
-          <section id="section">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/question" element={<DetailPage />}></Route>
-            </Routes>
-          </section>
-        </main>
-      </div>
-    </BrowserRouter>
+    <div id="app">
+      <Header />
+      <main id="main">
+        <Routes>
+          <Route element={<OverlapHssf />}>
+            <Route path="/" element={<Question />} />
+            <Route path="/questions/:id" element={<DetailPage />} />
+            <Route path="/user" element={<UserPage />} />
+          </Route>
+          <Route element={<OverlapHsf />}>
+            <Route path="/ask" element={<QuestionsCrate />} />
+          </Route>
+          <Route element={<OverlapSs />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+          </Route>
+        </Routes>
+      </main>
+    </div>
   );
 }
 
