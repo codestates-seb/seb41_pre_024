@@ -5,22 +5,27 @@ import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import DetailPage from './pages/DetailPage';
+import UserPage from './pages/UserPage';
 
 import Header from './components/Header';
+import Aside from './components/Aside';
 
 function App() {
   return (
     <BrowserRouter>
       <div id="layout">
         <Header />
-        <section id="section">
-          <Routes>
-            <Route path="/" exact={true} element={<Home />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/questions/:id" element={<DetailPage />} />
-          </Routes>
-        </section>
+        <main id="main">
+          <section id="section">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/questions/:id" element={<DetailPage />} />
+              <Route path="/user" element={<UserPage />} />
+            </Routes>
+          </section>
+        </main>
       </div>
     </BrowserRouter>
   );

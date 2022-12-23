@@ -9,6 +9,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+import Aside from '../components/Aside';
+import SideNavbar from '../components/Navbar';
+
 export default function DetailPage() {
   const [questionData, setQuestionData] = useState();
   const { id } = useParams();
@@ -28,7 +31,11 @@ export default function DetailPage() {
       {questionData && (
         <div>
           <Main>
-            <Aside></Aside>
+            <AsideContainer>
+              <div id="scroll">
+                <SideNavbar />
+              </div>
+            </AsideContainer>
             <Section>
               <DetailContainer>
                 <Title data={questionData} />
@@ -37,7 +44,9 @@ export default function DetailPage() {
                   <ContentsContainer>
                     <Contents data={questionData} />
                   </ContentsContainer>
-                  <SideBox />
+                  <SideBox>
+                    <Aside />
+                  </SideBox>
                 </ContentsAndSideBox>
               </DetailContainer>
             </Section>
@@ -58,7 +67,7 @@ const Main = styled.div`
   justify-content: center;
 `;
 
-const Aside = styled.div`
+const AsideContainer = styled.div`
   background-color: (255, 255, 255);
   flex-basis: 164px;
   min-height: calc(100vh - 372px);
@@ -66,6 +75,23 @@ const Aside = styled.div`
   /* border: 3px solid violet; */
   background-color: #f48224;
   border-right: 1px solid black;
+
+  #aside {
+    background-color: (255, 255, 255);
+    flex-basis: 164px;
+    min-height: calc(100vh - 372px);
+    position: relative;
+    border-right: 1px solid black;
+    border: 3px solid red;
+  }
+
+  #scroll {
+    width: 100px;
+    height: 100px;
+    /* background-color: black; */
+    position: sticky;
+    top: 74px;
+  }
 `;
 
 const Section = styled.div`
@@ -84,7 +110,7 @@ const Section = styled.div`
 // `;
 
 const DetailContainer = styled.div`
-  width: 1100px;
+  width: 900px;
   /* height: 700px;
   border: 1px solid blue; */
 `;
