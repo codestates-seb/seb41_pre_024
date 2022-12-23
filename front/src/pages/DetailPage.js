@@ -73,7 +73,7 @@ const AsideContainer = styled.div`
   min-height: calc(100vh - 372px);
   position: relative;
   /* border: 3px solid violet; */
-  background-color: #f48224;
+  /* background-color: #f48224; */
   border-right: 1px solid black;
 
   #aside {

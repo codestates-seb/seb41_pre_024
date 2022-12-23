@@ -9,6 +9,7 @@ import UserPage from './pages/UserPage';
 
 import Header from './components/Header';
 import Aside from './components/Aside';
+import EditAnswerPage from './pages/EditAnswerPage';
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/questions/:id" element={<DetailPage />} />
+              <Route
+                path="/posts/:id/edit/:answer_id"
+                element={<EditAnswerPage />}
+              />
               <Route path="/user" element={<UserPage />} />
             </Routes>
           </section>

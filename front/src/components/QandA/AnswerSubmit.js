@@ -78,16 +78,16 @@ export default function AnswerSubmit({ data }) {
   );
 }
 
+const AnswerFormHeader = styled.div`
+  font-size: 24px;
+  padding: 20px 0;
+`;
+
 const Textarea = styled.textarea`
   width: 100%;
   height: 300px;
   padding: 24px;
   font-size: 18px;
-`;
-
-const AnswerFormHeader = styled.div`
-  font-size: 24px;
-  padding: 20px 0;
 `;
 
 const Guideline = styled.div`

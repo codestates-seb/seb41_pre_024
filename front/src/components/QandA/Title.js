@@ -9,7 +9,8 @@ export default function Title({ data }) {
         <TitleText>{data.question_title}</TitleText>
         <QuestionInfo>
           <span className="infoTitle">
-            Asked<span className="infoText">{data.question_time}</span>
+            Asked
+            <span className="infoText">{data.question_time}</span>
           </span>
           <span className="infoTitle">
             Modified<span className="infoText">4 days ago</span>
