@@ -1,15 +1,19 @@
-import Footer from "../components/Footer";
 import MypageContent from "./MypageContent";
 import UserInfo from "./MypageInfo";
-import Aside from "../components/Aside";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const UserPage = () => {
   return (
     <>
-      {/* <Aside /> */}
-      <UserInfo />
-      <MypageContent />
-      <Footer />
+      <Container>
+        <UserInfo />
+        <MypageContent />
+      </Container>
     </>
   );
 };
