@@ -1,42 +1,48 @@
 @font-face {
   font-family: 'Apple SD Sandol Gothic Neo';
-  src: url('https://raw.githubusercontent.com/adrinerDP/font-applesdgothicneo/main/fonts/400_AppleSDGothicNeo-Medium.woff2')
-    format('woff');
+  src: url('https://raw.githubusercontent.com/adrinerDP/font-applesdgothicneo/main/fonts/400_AppleSDGothicNeo-Medium.woff2') format('woff');
 }
 
-* {
-  font-family: 'Apple SD Sandol Gothic Neo';
+* {	
+  font-family: "Apple SD Sandol Gothic Neo";
+  }
+
+
+#app{
+  margin-top: 50px;
 }
 
-#layout {
-  padding-top: 50px;
+#main{
+  background-color: rgba(255,255,255);
 }
 
-#main {
-  max-width: 2000px;
-  display: flex;
-  margin: 0 auto;
-  background-color: rgba(128, 128, 128, 0.098);
-}
 
-#aside {
-  background-color: (255, 255, 255);
+#aside{
+  background-color: rgba(255,255,255);
   flex-basis: 164px;
   min-height: calc(100vh - 372px);
   position: relative;
   border-right: 1px solid black;
 }
 
-#scroll {
+#scroll{
   width: 100px;
   height: 100px;
-  background-color: black;
   position: sticky;
   top: 74px;
 }
 
-#section {
-  background-color: (255, 255, 255);
-  flex: 1;
-  padding: 24px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
