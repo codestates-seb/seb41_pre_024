@@ -1,11 +1,11 @@
 @font-face {
-  font-family: "Apple SD Sandol Gothic Neo";
-  src: url("https://raw.githubusercontent.com/adrinerDP/font-applesdgothicneo/main/fonts/400_AppleSDGothicNeo-Medium.woff2")
-    format("woff");
+  font-family: 'Apple SD Sandol Gothic Neo';
+  src: url('https://raw.githubusercontent.com/adrinerDP/font-applesdgothicneo/main/fonts/400_AppleSDGothicNeo-Medium.woff2')
+    format('woff');
 }
 
 * {
-  font-family: "Apple SD Sandol Gothic Neo";
+  font-family: 'Apple SD Sandol Gothic Neo';
 }
 
 #app {

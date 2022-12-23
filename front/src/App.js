@@ -1,15 +1,15 @@
-import "./App.css";
-import Header from "./Header";
-import Navbar from "./Navbar";
-import Question from "./home/Questions";
-import LoginPage from "./user/LoginPage";
-import DetailPage from "./detail/DetailPage";
-import SignupPage from "./user/SignupPage";
-import { QuestionsCrate } from "./home/QuestionsCrate";
-import Footer from "./Footer";
-import { Route, Routes, Outlet } from "react-router-dom";
-import styled from "styled-components";
-import UserPage from "./user/UserPage";
+import './App.css';
+import Header from './Header';
+import Navbar from './Navbar';
+import Question from './home/Questions';
+import LoginPage from './user/LoginPage';
+import DetailPage from './detail/DetailPage';
+import SignupPage from './user/SignupPage';
+import { QuestionsCrate } from './home/QuestionsCrate';
+import Footer from './Footer';
+import { Route, Routes, Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+import UserPage from './user/UserPage';
 
 const Common = styled.div`
   display: flex;
