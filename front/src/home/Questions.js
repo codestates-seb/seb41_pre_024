@@ -2,6 +2,13 @@ import styled from "styled-components";
 import {QuestionsTap} from "./QuestionsTap";
 import {QuestionsSub} from "./QuestionsSub"
 
+/* 
+  [구현해야할 기능]
+  1. 처음 첫 홈화면에는 모든 Questons을 보여준다 15개씩 페이지네이션(15,30,50) 보여질 개수 지정가능
+  2. 
+
+*/
+
 const Layout = styled.div`
   display:flex;
   
@@ -11,7 +18,6 @@ const Layout = styled.div`
   }
   .subLine{
     margin-left: 15px;
-    // height: 100vh;
     flex:2;
   }
   .searchTitle{
@@ -22,7 +28,8 @@ const Layout = styled.div`
   }
 
   .crateBtn{
-    padding:10px;
+
+    padding: 10px;
     background-color:#0a95ff;
     border-radius: 3px;
     margin-right:12px;
@@ -30,7 +37,7 @@ const Layout = styled.div`
     a{
       padding:5px;
       color: white;
-      font-size:13px;
+      font-size:14px;
 
     }
   }
@@ -47,10 +54,12 @@ export default function Questios() {
     {/* 검색에 영향을 받는영역 */}
     <div className="listLine">
       <div className="searchTitle">
-        <h2>Search Results</h2>
+        {/* 기본 :  All Questions / 검색시 : Search Results */}
+        <h2>All Questions</h2>
         <div className="crateBtn"><a href="/ask">Ask Question</a></div>
       </div>
-      <div className="serachLang">Results for ㄴㄴ</div>
+      {/* 검색했을시 보여줄값 */}
+      {/* <div className="serachLang">Results for ㄴㄴ</div> */}
       <div className="serachList">
         <QuestionsTap/>
       </div>

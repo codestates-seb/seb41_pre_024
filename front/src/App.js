@@ -12,9 +12,11 @@ import styled from 'styled-components';
 import UserPage from './user/UserPage';
 
 const Common = styled.div`
+  flex:1;
   display: flex;
   width: 1264px;
   margin: 0 auto;
+
 
   & > div {
     flex: 1;

@@ -3,9 +3,10 @@ import { IoIosHelpCircle } from "react-icons/io";
 import { ImUser } from "react-icons/im";
 
 const List = styled.div`
+  margin-left: -24px;
   display: flex;
-  padding: 17px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid rgb(206,207,212);
+  padding: 16px;
 
   .head {
     flex-basis: 80px;
@@ -41,7 +42,7 @@ const List = styled.div`
         margin-right: 5px;
       }
       a {
-        color: blue;
+        color: rgb(13,93,192);
       }
     }
 

@@ -4,7 +4,7 @@ import { ImPencil, ImBubble, ImCommand } from "react-icons/im";
 
 const Layout = styled.div`
     text-align: left;
-    border: 1px solid black;
+    border: 1px solid rgb(206,207,212);
     
 
     .title{
@@ -12,7 +12,7 @@ const Layout = styled.div`
         padding: 11px;
         font-size: 14px;
         font-weight: bolder;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid rgb(206,207,212);
     }
 
     .list{
