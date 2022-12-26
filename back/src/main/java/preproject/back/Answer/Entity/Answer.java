@@ -1,5 +1,6 @@
 package preproject.back.Answer.Entity;
 
+
 import lombok.*;
 import preproject.back.Member.Entity.Member;
 import preproject.back.Question.Entity.Question;
@@ -39,9 +40,6 @@ public class Answer {
     private Question question;
 
 
-
-
-
     public void addQuestion(Question question){
         this.question = question;
     }
@@ -61,6 +59,5 @@ public class Answer {
         this.title = title;
         this.content = content;
     }
-
 
 }

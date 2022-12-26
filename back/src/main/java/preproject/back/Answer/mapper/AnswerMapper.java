@@ -31,5 +31,7 @@ public interface AnswerMapper {
 
     AnswerResponseDto AnswerToAnswerResponseDto(Answer answer);
 
+
     List<AnswerResponseDto> AnswersToAnswerResponses(List<Answer> answers);
+
 }

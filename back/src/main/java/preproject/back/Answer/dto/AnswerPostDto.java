@@ -1,10 +1,12 @@
 package preproject.back.Answer.dto;
 
+
 import lombok.*;
 import preproject.back.Member.Entity.Member;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,5 +27,6 @@ public class AnswerPostDto {
 
     @NotBlank(message = "본문 내용은 공백이 아니어야 합니다.")
     private String content;
+
 
 }

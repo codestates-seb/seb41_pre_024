@@ -8,7 +8,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 public class MemberResponseDto {
+    private long memberId;
     private String email;
     private String name;
+
 
 }

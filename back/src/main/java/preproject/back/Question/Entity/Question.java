@@ -53,4 +53,11 @@ public class Question {
         myAnswerList.add(answer);
     }
 
+
+    @OneToMany(mappedBy = "question")
+    private List<Tag> tagList =new ArrayList<>();
+
+    public void addTag(Tag tag){
+        tagList.add(tag);
+    }
 }
