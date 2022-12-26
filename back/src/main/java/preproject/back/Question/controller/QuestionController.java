@@ -11,8 +11,8 @@ import preproject.back.Question.dto.QuestionPatchDto;
 import preproject.back.Question.dto.QuestionPostDto;
 import preproject.back.Question.dto.QuestionResponseDto;
 import preproject.back.Question.mapper.QuestionMapper;
-import preproject.back.Question.response.MultiResponseDto;
-import preproject.back.Question.response.SingleResponseDto;
+import preproject.back.pagedto.MultiResponseDto;
+import preproject.back.pagedto.SingleResponseDto;
 import preproject.back.Question.service.QuestionService;
 
 import javax.validation.Valid;

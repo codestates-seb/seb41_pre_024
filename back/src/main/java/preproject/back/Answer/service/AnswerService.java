@@ -4,11 +4,10 @@ package preproject.back.Answer.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-
+import preproject.back.exception.ExceptionCode;
+import preproject.back.exception.BusinessLogicException;
 import org.springframework.stereotype.Service;
 import preproject.back.Answer.Entity.Answer;
-import preproject.back.Answer.Exception.BusinessLogicException;
-import preproject.back.Answer.Exception.ExceptionCode;
 import preproject.back.Answer.Repository.AnswerRepository;
 import preproject.back.Member.Entity.Member;
 import preproject.back.Member.service.MemberService;

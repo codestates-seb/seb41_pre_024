@@ -4,8 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import preproject.back.Question.exception.BusinessLogicException;
-import preproject.back.Question.exception.ExceptionCode;
+import preproject.back.exception.ExceptionCode;
+import preproject.back.exception.BusinessLogicException;
 import preproject.back.Question.Entity.Question;
 import preproject.back.Question.repository.QuestionRepository;
 

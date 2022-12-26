@@ -1,4 +1,4 @@
-package preproject.back.Question.response;
+package preproject.back.pagedto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,3 +11,4 @@ public class PageInfo {
     private long totalElements;
     private int totalPages;
 }
+

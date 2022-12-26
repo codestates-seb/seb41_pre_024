@@ -1,4 +1,4 @@
-package preproject.back.Answer.pagedto;
+package preproject.back.pagedto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

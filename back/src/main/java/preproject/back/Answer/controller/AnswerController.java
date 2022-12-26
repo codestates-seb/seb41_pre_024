@@ -12,7 +12,7 @@ import preproject.back.Answer.dto.AnswerPatchDto;
 import preproject.back.Answer.dto.AnswerPostDto;
 import preproject.back.Answer.mapper.AnswerMapper;
 import preproject.back.Answer.service.AnswerService;
-import preproject.back.Answer.pagedto.MultiResponseDto;
+import preproject.back.pagedto.MultiResponseDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
