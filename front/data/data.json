@@ -1,0 +1,104 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question_title": "🌈 Suggestion for Automatically Match Data in MysQL",
+      "question_content": "🌟 I have limited access to the MySQL database, I just can see a view called customer contains customer_id, name, and their location",
+      "question_tag": [
+        "python",
+        "mysql",
+        "database",
+        "jupyter-notebook"
+      ],
+      "question_recommend": 3,
+      "question_time": "Dec 12 at 6:48",
+      "member_id": "Arthur",
+      "answers": [
+        {
+          "answer_id": 1,
+          "answer_content": "🦄 This is a very stacked question with lots of steps needed to achieve what you want. So let's dive straight in! First, we should read the data frames from your (uncleaned) customer database and your location database",
+          "answer_recommend": 1,
+          "answer_time": "Dec 15 at 12:06",
+          "answer_choose": false,
+          "member_id": "Luke",
+          "question_id": 1
+        },
+        {
+          "answer_id": 2,
+          "answer_content": "🔥 I don't know if I understood correctly here.. [...] I mean if in the raw data there is punctuation or number or typo, it will automatically clean [...] You need some sort of validation method here, you cannot achieve that directly on the database, you need to handle it in your logic before the rows insertion. In these cases, the best solution is to prepare a picklist (multiple choice) from which end users can choose the right values. A free text input will always be error prone.If the multiple choiceis not an applicable solution in your case, then you need to put in place a list of validation rules but you need to think how to prevent every possible issue.",
+          "answer_recommend": 4,
+          "answer_time": "Dec 15 at 12:06",
+          "answer_choose": true,
+          "member_id": "Denis B.",
+          "question_id": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question_title": "🌿 How to make one Translate button work for translating all the inputs",
+      "question_content": "✅ I am trying to translate all inputs with their respective translated language outputs. When I click the Translate Button it works but not for the respective languages, the output language gets altered. Each output language from the Selection should be fixed, for Spanish Output, the second selection should be fixed with Spanish, for Dutch Output, the second selection should be fixed with Dutch, and so on. (Each time no bother to select) Second selection for each is the output language which should be fixed for each in the HTML <option> tag",
+      "question_tag": [
+        "javascript",
+        "html",
+        "button"
+      ],
+      "question_recommend": 6,
+      "question_time": "Dec 13 at 9:21",
+      "member_id": "Neha Soni",
+      "answers": [
+        {
+          "answer_id": 1,
+          "answer_content": "🌈 In TypeScript, you can use the process.env object to access environment variables. However, if you want to make certain variables required for your CDK app, you can use the cdk.App class's node.applyAspect method to apply an aspect to your CDK app that checks for the required environment variables at runtime. Here's an example of how you could use the cdk.App class's node.applyAspect method to apply an aspect that checks for required environment variables:",
+          "answer_recommend": 3,
+          "answer_time": "Dec 18 at 10:21",
+          "answer_choose": false,
+          "member_id": "jrn6270",
+          "question_id": 2
+        },
+        {
+          "answer_id": 2,
+          "answer_content": "🐥 This aspect will be applied to every node in the CDK app, so it will check for the required environment variables whenever the app is deployed. If any of the required environment variables are missing, the aspect will throw an error and the deployment will fail.",
+          "answer_recommend": 1,
+          "answer_time": "Dec 15 at 11:02",
+          "answer_choose": true,
+          "member_id": "Marian Bazalik",
+          "question_id": 2
+        },
+        {
+          "answer_id": 3,
+          "answer_content": "🚀 The approach I would take is to first decimate the curve using something like Ramer–Douglas–Peucker or Visvalingam–Whyatt. Apply this until you get a few points. You might need to do some adaptation to make these work for closed polylines.",
+          "answer_recommend": 1,
+          "answer_time": "Dec 17 at 8:52",
+          "answer_choose": false,
+          "member_id": "JonasH",
+          "question_id": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question_title": "Saving the Antd DatePicker value to the DB by a key",
+      "question_content": "Antd DatePicker documentation has code examples for onOk, onChange callbacks, and those callbacks essentially just print the value that had been selected by the user. What if in the callback i need to pass some other information besides the value, how can this be achieved? to be specific, i have a Table, with DatePicker element on every row, like in the screen below Table with DatePicker on every row",
+      "question_tag": [
+        "reactjs",
+        "callback",
+        "database"
+      ],
+      "question_recommend": 2,
+      "question_time": "Dec 10 at 12:48",
+      "member_id": "roykeane",
+      "answers": [
+        {
+          "answer_id": 1,
+          "answer_content": "Have you tried creating a configuration class to create your repository map",
+          "answer_recommend": 0,
+          "answer_time": "Dec 19 at 12:06",
+          "answer_choose": false,
+          "member_id": "Dugfsk",
+          "question_id": 1
+        }
+      ]
+    }
+  ]
+}
