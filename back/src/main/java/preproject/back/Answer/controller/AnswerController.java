@@ -46,7 +46,7 @@ public class AnswerController {
 
 
     //답변 수정 기능0 t-0
-    @PatchMapping("/answers/edit/{answer_id}")
+    @PatchMapping("/answers/{answer_id}/edit")
     public ResponseEntity patchAnswer(@PathVariable("answer_id") @Positive long answerId,
                                       @Valid @RequestBody AnswerPatchDto answerPatchDto){
         Answer answer = this.answerService.updateAnswer(answerId, this.mapper.AnswerPatchToAnswer(answerPatchDto));

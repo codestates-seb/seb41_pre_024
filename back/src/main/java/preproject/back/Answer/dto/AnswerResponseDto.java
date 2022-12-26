@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class AnswerResponseDto {
 
     private long answerId;
@@ -24,5 +25,5 @@ public class AnswerResponseDto {
 
     private long questionId;
 
-    private long memberId;
+    private String email; //response에 member eamil값 리턴하도록 수정
 }

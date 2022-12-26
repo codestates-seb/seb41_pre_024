@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value ="/questions")
+@RequestMapping(value ="/api/questions")
 @Validated
 @Slf4j
 public class QuestionController {
@@ -35,7 +35,7 @@ public class QuestionController {
     }
 
     //질문 작성 기능
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionPostDto) {
         Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionPostDto));
 
@@ -45,7 +45,7 @@ public class QuestionController {
     }
 
     //질문 수정 기능
-    @PatchMapping("/{question_id}")
+    @PatchMapping(("/{question_id}/edit"))
     public ResponseEntity patchQuestion(@PathVariable("question_id") @Positive long questionId,
                                         @Valid @RequestBody QuestionPatchDto questionPatchDto) {
         questionPatchDto.setQuestionId(questionId);
@@ -72,9 +72,6 @@ public class QuestionController {
                                        @Positive @RequestParam int size) {
         Page<Question> pageQuestions = questionService.findQuestionList(page-1, size);
         List<Question> questions = pageQuestions.getContent();
-        List<QuestionResponseDto> response = questions.stream()
-                .map(question -> mapper.questionToQuestionResponseDto(question))
-                .collect(Collectors.toList());
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
