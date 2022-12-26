@@ -31,9 +31,7 @@ export default function DetailPage() {
         <div>
           <Main>
             <AsideContainer>
-              <div id="scroll">
-                {/* <SideNavbar /> */}
-              </div>
+              <div id="scroll">{/* <SideNavbar /> */}</div>
             </AsideContainer>
             <Section>
               <DetailContainer>
@@ -43,15 +41,14 @@ export default function DetailPage() {
                   <ContentsContainer>
                     <Contents data={questionData} />
                   </ContentsContainer>
-                  <SideBox>
-                  </SideBox>
+                  <SideBox></SideBox>
                 </ContentsAndSideBox>
               </DetailContainer>
             </Section>
           </Main>
         </div>
       )}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

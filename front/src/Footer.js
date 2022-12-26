@@ -1,12 +1,14 @@
-import styled from 'styled-components';
-// import logo from '../assets/stackoverflow_small.png';
-// import logo from 'process.env.PUBLIC_URL/assets';
+import styled from "styled-components";
+// import logo from "../assets/stackoverflow_small.png";
+// import logo from "process.env.PUBLIC_URL/assets";
 
 export default function Footer() {
   return (
     <FooterContainer>
       <LogoAndLightMode>
-        {/* <Logo src={process.env.PUBLIC_URL + `/assets/stackoverflow_small.png`} /> */}
+        <Logo
+          src={`${process.env.PUBLIC_URL}/assets/stackoverflow_small.png`}
+        />
         <LightMode>
           <p className="mode selected">Light</p>
           <p className="mode">Dark</p>
@@ -150,5 +152,4 @@ const SnsContainer = styled.div`
     border-radius: 2rem;
     padding-right: 10px;
   }
-  
 `;

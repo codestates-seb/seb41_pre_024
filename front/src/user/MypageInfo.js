@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import profile from "../../assets/profile-example.jpeg";
 
 const UserContainer = styled.div`
   display: flex;
@@ -25,7 +24,9 @@ const UserName = styled.div`
 const UserInfo = () => {
   return (
     <UserContainer>
-      <UserProfile src={profile} />
+      <UserProfile
+        src={`${process.env.PUBLIC_URL}/assets/profile-example.jpeg`}
+      />
       <UserName>
         <div>Hello, I'm User</div>
         <div>User@google.com</div>
