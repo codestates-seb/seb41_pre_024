@@ -2,9 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import Answers from "./Answers";
 import Edit from "./Edit";
-import Questions from "./Questions";
+import Questions from "./UserQuestions";
 
 const Container = styled.div`
+  /* border: 1px solid blue; */
   display: flex;
   flex-direction: row;
   width: 80%;

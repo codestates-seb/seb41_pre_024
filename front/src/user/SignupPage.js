@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+import Header from '../Header';
 import styled from 'styled-components';
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';

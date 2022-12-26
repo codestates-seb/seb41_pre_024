@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Aside from '../components/Aside';
-import SideNavbar from '../components/Navbar';
-import Footer from '../components/Footer';
-
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -74,120 +70,48 @@ export default function EditAnswerPage() {
   return (
     <>
       {data && (
-        <div>
-          <Main>
-            <AsideContainer>
-              <div id="scroll">
-                <SideNavbar />
-              </div>
-            </AsideContainer>
-            <Section>
-              <DetailContainer>
-                <ContentsAndSideBox>
-                  <ContentsContainer>
-                    <AnswerFormHeader>Answer</AnswerFormHeader>
-                    <form onSubmit={(e) => handleEditSubmit(e, answer_id)}>
-                      <Textarea
-                        required
-                        {...editedBind}
-                        placeholder={data.answers[answer_id - 1].answer_content}
-                      ></Textarea>
-                      <Guideline>
-                        Thanks for contributing an answer to Stack Overflow!
-                        <br />
-                        <br />
-                        • Please be sure to answer the question. Provide details
-                        and share your research!
-                        <br />
-                        <br />
-                        But avoid …
-                        <br />
-                        <br />
-                        • Asking for help, clarification, or responding to other
-                        answers.
-                        <br />
-                        • Making statements based on opinion; back them up with
-                        references or personal experience.
-                        <br />
-                        <br />
-                        To learn more, see our tips on writing great answers.
-                      </Guideline>
-                      <SubmitBtn>Save edits</SubmitBtn>
-                    </form>
-                  </ContentsContainer>
-                  <SideBox>
-                    <Aside />
-                  </SideBox>
-                </ContentsAndSideBox>
-              </DetailContainer>
-            </Section>
-          </Main>
-        </div>
+        <ContentsAndSideBox>
+          <ContentsContainer>
+            <AnswerFormHeader>Answer</AnswerFormHeader>
+            <form onSubmit={(e) => handleEditSubmit(e, answer_id)}>
+              <Textarea
+                required
+                {...editedBind}
+                placeholder={data.answers[answer_id - 1].answer_content}
+              ></Textarea>
+              <Guideline>
+                Thanks for contributing an answer to Stack Overflow!
+                <br />
+                <br />
+                • Please be sure to answer the question. Provide details and
+                share your research!
+                <br />
+                <br />
+                But avoid …
+                <br />
+                <br />
+                • Asking for help, clarification, or responding to other
+                answers.
+                <br />
+                • Making statements based on opinion; back them up with
+                references or personal experience.
+                <br />
+                <br />
+                To learn more, see our tips on writing great answers.
+              </Guideline>
+              <SubmitBtn>Save edits</SubmitBtn>
+            </form>
+          </ContentsContainer>
+          <SideBox></SideBox>
+        </ContentsAndSideBox>
       )}
-      <Footer />
     </>
   );
 }
 
-const Main = styled.div`
-  max-width: 2000px;
-  display: flex;
-  margin: 0 auto;
-  background-color: rgba(128, 128, 128, 0.098);
-  /* border: 3px solid green; */
-  justify-content: center;
-`;
-
-const AsideContainer = styled.div`
-  background-color: (255, 255, 255);
-  flex-basis: 164px;
-  min-height: calc(100vh - 372px);
-  position: relative;
-  /* border: 3px solid violet; */
-  /* background-color: #f48224; */
-  border-right: 1px solid black;
-
-  #aside {
-    background-color: (255, 255, 255);
-    flex-basis: 164px;
-    min-height: calc(100vh - 372px);
-    position: relative;
-    border-right: 1px solid black;
-    border: 3px solid red;
-  }
-
-  #scroll {
-    width: 100px;
-    height: 100px;
-    /* background-color: black; */
-    position: sticky;
-    top: 74px;
-  }
-`;
-
-const Section = styled.div`
-  background-color: (255, 255, 255);
-  flex: 0.5;
-  padding: 24px;
-  /* border: 3px solid goldenrod; */
-`;
-
-// const Scroll = styled.div`
-//   width: 100px;
-//   height: 100px;
-//   background-color: black;
-//   position: sticky;
-//   top: 74px;
-// `;
-
-const DetailContainer = styled.div`
-  width: 900px;
-  /* height: 700px;
-  border: 1px solid blue; */
-`;
-
 const ContentsAndSideBox = styled.div`
   /* border: 3px solid aliceblue; */
+  width: 900px;
   display: flex;
   justify-content: space-between;
 `;
