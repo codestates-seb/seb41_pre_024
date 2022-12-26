@@ -47,10 +47,10 @@ public class Question {
     }
 
     @OneToMany(mappedBy = "question")
-    private List<Answer> myAnswerList =new ArrayList<>();
+    private List<Answer> answers =new ArrayList<>();
 
     public void addAnswer(Answer answer){
-        myAnswerList.add(answer);
+        answers.add(answer);
     }
 
 

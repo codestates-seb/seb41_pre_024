@@ -17,7 +17,7 @@ import javax.validation.constraints.Positive;
 
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/api/members")
 @Validated
 @Slf4j
 public class MemberController {
@@ -38,20 +38,20 @@ public class MemberController {
                 HttpStatus.CREATED);
     }
     //회원정보 수정
-    @PatchMapping("{member-id}")
-    public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
+    @PatchMapping("/{member_id}")
+    public ResponseEntity patchMember(@PathVariable("member_id") @Positive long memberId,
                                       @Valid @RequestBody MemberPatchDto memberPatchDto){
         Member response = memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
         return new ResponseEntity<>(mapper.memberToMemberResponseDto(response), HttpStatus.OK);
     }
     //회원정보 보기
-    @GetMapping("{member-id}")
+    @GetMapping("/{member-id}")
     public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId){
         Member response = memberService.findMember(memberId);
         return new ResponseEntity<>(mapper.memberToMemberResponseDto(response), HttpStatus.OK);
     }
     //회원 탈퇴
-    @DeleteMapping("{member-id}")
+    @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(@PathVariable("member-id") @Positive long memberId){
         memberService.deleteMember(memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
