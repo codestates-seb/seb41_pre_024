@@ -23,10 +23,10 @@ public class AnswerService {
     private final AnswerRepository answerRepository;
 
 
-//    private final MemberService memberService;
-    public AnswerService(AnswerRepository answerRepository){
+   private final MemberService memberService;
+    public AnswerService(AnswerRepository answerRepository,MemberService memberService){
         this.answerRepository = answerRepository;
-//        this.memberService =memberService;
+       this.memberService =memberService;
     }
 
     //답변 생성기능 postman ok
@@ -34,8 +34,9 @@ public class AnswerService {
 
         //멤버값 찾아서 넣어주고
 
-                /* findMember = memberService.findVerifiedMember(answer.getMember().getMemberId());
-        answer.addMember(findMember);*/
+//              Member findMember = memberService.findVerifiedMember(answer.getMember().getMemberId());
+//        answer.addMember(findMember);
+
 
         Answer savedAnswer = answerRepository.save(answer);
 
