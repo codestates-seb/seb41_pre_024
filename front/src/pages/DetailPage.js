@@ -34,4 +34,5 @@ const DetailContent = styled.div`
 const RightSection = styled.div`
   width: 100px;
   border: 1px solid red;
+
 `;

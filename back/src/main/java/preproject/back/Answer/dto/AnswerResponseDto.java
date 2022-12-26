@@ -4,12 +4,10 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Getter
+@Setter
 public class AnswerResponseDto {
 
     private long answerId;

@@ -1,8 +1,7 @@
 package preproject.back.Answer.Entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 import preproject.back.Member.Entity.Member;
 import preproject.back.Question.Entity.Question;
 
@@ -12,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Answer {
 
@@ -39,6 +39,7 @@ public class Answer {
     @JoinColumn(name ="question_id")
     private Question question;
 
+
     public void addQuestion(Question question){
         this.question = question;
     }
@@ -51,5 +52,12 @@ public class Answer {
         this.member = member;
     }
 
+
+    //테스트 위한 생성자
+    public Answer(long answerId,String title,String content) {
+        this.answerId = answerId;
+        this.title = title;
+        this.content = content;
+    }
 
 }

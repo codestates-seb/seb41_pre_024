@@ -23,13 +23,17 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation' //dto 유효성 검사
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2:' //h2인메모리
+	runtimeOnly 'com.h2database:h2:'
 	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'org.mapstruct:mapstruct:1.5.3.Final' //mapstruct
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'com.google.code.gson:gson:2.10'
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+

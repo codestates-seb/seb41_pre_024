@@ -62,6 +62,7 @@ public class MemberController {
         return ResponseEntity.ok(null);
     }
     //작정답변 리스트
+
     @GetMapping("/members/answers/{member-id}")
     public ResponseEntity getAnswer(){
         return ResponseEntity.ok(null);
