@@ -1,13 +1,13 @@
-import Header from "../components/Header";
-import styled from "styled-components";
-import { FcGoogle } from "react-icons/fc";
-import { BsGithub } from "react-icons/bs";
-import { FaFacebookSquare } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { RiQuestionnaireFill } from "react-icons/ri";
-import { TiArrowUnsorted } from "react-icons/ti";
-import { BsTagsFill } from "react-icons/bs";
-import { AiFillTrophy } from "react-icons/ai";
+import Header from '../Header';
+import styled from 'styled-components';
+import { FcGoogle } from 'react-icons/fc';
+import { BsGithub } from 'react-icons/bs';
+import { FaFacebookSquare } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { RiQuestionnaireFill } from 'react-icons/ri';
+import { TiArrowUnsorted } from 'react-icons/ti';
+import { BsTagsFill } from 'react-icons/bs';
+import { AiFillTrophy } from 'react-icons/ai';
 
 const HeaderContainer = styled.header`
   background-color: rgb(247, 247, 247);

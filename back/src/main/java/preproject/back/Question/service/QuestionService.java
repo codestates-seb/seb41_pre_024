@@ -1,5 +1,8 @@
 package preproject.back.Question.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import preproject.back.Question.exception.BusinessLogicException;
 import preproject.back.Question.exception.ExceptionCode;
@@ -45,14 +48,14 @@ public class QuestionService {
         return findQuestion;
     }
 
-    //질문 선택 기능
+    //특정 질문 선택 기능
     public Question findQuestion(long questionId) {
         return findVerifiedQuestion(questionId);
     }
 
     //질문 리스트 조회 기능
-    public List<Question> findQuestionList() {
-        return questionRepository.findAll();
+    public Page<Question> findQuestionList(int page, int size) {
+        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 
     //질문 삭제 기능

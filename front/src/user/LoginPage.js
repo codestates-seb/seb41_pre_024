@@ -1,24 +1,24 @@
-import Header from "../components/Header";
+import Header from "../Header";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import { FaFacebookSquare } from "react-icons/fa";
-import logo from "../assets/stackoverflow_small.png";
+// import logo from "../assets/stackoverflow_small.png";
 import { Link } from "react-router-dom";
 
-const HeaderContainer = styled.header`
-  background-color: rgb(247, 247, 247);
-  height: 50px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  border-top: 3px solid #f48225;
-  display: flex;
-  justify-content: center;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
-`;
+// const HeaderContainer = styled.header`
+//   background-color: rgb(247, 247, 247);
+//   height: 50px;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   z-index: 1;
+//   border-top: 3px solid #f48225;
+//   display: flex;
+//   justify-content: center;
+//   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
+// `;
 
 const Main = styled.div`
   background-color: #f1f2f3;
@@ -110,12 +110,12 @@ const Script = styled.div`
 const LoginPage = () => {
   return (
     <>
-      <HeaderContainer>
-        <Header />
-      </HeaderContainer>
+      {/* <HeaderContainer> */}
+      <Header />
+      {/* </HeaderContainer> */}
 
       <Main>
-        <Logo src={logo}></Logo>
+        {/* <Logo src={logo}></Logo> */}
         <ButtonContainer>
           <Google>
             <FcGoogle />
