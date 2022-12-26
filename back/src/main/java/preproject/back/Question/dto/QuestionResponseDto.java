@@ -7,6 +7,7 @@ import lombok.Setter;
 import preproject.back.Answer.Entity.Answer;
 import preproject.back.Answer.dto.AnswerResponseDto;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,7 +26,9 @@ public class QuestionResponseDto {
 
     private LocalDateTime createdAt;
 
+
     private String email;
 
     private List<AnswerResponseDto> answers;
+
 }

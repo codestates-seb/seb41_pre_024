@@ -19,6 +19,7 @@ public interface QuestionMapper {
 
     Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
 
+
     default QuestionResponseDto questionToQuestionResponseDto(Question question) {
         if (question == null) {
             return null;
@@ -66,4 +67,5 @@ public interface QuestionMapper {
         }
         return list;
     }
+
 }
