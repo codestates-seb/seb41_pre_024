@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import preproject.back.Answer.Entity.Answer;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,4 +25,6 @@ public class QuestionResponseDto {
     private LocalDateTime createdAt;
 
     private long memberId;
+
+    private List<Answer> myAnswerList;
 }

@@ -4,7 +4,7 @@ package preproject.back.response;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import preproject.back.Answer.Exception.ExceptionCode;
+import preproject.back.exception.ExceptionCode;
 
 import javax.validation.ConstraintViolation;
 import java.util.List;
