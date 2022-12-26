@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
 
-    Answer AnswerPostToAnswer(AnswerPostDto answerPostDto);
+    Answer AnswerPostToAnswer( AnswerPostDto answerPostDto);
 
     //mapper 기능 직접구현(자동맵핑시 빈 객체 생성 오류)
 //    default Answer AnswerPostToAnswer(AnswerPostDto answerPostDto){

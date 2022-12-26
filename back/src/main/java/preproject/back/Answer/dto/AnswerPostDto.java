@@ -15,6 +15,11 @@ public class AnswerPostDto {
 //    @Positive
 //    private long memberId;
 
+    //public Member getMember() {
+    //        Member member = new Member();
+    //        member.setMemberId(memberId);
+    //        return member;
+
     @NotBlank(message = "제목은 공백이 아니여야 합니다.")
     private String title;
 

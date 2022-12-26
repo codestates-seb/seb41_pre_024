@@ -38,12 +38,9 @@ public class Answer {
     @JoinColumn(name ="question_id")
     private Question question;
 
-    //테스트 위한 생성자
-    public Answer(long answerId,String title,String content){
-        this.answerId = answerId;
-        this.title =title;
-        this.content = content;
-    }
+
+
+
 
     public void addQuestion(Question question){
         this.question = question;
@@ -55,6 +52,14 @@ public class Answer {
 
     public void addMember(Member member){
         this.member = member;
+    }
+
+
+    //테스트 위한 생성자
+    public Answer(long answerId,String title,String content) {
+        this.answerId = answerId;
+        this.title = title;
+        this.content = content;
     }
 
 

@@ -13,12 +13,13 @@ import preproject.back.Answer.mapper.AnswerMapper;
 import preproject.back.Answer.service.AnswerService;
 import preproject.back.Answer.pagedto.MultiResponseDto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value ="/answers")
+@RequestMapping(value ="/api")
 @Validated
 @Slf4j
 public class AnswerController {
@@ -33,8 +34,9 @@ public class AnswerController {
     }
 
     //답변 작성 기능 0 t -0
-    @PostMapping
-    public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
+    @PostMapping("/answers/add")
+    public ResponseEntity postAnswer( //@PathVariable("question-id") @Positive long questionId,
+            @Valid @RequestBody AnswerPostDto answerPostDto){
 
         Answer answer =this.answerService.createAnswer(this.mapper.AnswerPostToAnswer(answerPostDto));
         return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer),HttpStatus.CREATED);
@@ -43,9 +45,9 @@ public class AnswerController {
 
 
     //답변 수정 기능0 t-0
-    @PatchMapping("/{answer_id}")
+    @PatchMapping("/answers/edit/{answer_id}")
     public ResponseEntity patchAnswer(@PathVariable("answer_id") @Positive long answerId,
-                                      @RequestBody AnswerPatchDto answerPatchDto){
+                                      @Valid @RequestBody AnswerPatchDto answerPatchDto){
         Answer answer = this.answerService.updateAnswer(answerId, this.mapper.AnswerPatchToAnswer(answerPatchDto));
         return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer),HttpStatus.OK);
     }
@@ -72,7 +74,7 @@ public class AnswerController {
         }
 
     //답변 삭제 기능0 t-o
-    @DeleteMapping("/{answer_id}")
+    @DeleteMapping("/answers/delete/{answer_id}")
     public ResponseEntity deleteAnswer(@PathVariable("answer_id") @Positive long answerId){
         this.answerService.deleteAnswer(answerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -80,7 +82,7 @@ public class AnswerController {
 
 
     //답변 추천(up) 기능0
-    @PatchMapping("/recommend/up/{answer_id}")
+    @PatchMapping("/answers/recommend/up/{answer_id}")
     public ResponseEntity recommendUpAnswer(@PathVariable("answer_id") @Positive long answerId){
         Answer answer = this.answerService.recommendUpAnswer(answerId);
 
@@ -88,7 +90,7 @@ public class AnswerController {
     }
 
     //답변 추천(down) 기능0
-    @PatchMapping("/recommend/down/{answer_id}")
+    @PatchMapping("/answers/recommend/down/{answer_id}")
     public ResponseEntity recommendDownAnswer(@PathVariable("answer_id") @Positive long answerId){
         Answer answer = this.answerService.recommendDownAnswer(answerId);
 
@@ -97,7 +99,7 @@ public class AnswerController {
 
 
     //답변 채택 기능0
-    @PatchMapping("/adoption/{answer_id}")
+    @PatchMapping("/answers/adoption/{answer_id}")
     public ResponseEntity adoptAnswer(@PathVariable("answer_id") @Positive long answerId){
         Answer answer = this.answerService.adoptAnswer(answerId);
 

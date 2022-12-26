@@ -8,6 +8,8 @@ import preproject.back.Answer.Entity.Answer;
 import preproject.back.Answer.Exception.BusinessLogicException;
 import preproject.back.Answer.Exception.ExceptionCode;
 import preproject.back.Answer.Repository.AnswerRepository;
+import preproject.back.Member.Entity.Member;
+import preproject.back.Member.service.MemberService;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -18,12 +20,19 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
+//    private final MemberService memberService;
     public AnswerService(AnswerRepository answerRepository){
         this.answerRepository = answerRepository;
+//        this.memberService =memberService;
     }
 
     //답변 생성기능 postman ok
     public Answer createAnswer(Answer answer){
+
+        //멤버값 찾아서 넣어주고
+
+                /* findMember = memberService.findVerifiedMember(answer.getMember().getMemberId());
+        answer.addMember(findMember);*/
 
         Answer savedAnswer = answerRepository.save(answer);
 
@@ -34,6 +43,10 @@ public class AnswerService {
     public Answer updateAnswer(long answerId, Answer answer){
         //존재하는 답변인지 확인
         Answer findAnswer = verifyAnswer(answerId);
+
+       /* Member postMember = MemberService.findVerifiedMember(findAnswer.getMember().getMemberId()); // 작성자
+        if(memberService.getLoginMember().getMemberId() != postMember.getMemberId()) // 로그인 유저 != 작성자
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED); // 수정 권한 없음*/
 
         //각 변수가 존재한다면(변경 내용이 있다면) 바꿔서 저장해주기
         Optional.ofNullable(answer.getTitle())
@@ -54,6 +67,7 @@ public class AnswerService {
         return answerRepository.findAll(PageRequest.of(page, size,
                 Sort.by("answerId").descending())); //최신순 정렬
     }
+
     //답변 삭제 기능 postman ok
     public void deleteAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId);
