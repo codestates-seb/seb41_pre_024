@@ -21,13 +21,13 @@ public class Member {
     @Column(name = "member_id")
     private long memberId;
 
-    @Column(name = "member_email")
+    @Column(name = "member_email", nullable = false, unique = true, updatable = false)
     private String email;
 
-    @Column(name = "member_name")
+    @Column(name = "member_name", nullable = false)
     private String name;
 
-    @Column(name = "member_password")
+    @Column(name = "member_password", nullable = false)
     private String password;
 
 
