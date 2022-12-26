@@ -10,7 +10,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import preproject.back.Answer.Exception.BusinessLogicException;
+import preproject.back.exception.BusinessLogicException;
 import preproject.back.response.ErrorResponse;
 
 import javax.validation.ConstraintViolationException;
