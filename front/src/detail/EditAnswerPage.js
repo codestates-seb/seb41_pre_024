@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import axios from 'axios';
+import { QuestionsSub } from '../home/QuestionsSub';
 
 export default function EditAnswerPage() {
   const [data, setData] = useState();
@@ -102,7 +103,9 @@ export default function EditAnswerPage() {
               <SubmitBtn>Save edits</SubmitBtn>
             </form>
           </ContentsContainer>
-          <SideBox></SideBox>
+          <SideBox>
+            <QuestionsSub />
+          </SideBox>
         </ContentsAndSideBox>
       )}
     </>
@@ -172,5 +175,5 @@ const SideBox = styled.div`
   /* height: 700px; */
   margin: 24px;
   /* border: 3px solid sandybrown; */
-  background-color: #fbf3d5;
+  /* background-color: #fbf3d5; */
 `;

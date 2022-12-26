@@ -83,6 +83,7 @@ const Menu = styled.div`
     border: none;
     margin-right: 20px;
     color: #6a737c;
+    background-color: inherit;
 
     :hover {
       cursor: pointer;

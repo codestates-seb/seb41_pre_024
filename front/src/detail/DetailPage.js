@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+import { QuestionsSub } from '../home/QuestionsSub';
+
 export default function DetailPage() {
   const [questionData, setQuestionData] = useState();
   const { id } = useParams();
@@ -32,7 +34,9 @@ export default function DetailPage() {
             <ContentsContainer>
               <Contents data={questionData} />
             </ContentsContainer>
-            <SideBox></SideBox>
+            <SideBox>
+              <QuestionsSub />
+            </SideBox>
           </ContentsAndSideBox>
         </DetailContainer>
       )}
@@ -62,5 +66,4 @@ const SideBox = styled.div`
   /* height: 700px; */
   margin: 24px;
   /* border: 3px solid sandybrown; */
-  background-color: #fbf3d5;
 `;

@@ -29,6 +29,7 @@ export default function Title({ data }) {
 const TitieContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 10px 0;
 `;
 
 const TitleAndInfo = styled.div`

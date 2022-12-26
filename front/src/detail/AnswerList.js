@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AdditionalFunction from './AdditionalFunc';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function AnswerList({ data }) {
   console.log(data);
@@ -52,7 +53,9 @@ export default function AnswerList({ data }) {
                 <Menu>
                   <button className="menu">Share</button>
                   <button className="menu">Follow</button>
-                  <button className="menu">Edit</button>
+                  <Link to={`/posts/${id}/edit/${answer.answer_id}`}>
+                    <button className="menu">Edit</button>
+                  </Link>
                   <button
                     onClick={(e) => handleAnswerDelete(e, answer.answer_id)}
                     className="menu"
@@ -117,6 +120,7 @@ const Menu = styled.div`
     border: none;
     margin-right: 20px;
     color: #6a737c;
+    background-color: inherit;
 
     :hover {
       cursor: pointer;
