@@ -7,6 +7,7 @@ import { FaCheck } from 'react-icons/fa';
 import { RxCounterClockwiseClock } from 'react-icons/rx';
 
 export default function AdditionalFunc({ likes, checked }) {
+  // 추천 수, 채택 여부
   console.log('likes', likes);
   return (
     <Container>

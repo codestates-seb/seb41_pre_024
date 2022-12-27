@@ -47,7 +47,7 @@ const QuestionInfo = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 13px;
-  margin-top: 8px;
+  margin: 8px 0;
 
   .infoTitle {
     color: #6a737c;
