@@ -7,7 +7,7 @@ export default function Question({ data }) {
     <>
       {data && (
         <DetailContainer>
-          <AdditionalFunction likes={data.question_recommend} />
+          <AdditionalFunction question={data} />
           <DetailBody>
             <DetailText>
               {data.question_content}

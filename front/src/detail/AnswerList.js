@@ -40,10 +40,7 @@ export default function AnswerList({ data }) {
       {data &&
         data.map((answer) => (
           <DetailContainer key={answer.answer_id}>
-            <AdditionalFunction
-              likes={answer.answer_recommend}
-              checked={answer.answer_choose}
-            />
+            <AdditionalFunction answer={answer} />
             <DetailBody>
               <DetailText>{answer.answer_content}</DetailText>
               <DetailFooter>
