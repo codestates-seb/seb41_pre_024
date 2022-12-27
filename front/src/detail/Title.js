@@ -19,7 +19,7 @@ export default function Title({ data }) {
           </span>
         </QuestionInfo>
       </TitleAndInfo>
-      <Link to="/questions/ask">
+      <Link to="/ask">
         <AskQuestionBtn>Ask Question</AskQuestionBtn>
       </Link>
     </TitieContainer>

@@ -78,7 +78,6 @@ function App() {
                 path="/posts/:id/edit/:answer_id"
                 element={<EditAnswerPage />}
               />
-              <Route path="/questions/:id" element={<DetailPage />} />
               <Route path="/bookmark" element={<BookmarkPage />} />
               <Route path="/user" element={<UserPage />} />
             </Route>
