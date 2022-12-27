@@ -8,6 +8,19 @@ import AnswerSubmit from './AnswerSubmit';
 // axios!
 
 export default function Contents({ data }) {
+  // answer 데이터 id 순으로 정렬
+  const sortedAnswerData = data.answers.sort(function (a, b) {
+    if (a.answer_id > b.answer_id) {
+      return 1;
+    }
+    if (a.answer_id < b.answer_id) {
+      return -1;
+    }
+    return 0;
+  });
+
+  console.log('sorted', sortedAnswerData);
+
   return (
     <div>
       {data && (
@@ -26,8 +39,8 @@ export default function Contents({ data }) {
               </select>
             </div>
           </AnswerHeader>
-          <AnswerList data={data} />
-          <AnswerSubmit data={data} />
+          <AnswerList data={sortedAnswerData} />
+          <AnswerSubmit data={sortedAnswerData} />
         </div>
       )}
     </div>

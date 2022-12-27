@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { IoEarthSharp } from "react-icons/io5";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { IoEarthSharp } from 'react-icons/io5';
 
 const Container = styled.ol`
   /* border: 1px solid red; */
@@ -33,7 +33,7 @@ const Container = styled.ol`
 `;
 
 const SideNavbar = () => {
-  if (window.location.pathname === "/login") return null;
+  if (window.location.pathname === '/login') return null;
   return (
     <>
       <Container>

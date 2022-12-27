@@ -12,7 +12,7 @@ export default function AnswerSubmit({ data }) {
   console.log('submit', data);
 
   const newAnswer = {
-    answer_id: data.answers.length + 1,
+    answer_id: data.length + 1,
     answer_content: answer,
     answer_recommend: 0,
     answer_time: new Date().toLocaleDateString('ko-KR'),
@@ -29,7 +29,7 @@ export default function AnswerSubmit({ data }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        answers: [...data.answers, newAnswer],
+        answers: [...data, newAnswer],
       }),
     })
       .then((res) => {
