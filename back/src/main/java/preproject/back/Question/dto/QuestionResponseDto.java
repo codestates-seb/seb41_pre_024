@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import preproject.back.Answer.Entity.Answer;
 import preproject.back.Answer.dto.AnswerResponseDto;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class QuestionResponseDto {
   //todo  private int recommend;
 
     private LocalDateTime createdAt;
+
 
     private String email; //TODO 작성자 email보이게
 
