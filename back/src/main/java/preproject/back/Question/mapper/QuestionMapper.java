@@ -18,8 +18,6 @@ public interface QuestionMapper {
     Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
 
     Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
-
-
     default QuestionResponseDto questionToQuestionResponseDto(Question question) {
         if (question == null) {
             return null;
@@ -30,8 +28,12 @@ public interface QuestionMapper {
         questionResponseDto.setQuestionId(question.getQuestionId());
         questionResponseDto.setTitle(question.getTitle());
         questionResponseDto.setContent(question.getContent());
-        questionResponseDto.setRecommend(question.getRecommend());
+
+        questionResponseDto.setTotalAnswers(question.getAnswers().size());
         questionResponseDto.setCreatedAt(question.getCreatedAt());
+        questionResponseDto.setTotalRecommend(question.getAnswers().stream().mapToInt(n -> {
+            return n.getRecommend();
+        }).sum());
 //        questionResponseDto.setEmail(question.getMember().getEmail());
         List<AnswerResponseDto> list = question.getAnswers()
                 .stream().map(
@@ -67,5 +69,4 @@ public interface QuestionMapper {
         }
         return list;
     }
-
 }
