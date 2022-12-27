@@ -9,10 +9,12 @@ const List = styled.div`
   padding: 16px;
 
   .head {
+    margin-left: 20px;
     flex-basis: 80px;
     display: flex;
     flex-direction: column;
     align-items: end;
+    font-size: 13px;
 
     & > div:nth-child(2) {
       border: 1px solid black;
@@ -33,7 +35,7 @@ const List = styled.div`
   .body {
     flex: 1;
     text-align: left;
-    margin-left: 15px;
+    margin: 0 15px;
 
     .title {
       display: flex;
@@ -51,41 +53,48 @@ const List = styled.div`
         overflow: hidden;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        margin-bottom: 5px;
         font-size:13px;
+        margin-bottom: 10px;
     }
 
 
     .info{
       display: flex;
-      height: 32px;
-      justify-content: space-between;
+      flex-direction: column;
+      min-height: 35px;
       align-items: center;
+      flex-wrap: wrap;
 
-      .tag{
-        display:flex;
-        margin-bottom: 10px;
-        li{
-          border-radius:5px;
-          padding:5px;
-          margin: 0 3px;
-          color: hsl(205,47%,42%);
-          background-color: hsl(205,46%,92%);
-          font-size: 13px;
-        }
-      }
+      .tagpoint{
+        align-self: flex-start;
+        
+        .tag{
+          display:flex;
+          flex-wrap: wrap;
+          gap: 4px;
+      
+          li{
+            border-radius:5px;
+            padding:5px;
+            margin: 0 3px;
+            color: hsl(205,47%,42%);
+            background-color: hsl(205,46%,92%);
+            font-size: 13px;
+          }
+      }}
+
+
+   
 
       .users{
-        
+        // margin-top: 5px;
+        align-self: flex-end;
         font-size: 13px;
         span{
           vertical-align: middle;
           margin:5px;
         }
-      }
-
-
-    }
+      }}
 
   }
 `;
@@ -97,18 +106,21 @@ export const QuestionsList = () => {
         <div className="head">
           <div>
             <div>
+              {/* 투표수에따른 값변화 */}
               <span>8</span>
               <span>votes</span>
             </div>
           </div>
           <div>
             <div>
+              {/* 답변에따른 값변화 */}
               <span>1</span>
               <span>answer</span>
             </div>
           </div>
           <div>
             <div>
+              {/* 클릭에 따른 값변화 */}
               <span>105</span>
               <span>views</span>
             </div>
@@ -127,8 +139,8 @@ export const QuestionsList = () => {
             <p>
               type sssssssssssssssssssssafterwards looks like 가나다 This seems to be only a visual
               issue, as if I were to type and hit backspace until
-              there was no change shown, I would be left with
-            </p>
+              there was no change shown, I would be left with there was no change shown, I would be left with there was no change shown, I would be left with
+             </p>
           </div>
           <div className="info">
             <div className="tagpoint">
@@ -137,12 +149,14 @@ export const QuestionsList = () => {
                 <li>macos</li>
                 <li>Python-3.x</li>
                 <li>osx-elcapitan</li>
+                <li>osx-elcapitan</li>
               </ul>
             </div>
             <div className="users">
+              {/* 태그 내용에 따른 위치변화 ? */}
               <span><ImUser></ImUser></span>
-              <span>유저아이디</span>
-              <span>작성시간</span>
+              <span>user3757849</span>
+              <span>asked 31 secs ago</span>
             </div>
           </div>
         </div>

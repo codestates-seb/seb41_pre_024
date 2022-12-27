@@ -1,18 +1,12 @@
 import styled from "styled-components";
-import Header from "../Header";
-import Footer from "../Footer";
 
 const Layout = styled.div`
-  // display:flex;
-  // flex-direction: column;
-  // height: calc(100vh - 342px);
 
   .title {
     background: url(https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368)
       no-repeat right/500px;
     height: 130px;
     line-height: 130px;
-    // flex: 1;
   }
 
   .exple {
@@ -29,10 +23,12 @@ const Layout = styled.div`
   .exple_list {
     margin-left: 15px;
     list-style: inside;
+    font-size: 13px;
   }
 
   h5 {
     font-size: 14px;
+    margin-bottom: 5px;
   }
 `;
 
@@ -43,7 +39,8 @@ const Form = styled.form`
   flex-direction: column;
   gap: 20px;
 
-.conTitle{
+
+.conPs{
   display:flex;
   flex-direction: column;
   padding: 20px;
@@ -57,7 +54,7 @@ const Form = styled.form`
     margin: 2px 0;
   }
 
-  .isTitle{
+  .isCon{
     padding:5px;
     flex:1;
     flex-basis: 33px;
@@ -67,6 +64,14 @@ const Form = styled.form`
 .content{
   padding: 20px;
   border: 1px solid rgb(220,244,226);
+
+  & > *{
+    margin-bottom: 5px;
+  }
+
+  p{
+    font-size: 13px;
+  }
 }
 
 textarea {
@@ -77,6 +82,11 @@ textarea {
 
 button{
   padding: 10px 13px;
+  background-color:#0a95ff;
+  border-radius: 3px;
+  color: white;
+  border:none;
+  box-shadow: 0px 0px 3px 0px white inset;
 }
 `
 
@@ -117,16 +127,25 @@ export const QuestionsCrate = () => {
           </div>
         </div>
         <Form>
-          <div className="conTitle">
+          <div className="conPs">
             <h5>Title</h5>
             <p>
               Be specific and imagine you’re asking a question to another
               person.
             </p>
-            <input type="text" className="isTitle" placeholder="e.g is there an R function fpr finding the index of an element in a vector"/>
+            <input type="text" className="isCon" placeholder="e.g is there an R function fpr finding the index of an element in a vector"/>
           </div>
+
+          <div className="conPs">
+            <h5>Tags</h5>
+            <p>
+              Add up to 5 tags to describe what your question is about. start typing to see suggestions
+            </p>
+            <input type="text" className="isCon" placeholder="e.g. (asp.net wordpress mongodb)"/>
+          </div>
+
           <div className="content">
-            <h5>What are the details of your problem?</h5>
+            <h4>What are the details of your problem?</h4>
             <p>
               Introduce the problem and expand on what you put in the title.
               Minimum 20 characters.
