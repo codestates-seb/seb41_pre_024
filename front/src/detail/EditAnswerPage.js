@@ -9,7 +9,7 @@ import axios from 'axios';
 import { QuestionsSub } from '../home/QuestionsSub';
 
 export default function EditAnswerPage() {
-  const [data, setData] = useState();
+  const [answerData, setAnswerData] = useState();
   const { id, answer_id } = useParams(); // question id와 answer id 가져옴
 
   console.log(id);
@@ -21,25 +21,48 @@ export default function EditAnswerPage() {
     async function request() {
       const response = await axios.get(`http://localhost:3001/questions/${id}`);
       const { data } = response; // 답변 속한 질문 데이터 전체
-      setData(data);
+
+      // answer 데이터 id 순으로 정렬
+      const sortedAnswerData = data.answers.sort(function (a, b) {
+        if (a.answer_id > b.answer_id) {
+          return 1;
+        }
+        if (a.answer_id < b.answer_id) {
+          return -1;
+        }
+        return 0;
+      });
+
+      console.log(sortedAnswerData);
+
+      setAnswerData(sortedAnswerData);
     }
     request();
   }, []);
 
-  console.log(data);
+  // // answer 데이터 id 순으로 정렬
+  // const sortedAnswerData = data.answers.sort(function (a, b) {
+  //   if (a.answer_id > b.answer_id) {
+  //     return 1;
+  //   }
+  //   if (a.answer_id < b.answer_id) {
+  //     return -1;
+  //   }
+  //   return 0;
+  // });
 
   const handleEditSubmit = (e, answer_id) => {
-    const editedAnswerList = data.answers.filter(
+    const editedAnswerList = answerData.filter(
       (el) => el.answer_id !== Number(answer_id)
     ); // 수정할 answer만 뺀 answers 리스트
 
     const editedAnswer = {
       answer_id: Number(answer_id), // params로 받아옴
       answer_content: edited, // useInput 이용해서 받아옴
-      answer_recommend: data.answers[answer_id - 1].answer_recommend,
-      answer_time: data.answers[answer_id - 1].answer_time,
-      answer_choose: data.answers[answer_id - 1].answer_choose,
-      member_id: data.answers[answer_id - 1].member_id,
+      answer_recommend: answerData[answer_id - 1].answer_recommend,
+      answer_time: answerData[answer_id - 1].answer_time,
+      answer_choose: answerData[answer_id - 1].answer_choose,
+      member_id: answerData[answer_id - 1].member_id,
       question_id: Number(id), // params로 받아옴
     };
 
@@ -70,7 +93,7 @@ export default function EditAnswerPage() {
 
   return (
     <>
-      {data && (
+      {answerData && (
         <ContentsAndSideBox>
           <ContentsContainer>
             <AnswerFormHeader>Answer</AnswerFormHeader>
@@ -78,7 +101,7 @@ export default function EditAnswerPage() {
               <Textarea
                 required
                 {...editedBind}
-                placeholder={data.answers[answer_id - 1].answer_content}
+                placeholder={answerData[answer_id - 1].answer_content}
               ></Textarea>
               <Guideline>
                 Thanks for contributing an answer to Stack Overflow!

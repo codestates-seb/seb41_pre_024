@@ -5,13 +5,10 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export default function AnswerList({ data }) {
-  console.log(data);
   const { id } = useParams();
 
   function handleAnswerDelete(e, answer_id) {
-    const newAnswerList = data.answers.filter(
-      (el) => el.answer_id !== answer_id
-    );
+    const newAnswerList = data.filter((el) => el.answer_id !== answer_id);
     e.preventDefault();
     fetch(`http://localhost:3001/questions/${id}`, {
       method: 'PATCH',
@@ -41,7 +38,7 @@ export default function AnswerList({ data }) {
   return (
     <div>
       {data &&
-        data.answers.map((answer) => (
+        data.map((answer) => (
           <DetailContainer key={answer.answer_id}>
             <AdditionalFunction
               likes={answer.answer_recommend}
