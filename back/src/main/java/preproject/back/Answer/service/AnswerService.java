@@ -4,6 +4,7 @@ package preproject.back.Answer.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import preproject.back.Question.repository.QuestionRepository;
 import preproject.back.exception.ExceptionCode;
 import preproject.back.exception.BusinessLogicException;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,14 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
+    private final QuestionRepository questionRepository;
+
 
    private final MemberService memberService;
-    public AnswerService(AnswerRepository answerRepository,MemberService memberService){
+    public AnswerService(AnswerRepository answerRepository,MemberService memberService,QuestionRepository questionRepository){
         this.answerRepository = answerRepository;
        this.memberService =memberService;
+       this.questionRepository =questionRepository;
     }
 
     //답변 생성기능 postman ok
@@ -83,32 +87,36 @@ public class AnswerService {
 
 
     //답변 추천(up) 기능 postman ok
-    public Answer recommendUpAnswer(long answerId){
+    public Answer recommendAnswer(long answerId,String recommendStatus){
         Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
-
-        findAnswer.setRecommend(findAnswer.getRecommend()+1);
-
+        if(recommendStatus.equals("up")){
+            findAnswer.setRecommend(findAnswer.getRecommend()+1);
+        }
+        else if(recommendStatus.equals("down")){
+            findAnswer.setRecommend(findAnswer.getRecommend() - 1);
+        }
+        else throw new BusinessLogicException(ExceptionCode.RECOMMEND_STATUS_ONLY_UPDOWN);
         return answerRepository.save(findAnswer);
 
     }
 
 
-    //답변 추천(down) 기능 postman ok
-    public Answer recommendDownAnswer(long answerId){
-        Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
+//    답변 추천(down) 기능 postman ok
+//    public Answer recommendDownAnswer(long answerId){
+//        Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
+//
+//        findAnswer.setRecommend(findAnswer.getRecommend()-1);
+//
+//        return answerRepository.save(findAnswer);
 
-        findAnswer.setRecommend(findAnswer.getRecommend()-1);
+//    }
 
-        return answerRepository.save(findAnswer);
-
-    }
 
 //답변 채택 기능 //이미 true값이어도 예외 발생이 안됨
     public Answer adoptAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId);
 
         verifyChosenAnswer(findAnswer);
-
 
         findAnswer.setChoose(true);
 
@@ -119,15 +127,16 @@ public class AnswerService {
 
     /*검증로직*/
 
-
-    //Answer가 채택 상태이면 예외발생
-    //TODO Question 객체의 answerList에 채택상태(true)인 Answer객체가 있으면 예외발생하는 것으로 변환
-    //question Id가 같으면 예외발생(이미 채택완료한 질문)
+    //Question 객체의 answerList에 채택상태(true)인 Answer객체가 있으면 예외발생하는 것으로 변환
     private void verifyChosenAnswer(Answer answer){
 
-        if(answer.isChoose() == true) new BusinessLogicException(ExceptionCode.ALREADY_CHOSEN_ANSWER);
+        if(answer.getQuestion().getAnswers().stream()
+                .map(n ->{return n.isChoose();})
+                .filter(a->a.booleanValue()==true)
+                .count()>=1){
+            throw new BusinessLogicException(ExceptionCode.ALREADY_CHOSEN_ANSWER);
+        }
     }
-
 
 
 
