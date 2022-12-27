@@ -5,11 +5,11 @@ import { GoTriangleDown } from 'react-icons/go';
 import { FiBookmark } from 'react-icons/fi';
 import { FaCheck } from 'react-icons/fa';
 import { RxCounterClockwiseClock } from 'react-icons/rx';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   add_answer_bookmark,
-  remove_answer_bookmark,
+  add_question_bookmark,
 } from '../detail/bookmarkSlice';
 
 export default function AdditionalFunc({ question, answer }) {
@@ -18,7 +18,6 @@ export default function AdditionalFunc({ question, answer }) {
 
   console.log('answer', answer);
 
-  // 추천 수, 채택 여부
   return (
     <>
       {question && (
@@ -31,7 +30,13 @@ export default function AdditionalFunc({ question, answer }) {
             <GoTriangleDown className="vote" />
           </Down>
           <Icons>
-            <FiBookmark className="icon" onClick={() => {}} />
+            <FiBookmark
+              className="icon"
+              onClick={() => {
+                dispatch(add_question_bookmark(question));
+                navigate('/bookmark');
+              }}
+            />
           </Icons>
           <Icons>
             <RxCounterClockwiseClock className="icon" />
@@ -52,7 +57,7 @@ export default function AdditionalFunc({ question, answer }) {
               className="icon"
               onClick={() => {
                 dispatch(add_answer_bookmark(answer));
-                console.log('added!');
+
                 navigate('/bookmark');
               }}
             />
@@ -74,7 +79,6 @@ export default function AdditionalFunc({ question, answer }) {
 const Container = styled.div`
   width: 100px;
   height: 200px;
-  /* border: 3px solid green; */
 
   display: flex;
   flex-direction: column;
