@@ -29,6 +29,7 @@ export default function Title({ data }) {
 const TitieContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 10px 0;
 `;
 
 const TitleAndInfo = styled.div`
@@ -46,7 +47,7 @@ const QuestionInfo = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 13px;
-  margin-top: 8px;
+  margin: 8px 0;
 
   .infoTitle {
     color: #6a737c;

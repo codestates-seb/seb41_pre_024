@@ -3,13 +3,12 @@ import styled from 'styled-components';
 
 import Title from './Title';
 import Contents from './Contents';
-import Footer from '../Footer';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-// import SideNavbar from '../Navbar';
+import { QuestionsSub } from '../home/QuestionsSub';
 
 export default function DetailPage() {
   const [questionData, setQuestionData] = useState();
@@ -28,86 +27,26 @@ export default function DetailPage() {
   return (
     <>
       {questionData && (
-        <div>
-          <Main>
-            <AsideContainer>
-              <div id="scroll">{/* <SideNavbar /> */}</div>
-            </AsideContainer>
-            <Section>
-              <DetailContainer>
-                <Title data={questionData} />
-                <hr />
-                <ContentsAndSideBox>
-                  <ContentsContainer>
-                    <Contents data={questionData} />
-                  </ContentsContainer>
-                  <SideBox></SideBox>
-                </ContentsAndSideBox>
-              </DetailContainer>
-            </Section>
-          </Main>
-        </div>
+        <DetailContainer>
+          <Title data={questionData} />
+          <hr />
+          <ContentsAndSideBox>
+            <ContentsContainer>
+              <Contents data={questionData} />
+            </ContentsContainer>
+            <SideBox>
+              <QuestionsSub />
+            </SideBox>
+          </ContentsAndSideBox>
+        </DetailContainer>
       )}
-      {/* <Footer /> */}
     </>
   );
 }
 
-const Main = styled.div`
-  max-width: 2000px;
-  display: flex;
-  margin: 0 auto;
-  background-color: rgba(128, 128, 128, 0.098);
-  /* border: 3px solid green; */
-  justify-content: center;
-`;
-
-const AsideContainer = styled.div`
-  background-color: (255, 255, 255);
-  flex-basis: 164px;
-  min-height: calc(100vh - 372px);
-  position: relative;
-  /* border: 3px solid violet; */
-  background-color: #f48224;
-  border-right: 1px solid black;
-
-  #aside {
-    background-color: (255, 255, 255);
-    flex-basis: 164px;
-    min-height: calc(100vh - 372px);
-    position: relative;
-    border-right: 1px solid black;
-    border: 3px solid red;
-  }
-
-  #scroll {
-    width: 100px;
-    height: 100px;
-    /* background-color: black; */
-    position: sticky;
-    top: 74px;
-  }
-`;
-
-const Section = styled.div`
-  background-color: (255, 255, 255);
-  flex: 0.5;
-  padding: 24px;
-  /* border: 3px solid goldenrod; */
-`;
-
-// const Scroll = styled.div`
-//   width: 100px;
-//   height: 100px;
-//   background-color: black;
-//   position: sticky;
-//   top: 74px;
-// `;
-
 const DetailContainer = styled.div`
   width: 900px;
-  /* height: 700px;
-  border: 1px solid blue; */
+  /* border: 1px solid blue; */
 `;
 
 const ContentsAndSideBox = styled.div`
@@ -127,5 +66,4 @@ const SideBox = styled.div`
   /* height: 700px; */
   margin: 24px;
   /* border: 3px solid sandybrown; */
-  background-color: #fbf3d5;
 `;
