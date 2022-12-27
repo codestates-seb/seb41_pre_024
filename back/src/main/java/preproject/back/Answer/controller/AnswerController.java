@@ -15,6 +15,7 @@ import preproject.back.Answer.service.AnswerService;
 import preproject.back.pagedto.MultiResponseDto;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -83,20 +84,21 @@ public class AnswerController {
 
 
     //답변 추천(up) 기능0
-    @PatchMapping("/answers/recommend/up/{answer_id}")
-    public ResponseEntity recommendUpAnswer(@PathVariable("answer_id") @Positive long answerId){
-        Answer answer = this.answerService.recommendUpAnswer(answerId);
+    @PatchMapping("/answers/recommend/{answer_id}")
+    public ResponseEntity recommendUpAnswer(@PathVariable("answer_id") @Positive long answerId,
+                                            @RequestParam String recommendStatus){
+        Answer answer = this.answerService.recommendAnswer(answerId,recommendStatus);
 
         return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer), HttpStatus.OK);
     }
 
-    //답변 추천(down) 기능0
-    @PatchMapping("/answers/recommend/down/{answer_id}")
-    public ResponseEntity recommendDownAnswer(@PathVariable("answer_id") @Positive long answerId){
-        Answer answer = this.answerService.recommendDownAnswer(answerId);
-
-        return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer), HttpStatus.OK);
-    }
+//    //답변 추천(down) 기능0
+//    @PatchMapping("/answers/recommend/down/{answer_id}")
+//    public ResponseEntity recommendDownAnswer(@PathVariable("answer_id") @Positive long answerId){
+//        Answer answer = this.answerService.recommendDownAnswer(answerId);
+//
+//        return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer), HttpStatus.OK);
+//    }
 
 
     //답변 채택 기능0

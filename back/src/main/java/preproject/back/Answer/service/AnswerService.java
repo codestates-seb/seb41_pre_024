@@ -83,25 +83,29 @@ public class AnswerService {
 
 
     //답변 추천(up) 기능 postman ok
-    public Answer recommendUpAnswer(long answerId){
+    public Answer recommendAnswer(long answerId,String recommendStatus){
         Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
-
-        findAnswer.setRecommend(findAnswer.getRecommend()+1);
-
+        if(recommendStatus.equals("up")){
+            findAnswer.setRecommend(findAnswer.getRecommend()+1);
+        }
+        else if(recommendStatus.equals("down")){
+            findAnswer.setRecommend(findAnswer.getRecommend() - 1);
+        }
+        else throw new BusinessLogicException(ExceptionCode.RECOMMEND_STATUS_ONLY_UPDOWN);
         return answerRepository.save(findAnswer);
 
     }
 
 
-    //답변 추천(down) 기능 postman ok
-    public Answer recommendDownAnswer(long answerId){
-        Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
+//    //답변 추천(down) 기능 postman ok
+//    public Answer recommendDownAnswer(long answerId){
+//        Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
+//
+//        findAnswer.setRecommend(findAnswer.getRecommend()-1);
+//
+//        return answerRepository.save(findAnswer);
 
-        findAnswer.setRecommend(findAnswer.getRecommend()-1);
-
-        return answerRepository.save(findAnswer);
-
-    }
+//    }
 
 //답변 채택 기능 //이미 true값이어도 예외 발생이 안됨
     public Answer adoptAnswer(long answerId){
