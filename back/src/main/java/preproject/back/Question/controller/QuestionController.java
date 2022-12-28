@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import preproject.back.Answer.Entity.Answer;
 import preproject.back.Question.Entity.Question;
 import preproject.back.Question.dto.QuestionPatchDto;
 import preproject.back.Question.dto.QuestionPostDto;
@@ -85,5 +86,14 @@ public class QuestionController {
         questionService.deleteQuestion(questionId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //질문 추천 기능
+    @PatchMapping("/recommend/{question_id}")
+    public ResponseEntity recommendUpQuestion(@PathVariable("question_id") @Positive long questionId,
+                                            @RequestParam String recommendStatus){
+        Question question = questionService.recommendQuestion(questionId,recommendStatus);
+
+        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(question), HttpStatus.OK);
     }
 }

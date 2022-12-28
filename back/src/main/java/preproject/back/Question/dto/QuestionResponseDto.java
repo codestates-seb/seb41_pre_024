@@ -20,11 +20,11 @@ public class QuestionResponseDto {
 
     private String content;
 
+    private int recommend;
+
     private int totalAnswers; //총 답변수
 
     private int totalRecommend;
-
-  //todo  private int recommend;
 
     private LocalDateTime createdAt;
 
