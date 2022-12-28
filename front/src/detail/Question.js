@@ -7,7 +7,7 @@ export default function Question({ data }) {
     <>
       {data && (
         <DetailContainer>
-          <AdditionalFunction likes={data.question_recommend} />
+          <AdditionalFunction question={data} />
           <DetailBody>
             <DetailText>
               {data.question_content}
@@ -55,16 +55,13 @@ const DetailContainer = styled.div`
   display: flex;
   justify-content: space-between;
   color: #3b4044;
-  /* border: 3px solid gold; */
 `;
 
 const DetailBody = styled.div`
   flex: 1;
-  /* border: 3px solid gray; */
 `;
 
 const DetailText = styled.div`
-  /* border: 3px solid gray; */
   padding: 10px 0;
   line-height: 24px;
 `;
@@ -72,13 +69,10 @@ const DetailText = styled.div`
 const DetailFooter = styled.div`
   display: flex;
   justify-content: space-between;
-  /* border: 3px solid gray; */
   padding: 20px 0;
 `;
 
 const Menu = styled.div`
-  /* border: 3px solid gray; */
-
   .menu {
     border: none;
     margin-right: 20px;
