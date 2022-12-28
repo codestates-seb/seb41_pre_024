@@ -10,17 +10,14 @@ import AnswerSubmit from './AnswerSubmit';
 export default function Contents({ data }) {
   // answer 데이터 id 순으로 정렬
   const sortedAnswerData = data.answers.sort(function (a, b) {
-    if (a.answer_id > b.answer_id) {
+    if (a.answerId > b.answerId) {
       return 1;
     }
-    if (a.answer_id < b.answer_id) {
+    if (a.answerId < b.answerId) {
       return -1;
     }
     return 0;
   });
-
-  console.log('data', data);
-  console.log('sortedAnswerData', sortedAnswerData);
 
   return (
     <div>

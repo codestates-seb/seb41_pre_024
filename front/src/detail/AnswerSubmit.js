@@ -7,21 +7,21 @@ import { useParams } from 'react-router-dom';
 export default function AnswerSubmit({ data }) {
   const [answer, answerBind] = useInput();
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { questionId } = useParams();
 
   const newAnswer = {
-    answer_id: data.length + 1,
-    answer_content: answer,
-    answer_recommend: 0,
-    answer_time: new Date().toLocaleDateString('ko-KR'),
-    answer_choose: false,
+    answerId: data.length + 1,
+    content: answer,
+    recommend: 0,
+    createdAt: new Date().toLocaleDateString('ko-KR'),
+    choose: false,
     member_id: 'Pika', // 로그인한 user_id 필요
-    question_id: id,
+    questionId: questionId,
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3001/questions/${id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/questions/${questionId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -37,8 +37,6 @@ export default function AnswerSubmit({ data }) {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
-
         window.location.reload(); // 새로고침
       })
       .catch((err) => {

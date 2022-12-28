@@ -10,7 +10,7 @@ export default function Question({ data }) {
           <AdditionalFunction question={data} />
           <DetailBody>
             <DetailText>
-              {data.question_content}
+              {data.content}
               {/* Excuse all the Console.WriteLines! Trying to figure out what is
           happening here😀
           <br />
@@ -29,7 +29,7 @@ export default function Question({ data }) {
                 <button className="menu">Delete</button>
               </Menu>
               <Author>
-                <div className="createdAt">asked Dec 21, 2021 at 19:33</div>
+                <div className="createdAt">asked {data.createdAt}</div>
                 <div className="user">
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/userIcon.png`}

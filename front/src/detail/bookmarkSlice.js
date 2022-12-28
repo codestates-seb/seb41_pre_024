@@ -5,25 +5,25 @@ const bookmarkSlice = createSlice({
   initialState: {
     question_bookmarks: [
       {
-        id: 300,
-        question_title: '😀 Question Bookmark Sample',
-        question_content:
+        questionIdId: 300,
+        title: '😀 Question Bookmark Sample',
+        content:
           '🍉 Small question on Spring Boot, and how to use a design pattern combined with Spring @Value configuration in order to select the appropriate @Repository please.n',
         question_tag: ['mysql', 'database'],
-        question_recommend: 2,
-        question_time: 'Dec 19 at 5:48',
+        totalRecommend: 2,
+        createdAt: 'Dec 19 at 5:48',
         member_id: 'Mimi',
       },
     ],
     answer_bookmarks: [
       {
-        answer_id: 100,
-        answer_content: 'Answer Bookmarks 샘플입니다',
-        answer_recommend: 2,
-        answer_time: 'Dec 13 at 12:06',
-        answer_choose: false,
+        answerId: 100,
+        content: 'Answer Bookmarks 샘플입니다',
+        recommend: 2,
+        createdAt: 'Dec 13 at 12:06',
+        choose: false,
         member_id: 'Lily',
-        question_id: 1,
+        questionId: 1,
       },
     ],
   }, //
@@ -41,7 +41,7 @@ const bookmarkSlice = createSlice({
     },
     remove_answer_bookmark: (state, action) => {
       state.answer_bookmarks = state.answer_bookmarks.filter(
-        (item) => item.answer_id !== action.payload.answer_id
+        (item) => item.answerId !== action.payload.answerId
       );
     },
   },

@@ -12,13 +12,16 @@ import { QuestionsSub } from '../home/QuestionsSub';
 
 export default function DetailPage() {
   const [questionData, setQuestionData] = useState();
-  const { id } = useParams();
-  console.log(id);
+
+  const { questionId } = useParams();
 
   useEffect(() => {
     async function request() {
-      const response = await axios.get(`http://localhost:3001/questions/${id}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`
+      );
       const { data } = response;
+      console.log(data);
       setQuestionData(data);
     }
     request();

@@ -16,8 +16,6 @@ export default function AdditionalFunc({ question, answer }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log('answer', answer);
-
   return (
     <>
       {question && (
@@ -25,7 +23,7 @@ export default function AdditionalFunc({ question, answer }) {
           <Up>
             <GoTriangleUp className="vote" />
           </Up>
-          <Likes>{question.question_recommend}</Likes>
+          <Likes>{question.totalRecommend}</Likes>
           <Down>
             <GoTriangleDown className="vote" />
           </Down>
@@ -48,7 +46,7 @@ export default function AdditionalFunc({ question, answer }) {
           <Up>
             <GoTriangleUp className="vote" />
           </Up>
-          <Likes>{answer.answer_recommend}</Likes>
+          <Likes>{answer.recommend}</Likes>
           <Down>
             <GoTriangleDown className="vote" />
           </Down>
@@ -62,7 +60,7 @@ export default function AdditionalFunc({ question, answer }) {
               }}
             />
           </Icons>
-          {answer.answer_choose && (
+          {answer.choose && (
             <Icons>
               <FaCheck className="icon check" />
             </Icons>

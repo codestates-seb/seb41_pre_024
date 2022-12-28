@@ -5,12 +5,13 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export default function AnswerList({ data }) {
-  const { id } = useParams();
+  const { questionId } = useParams();
+  console.log(data);
 
-  function handleAnswerDelete(e, answer_id) {
-    const newAnswerList = data.filter((el) => el.answer_id !== answer_id);
+  function handleAnswerDelete(e, answerId) {
+    const newAnswerList = data.filter((el) => el.answerId !== answerId);
     e.preventDefault();
-    fetch(`http://localhost:3001/questions/${id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/questions/${questionId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +27,6 @@ export default function AnswerList({ data }) {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         window.location.reload(); // 새로고침
       })
       .catch((err) => {
@@ -38,26 +38,26 @@ export default function AnswerList({ data }) {
     <div>
       {data &&
         data.map((answer) => (
-          <DetailContainer key={answer.answer_id}>
+          <DetailContainer key={answer.answerId}>
             <AdditionalFunction answer={answer} />
             <DetailBody>
-              <DetailText>{answer.answer_content}</DetailText>
+              <DetailText>{answer.content}</DetailText>
               <DetailFooter>
                 <Menu>
                   <button className="menu">Share</button>
                   <button className="menu">Follow</button>
-                  <Link to={`/posts/${id}/edit/${answer.answer_id}`}>
+                  <Link to={`/posts/${questionId}/edit/${answer.answerId}`}>
                     <button className="menu">Edit</button>
                   </Link>
                   <button
-                    onClick={(e) => handleAnswerDelete(e, answer.answer_id)}
+                    onClick={(e) => handleAnswerDelete(e, answer.answerId)}
                     className="menu"
                   >
                     Delete
                   </button>
                 </Menu>
                 <Author>
-                  <div className="createdAt">asked {answer.answer_time}</div>
+                  <div className="createdAt">answered {answer.createdAt}</div>
                   <div className="user">
                     <img
                       src={`${process.env.PUBLIC_URL}/assets/userIcon_02.png`}
