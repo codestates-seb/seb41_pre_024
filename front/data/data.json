@@ -5,7 +5,12 @@
       "questionId": 1,
       "title": "🌈 Suggestion for Automatically Match Data in MysQL",
       "content": "🌟 I have limited access to the MySQL database, I just can see a view called customer contains customer_id, name, and their location",
-      "question_tag": ["python", "mysql", "database", "jupyter-notebook"],
+      "question_tag": [
+        "python",
+        "mysql",
+        "database",
+        "jupyter-notebook"
+      ],
       "totalRecommend": 3,
       "createdAt": "Dec 12 at 6:48",
       "member_id": "Arthur",
@@ -24,7 +29,7 @@
           "content": "🔥 I don't know if I understood correctly here.. [...] I mean if in the raw data there is punctuation or number or typo, it will automatically clean [...] You need some sort of validation method here, you cannot achieve that directly on the database, you need to handle it in your logic before the rows insertion. In these cases, the best solution is to prepare a picklist (multiple choice) from which end users can choose the right values. A free text input will always be error prone.If the multiple choiceis not an applicable solution in your case, then you need to put in place a list of validation rules but you need to think how to prevent every possible issue.",
           "recommend": 4,
           "createdAt": "Dec 15 at 12:06",
-          "choose": true,
+          "choose": false,
           "member_id": "Denis B.",
           "questionId": 1
         }
@@ -35,7 +40,11 @@
       "questionId": 2,
       "title": "🌿 How to make one Translate button work for translating all the inputs",
       "content": "✅ I am trying to translate all inputs with their respective translated language outputs. When I click the Translate Button it works but not for the respective languages, the output language gets altered. Each output language from the Selection should be fixed, for Spanish Output, the second selection should be fixed with Spanish, for Dutch Output, the second selection should be fixed with Dutch, and so on. (Each time no bother to select) Second selection for each is the output language which should be fixed for each in the HTML <option> tag",
-      "question_tag": ["javascript", "html", "button"],
+      "question_tag": [
+        "javascript",
+        "html",
+        "button"
+      ],
       "recommend": 6,
       "createdAt": "Dec 13 at 9:21",
       "member_id": "Neha Soni",
@@ -73,7 +82,11 @@
       "id": 3,
       "title": "Saving the Antd DatePicker value to the DB by a key",
       "content": "Antd DatePicker documentation has code examples for onOk, onChange callbacks, and those callbacks essentially just print the value that had been selected by the user. What if in the callback i need to pass some other information besides the value, how can this be achieved? to be specific, i have a Table, with DatePicker element on every row, like in the screen below Table with DatePicker on every row",
-      "question_tag": ["reactjs", "callback", "database"],
+      "question_tag": [
+        "reactjs",
+        "callback",
+        "database"
+      ],
       "recommend": 2,
       "createdAt": "Dec 10 at 12:48",
       "member_id": "roykeane",

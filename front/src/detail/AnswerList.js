@@ -1,38 +1,42 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import styled from 'styled-components';
 import AdditionalFunction from './AdditionalFunc';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { FaCheck } from 'react-icons/fa';
 
 export default function AnswerList({ data }) {
   const { questionId } = useParams();
   console.log(data);
 
+  const checked = data.filter((answer) => answer.choose === true).length === 1;
+
   function handleAnswerDelete(e, answerId) {
     const newAnswerList = data.filter((el) => el.answerId !== answerId);
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_URL}/questions/${questionId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        answers: newAnswerList,
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error('could not fetch the data for that resource');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        window.location.reload(); // 새로고침
-      })
-      .catch((err) => {
-        console.error('Error', err);
-      });
+
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        { answers: newAnswerList }
+      );
+      window.location.reload();
+    }
+    request();
   }
+
+  const handleAdopt = ({ answerId }) => {
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=yes`
+      );
+      console.log('unliked');
+      window.location.reload();
+    }
+    request();
+  };
 
   return (
     <div>
@@ -44,6 +48,15 @@ export default function AnswerList({ data }) {
               <DetailText>{answer.content}</DetailText>
               <DetailFooter>
                 <Menu>
+                  {checked ? null : (
+                    <button
+                      className="menu adopt"
+                      onClick={() => handleAdopt(answer.answerId)}
+                    >
+                      <FaCheck className="icon check" />
+                      Accept
+                    </button>
+                  )}
                   <button className="menu">Share</button>
                   <button className="menu">Follow</button>
                   <Link to={`/posts/${questionId}/edit/${answer.answerId}`}>
@@ -113,6 +126,14 @@ const Menu = styled.div`
     :hover {
       cursor: pointer;
     }
+  }
+
+  .adopt {
+    padding: 5px;
+    border-radius: 3px;
+    color: #0995ff;
+    /* background-color: #0995ff; */
+    border: 1px solid #0995ff;
   }
 `;
 

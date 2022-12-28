@@ -10,7 +10,7 @@ import { QuestionsSub } from '../home/QuestionsSub';
 
 export default function EditAnswerPage() {
   const [answerData, setAnswerData] = useState();
-  const { questionId, answerId } = useParams(); // question id와 answer id 가져옴
+  const { questionId, answerId } = useParams();
 
   const [edited, editedBind] = useInput();
   const navigate = useNavigate();
@@ -54,28 +54,15 @@ export default function EditAnswerPage() {
     };
 
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_URL}/questions/${questionId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        answers: [...editedAnswerList, editedAnswer],
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error('could not fetch the data for that resource');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        navigate(`/questions/${questionId}`);
-        window.location.reload(); // 새로고침
-      })
-      .catch((err) => {
-        console.error('Error', err);
-      });
+
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        { answers: [...editedAnswerList, editedAnswer] }
+      );
+      navigate(`/questions/${questionId}`);
+    }
+    request();
   };
 
   return (

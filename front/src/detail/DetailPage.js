@@ -12,7 +12,6 @@ import { QuestionsSub } from '../home/QuestionsSub';
 
 export default function DetailPage() {
   const [questionData, setQuestionData] = useState();
-
   const { questionId } = useParams();
 
   useEffect(() => {

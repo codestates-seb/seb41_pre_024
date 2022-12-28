@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export default function AnswerSubmit({ data }) {
   const [answer, answerBind] = useInput();
@@ -21,27 +22,15 @@ export default function AnswerSubmit({ data }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_URL}/questions/${questionId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        answers: [...data, newAnswer],
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error('could not fetch the data for that resource');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        window.location.reload(); // 새로고침
-      })
-      .catch((err) => {
-        console.error('Error', err);
-      });
+
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        { answers: [...data, newAnswer] }
+      );
+      window.location.reload();
+    }
+    request();
   };
 
   return (

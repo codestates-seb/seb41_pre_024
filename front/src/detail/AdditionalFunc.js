@@ -11,10 +11,41 @@ import {
   add_answer_bookmark,
   add_question_bookmark,
 } from '../detail/bookmarkSlice';
+import axios from 'axios';
 
 export default function AdditionalFunc({ question, answer }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleLike = ({ answerId }) => {
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=up`
+      );
+      console.log('liked!');
+    }
+    request();
+  };
+
+  const handleUnlike = ({ answerId }) => {
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=down`
+      );
+      console.log('unliked');
+    }
+    request();
+  };
+
+  const handleCancelAdopt = ({ answerId }) => {
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=no`
+      );
+      console.log('unliked');
+    }
+    request();
+  };
 
   return (
     <>
@@ -43,11 +74,11 @@ export default function AdditionalFunc({ question, answer }) {
       )}
       {answer && (
         <Container>
-          <Up>
+          <Up onClick={() => handleLike(answer.answerId)}>
             <GoTriangleUp className="vote" />
           </Up>
           <Likes>{answer.recommend}</Likes>
-          <Down>
+          <Down onClick={() => handleUnlike(answer.answerId)}>
             <GoTriangleDown className="vote" />
           </Down>
           <Icons>
@@ -55,13 +86,12 @@ export default function AdditionalFunc({ question, answer }) {
               className="icon"
               onClick={() => {
                 dispatch(add_answer_bookmark(answer));
-
                 navigate('/bookmark');
               }}
             />
           </Icons>
           {answer.choose && (
-            <Icons>
+            <Icons onClick={() => handleCancelAdopt(answer.answerId)}>
               <FaCheck className="icon check" />
             </Icons>
           )}
