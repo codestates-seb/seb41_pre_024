@@ -108,9 +108,6 @@ const Script = styled.div`
 `;
 
 const LoginPage = () => {
-  // ToDo : email or password 비어있으면 로그인 안 되도록
-  // ToDo : 이메일과 비밀번호 일치 하는지 확인 -> 일치하면 홈 화면으로 이동
-
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   // 이메일 유효성 검사
@@ -151,9 +148,6 @@ const LoginPage = () => {
   const onClick = () => {
     console.log("Email : ", emailValue);
     console.log("Password : ", passwordValue);
-    setEmailValue("");
-    setIsEmailErr("");
-    setPasswordValue("");
   };
 
   return (

@@ -21,7 +21,8 @@ const UserName = styled.div`
   justify-content: space-around;
 `;
 
-const UserInfo = () => {
+const UserInfo = ({ userInfo }) => {
+  console.log(userInfo);
   return (
     <UserContainer>
       <UserProfile
@@ -30,6 +31,8 @@ const UserInfo = () => {
       <UserName>
         <div>Hello, I'm User</div>
         <div>User@google.com</div>
+        {/* <div>Hello, {userInfo.userName}</div>
+        <div>{userInfo.userEmail}</div> */}
       </UserName>
     </UserContainer>
   );

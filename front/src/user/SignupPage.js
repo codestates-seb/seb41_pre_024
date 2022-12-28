@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import { FaFacebookSquare } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import SignupInfo from "./SignupInfo";
 import axios from "axios";
 
@@ -118,11 +118,11 @@ const SignupPage = () => {
   const [passwordErr, setPasswordErr] = useState(false);
 
   const navigate = useNavigate();
-  const nextId = useRef(3);
 
   const onChangeName = (e) => {
     setNameValue(e.target.value);
-    const nameRegex = /^[a-zA-Z가-헿0-9]{3,}$/;
+    // console.log(e.target.value);
+    const nameRegex = /^[a-zA-Z가-힣0-9]{3,}$/;
     if (!nameValue || !nameRegex.test(nameValue)) {
       setNameErr(true);
       return false;
@@ -158,7 +158,7 @@ const SignupPage = () => {
 
   function checkValidation() {
     if (!nameErr && !emailErr && !passwordErr) {
-      console.log("ok");
+      console.log("Go to login!");
       return true;
     }
     return false;
@@ -168,32 +168,27 @@ const SignupPage = () => {
     e.preventDefault();
     if (checkValidation()) {
       signup();
-      navigate("/");
+      navigate("/login");
     }
   };
 
-  const signup = async () => {
-    nextId.current++;
-    let body = {
-      id: nextId.current,
-      userId: nextId.current,
+  const signup = () => {
+    const body = {
       userName: nameValue,
       userEmail: emailValue,
       userPassword: passwordValue,
     };
-
-    await axios
-      .post("http://localhost:8080/user", body, {
+    axios
+      .post(`http://localhost:8080/members`, body, {
         headers: { "Content-Type": "application/json" },
       })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-  };
 
-  const onClick = () => {
-    setNameValue("");
-    setEmailValue("");
-    setPasswordValue("");
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error("Error", err);
+      });
   };
 
   return (
@@ -242,7 +237,7 @@ const SignupPage = () => {
                 </p>
               )}
             </div>
-            <button onClick={onClick}>Sign up</button>
+            <button type="submit">Sign up</button>
           </SignupContainer>
 
           <Script>
