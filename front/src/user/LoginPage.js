@@ -1,24 +1,9 @@
-import Header from "../Header";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import { FaFacebookSquare } from "react-icons/fa";
-// import logo from "../assets/stackoverflow_small.png";
-import { Link } from "react-router-dom";
-
-// const HeaderContainer = styled.header`
-//   background-color: rgb(247, 247, 247);
-//   height: 50px;
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   z-index: 1;
-//   border-top: 3px solid #f48225;
-//   display: flex;
-//   justify-content: center;
-//   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
-// `;
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useDispatch } from "react";
 
 const Main = styled.div`
   background-color: #f1f2f3;
@@ -72,6 +57,21 @@ const LoginContainer = styled.form`
 
   div {
     font-weight: 600;
+
+    p {
+      font-size: small;
+      font-weight: 300;
+      margin-top: 5px;
+    }
+
+    .emailErrMsg {
+      font-size: small;
+      color: #ea4335;
+    }
+  }
+
+  .emailErr {
+    border: 2px solid #de4f54;
   }
 
   input {
@@ -108,14 +108,60 @@ const Script = styled.div`
 `;
 
 const LoginPage = () => {
+  // ToDo : email or password 비어있으면 로그인 안 되도록
+  // ToDo : 이메일과 비밀번호 일치 하는지 확인 -> 일치하면 홈 화면으로 이동
+
+  const [emailValue, setEmailValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  // 이메일 유효성 검사
+  const [isEmail, setIsEmail] = useState(false);
+  const [isEmailErr, setIsEmailErr] = useState("");
+  // 이메일, 비밀번호 일치 검사
+  // const [isValidate, setIsValidate] = useState(false);
+
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
+
+  const onChangeEmail = (e) => {
+    setEmailValue(e.target.value);
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (!emailRegex.test(e.target.value)) {
+      setIsEmailErr("올바른 이메일 형식이 아닙니다.");
+      setIsEmail(true);
+    } else {
+      setIsEmailErr("올바른 이메일 형식입니다.");
+      setIsEmail(false);
+    }
+  };
+
+  const onChangePassword = (e) => {
+    setPasswordValue(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // let body = {
+    //   email: emailValue,
+    //   password: passwordValue,
+    // };
+    // dispatch(loginUser(body));
+  };
+
+  const onClick = () => {
+    console.log("Email : ", emailValue);
+    console.log("Password : ", passwordValue);
+    setEmailValue("");
+    setIsEmailErr("");
+    setPasswordValue("");
+  };
+
   return (
     <>
-      {/* <HeaderContainer> */}
-      <Header />
-      {/* </HeaderContainer> */}
-
       <Main>
-        {/* <Logo src={logo}></Logo> */}
+        <Logo
+          src={`${process.env.PUBLIC_URL}/assets/stackoverflow_small.png`}
+        ></Logo>
         <ButtonContainer>
           <Google>
             <FcGoogle />
@@ -131,26 +177,37 @@ const LoginPage = () => {
           </Facebook>
         </ButtonContainer>
 
-        <LoginContainer>
+        <LoginContainer onSubmit={onSubmit}>
           <div>
             <label>Email</label>
-            <input type="text" />
+            <input
+              type="text"
+              onChange={onChangeEmail}
+              value={emailValue}
+              className={isEmail ? "emailErr" : undefined}
+            />
+            <p className={isEmail ? "emailErrMsg" : undefined}>{isEmailErr}</p>
+            {/* {isValidate && (
+              <p className="errMessage">
+                The email or password is incorrect
+              </p>
+            )} */}
           </div>
           <div>
             <label>Password</label>
-            <input type="password" />
+            <input
+              type="password"
+              onChange={onChangePassword}
+              value={passwordValue}
+            />
           </div>
-          <button>Log in</button>
+          <button onClick={onClick}>Log in</button>
         </LoginContainer>
 
         <Script>
           <div>
             <p>Don't have an account?</p>
             <Link to="/signup">Sign up</Link>
-          </div>
-          <div>
-            <p>Are tou an employer? </p>
-            <Link to="#">Sign up on Talent</Link>
           </div>
         </Script>
       </Main>

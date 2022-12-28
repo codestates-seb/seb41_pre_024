@@ -1,14 +1,13 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { IoSearchOutline } from "react-icons/io5";
-// import logo from "logo-stackoverflow.png";
-import { VscAccount } from "react-icons/vsc";
-import { BsFillInboxFill } from "react-icons/bs";
-import { AiFillTrophy } from "react-icons/ai";
-import { AiFillQuestionCircle } from "react-icons/ai";
-import { FaRegSnowflake } from "react-icons/fa";
-import { BsFillChatSquareTextFill } from "react-icons/bs";
+// import { VscAccount } from "react-icons/vsc";
+// import { BsFillInboxFill } from "react-icons/bs";
+// import { AiFillTrophy } from "react-icons/ai";
+// import { AiFillQuestionCircle } from "react-icons/ai";
+// import { FaRegSnowflake } from "react-icons/fa";
+// import { BsFillChatSquareTextFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -85,22 +84,22 @@ const SignupButton = styled(Button)`
   border: none;
 `;
 
-const IconContainer = styled.div`
-  display: flex;
-  gap: 20px;
-  margin-left: 20px;
+// const IconContainer = styled.div`
+//   display: flex;
+//   gap: 20px;
+//   margin-left: 20px;
 
-  .icon {
-    font-size: 24px;
-    color: #525960;
-  }
-`;
+//   .icon {
+//     font-size: 24px;
+//     color: #525960;
+//   }
+// `;
 
 const Header = () => {
-  const [isClick, setIsClick] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
-  const onClickBtn = (e) => {
-    setIsClick(true);
+  const onClick = () => {
+    setIsLogin(!isLogin);
   };
 
   return (
@@ -116,29 +115,33 @@ const Header = () => {
           <input type="text" placeholder="Search..." />
         </div>
       </SearchForm>
-      {/* {isClick ? (
-        <IconContainer>
-          <VscAccount className="icon" />
-          <BsFillInboxFill className="icon" />
-          <AiFillTrophy className="icon" />
-          <AiFillQuestionCircle className="icon" />
-          <FaRegSnowflake className="icon" />
-          <BsFillChatSquareTextFill className="icon" />
-        </IconContainer>
+      {isLogin ? (
+        // <IconContainer>
+        //   <VscAccount className="icon" onClick={onClick} />
+        //   <BsFillInboxFill className="icon" />
+        //   <AiFillTrophy className="icon" />
+        //   <AiFillQuestionCircle className="icon" />
+        //   <FaRegSnowflake className="icon" />
+        //   <BsFillChatSquareTextFill className="icon" />
+        // </IconContainer>
+        <>
+          <Link to="/user">
+            <Button onClick={onClick}>My page</Button>
+          </Link>
+          <Link to="/">
+            <SignupButton>Log out</SignupButton>
+          </Link>
+        </>
       ) : (
-        <div>
-          <Button onClick={onClickBtn}>Log in</Button>
+        <>
           <Link to="/login">
+            <Button onClick={onClick}>Log in</Button>
+          </Link>
+          <Link to="/signup">
             <SignupButton>Sign up</SignupButton>
           </Link>
-        </div>
-      )} */}
-      <Link to="/login">
-        <Button>Log in</Button>
-      </Link>
-      <Link to="/signup">
-        <SignupButton>Sign up</SignupButton>
-      </Link>
+        </>
+      )}
     </Container>
   );
 };

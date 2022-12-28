@@ -100,5 +100,49 @@
         }
       ]
     }
+  ],
+  "user": [
+    {
+      "id": 0,
+      "userId": 0,
+      "userName": "김현정",
+      "userEmail": "cowguswjd@naver.com",
+      "userPassword": "rlaguswjd97@"
+    },
+    {
+      "id": 1,
+      "userId": 1,
+      "userName": "김영희",
+      "userEmail": "dooly1255@naver.com",
+      "userPassword": "rladudgml99@"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "userName": "김건호",
+      "userEmail": "keonho@naver.com",
+      "userPassword": "rlarjsgh96@"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "userName": "김재택",
+      "userEmail": "김재택@naver.com",
+      "userPassword": "rlarjsgh96@"
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "userName": "",
+      "userEmail": "",
+      "userPassword": ""
+    },
+    {
+      "id": 5,
+      "userId": 5,
+      "userName": "",
+      "userEmail": "",
+      "userPassword": ""
+    }
   ]
 }
