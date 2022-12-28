@@ -10,14 +10,13 @@ import Footer from './Footer';
 import { Route, Routes, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import UserPage from './user/UserPage';
+import EditAnswerPage from './detail/EditAnswerPage';
 
 const Common = styled.div`
   flex:1;
   display: flex;
   width: 1264px;
   margin: 0 auto;
-
-
   & > div {
     flex: 1;
     padding: 24px;
@@ -74,6 +73,10 @@ function App() {
           <Route element={<OverlapHssf />}>
             <Route path="/" element={<Question />} />
             <Route path="/questions/:id" element={<DetailPage />} />
+            <Route
+              path="/posts/:id/edit/:answer_id"
+              element={<EditAnswerPage />}
+            />
             <Route path="/user" element={<UserPage />} />
           </Route>
           <Route element={<OverlapHsf />}>
