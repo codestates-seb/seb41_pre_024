@@ -1,72 +1,33 @@
 @font-face {
-    font-family: 'Apple SD Sandol Gothic Neo';
-    src: url('https://raw.githubusercontent.com/adrinerDP/font-applesdgothicneo/main/fonts/400_AppleSDGothicNeo-Medium.woff2') format('woff');
+  font-family: 'Apple SD Sandol Gothic Neo';
+  src: url('https://raw.githubusercontent.com/adrinerDP/font-applesdgothicneo/main/fonts/400_AppleSDGothicNeo-Medium.woff2')
+    format('woff');
 }
 
-* {	
-    font-family: "Apple SD Sandol Gothic Neo";
-    }
-
-
-#layout{
-    padding-top: 50px;
+* {
+  font-family: 'Apple SD Sandol Gothic Neo';
 }
 
-
-#header {
-    background-color: rgb(247,247,247);
-    height: 50px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
+#app {
+  margin-top: 50px;
 }
 
-#main{
-    max-width: 1264px;
-    display: flex;
-    margin: 0 auto;
-    background-color: rgba(128, 128, 128, 0.098);
+#main {
+  background-color: rgba(255, 255, 255);
 }
 
-#aside{
-    background-color: (255,255,255);
-    flex-basis: 164px;
-    min-height: calc(100vh - 372px);
-    position: relative;
-    border-right: 1px solid black;
+#aside {
+  background-color: rgba(255, 255, 255);
+  flex-basis: 164px;
+  min-height: calc(100vh - 372px);
+  position: relative;
+  border-right: 1px solid black;
 }
 
-#scroll{
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    position: sticky;
-    top: 74px;
+#scroll {
+  width: 100%;
+  /* width: 100px; */
+  height: 100px;
+  position: sticky;
+  top: 74px;
 }
-
-#section{
-    background-color: (255,255,255);
-    flex: 1;
-    padding: 24px;
-}
-
-#footer{
-    height: 322px;
-    background-color: rgb(26,29,30);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
