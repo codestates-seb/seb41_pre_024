@@ -112,6 +112,7 @@ public class AnswerService {
 //    }
 
 
+
 /*답변 채택 기능 -> 채택 취소기능 추가 ver
 //    public Answer adoptAnswer(long answerId,String adoptStatus){
 //        Answer findAnswer = verifyAnswer(answerId);
@@ -128,6 +129,7 @@ public class AnswerService {
 //        return answerRepository.save(findAnswer);
 //
 //    }*/
+
 
     public Answer adoptAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId);
@@ -150,6 +152,7 @@ public class AnswerService {
             throw new BusinessLogicException(ExceptionCode.ALREADY_CHOSEN_ANSWER);
         }
     }
+
 
     //Answer가 null이면 예외발생
     private Answer verifyAnswer(long answerId) {
