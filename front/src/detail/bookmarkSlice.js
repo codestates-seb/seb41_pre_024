@@ -5,7 +5,7 @@ const bookmarkSlice = createSlice({
   initialState: {
     question_bookmarks: [
       {
-        questionIdId: 300,
+        questionId: 300,
         title: '😀 Question Bookmark Sample',
         content:
           '🍉 Small question on Spring Boot, and how to use a design pattern combined with Spring @Value configuration in order to select the appropriate @Repository please.n',
@@ -33,7 +33,7 @@ const bookmarkSlice = createSlice({
     },
     remove_question_bookmark: (state, action) => {
       state.question_bookmarks = state.question_bookmarks.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.questionId !== action.payload.questionId
       );
     },
     add_answer_bookmark: (state, action) => {
