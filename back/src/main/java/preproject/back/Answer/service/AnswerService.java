@@ -112,14 +112,29 @@ public class AnswerService {
 //    }
 
 
-//답변 채택 기능 //이미 true값이어도 예외 발생이 안됨
+
+/*답변 채택 기능 -> 채택 취소기능 추가 ver
+//    public Answer adoptAnswer(long answerId,String adoptStatus){
+//        Answer findAnswer = verifyAnswer(answerId);
+//
+//        if(adoptStatus.equals("yes")){
+//        verifyChosenAnswer(findAnswer);
+//        findAnswer.setChoose(true);
+//        }
+//        else if(adoptStatus.equals("no")){
+//            findAnswer.setChoose(false);
+//        }
+//        else throw new BusinessLogicException(ExceptionCode.ADOPT_STATUS_ONLY_YESORNO);
+//
+//        return answerRepository.save(findAnswer);
+//
+//    }*/
+
+
     public Answer adoptAnswer(long answerId){
         Answer findAnswer = verifyAnswer(answerId);
-
-        verifyChosenAnswer(findAnswer);
-
-        findAnswer.setChoose(true);
-
+            verifyChosenAnswer(findAnswer);
+            findAnswer.setChoose(true);
         return answerRepository.save(findAnswer);
 
     }
@@ -137,7 +152,6 @@ public class AnswerService {
             throw new BusinessLogicException(ExceptionCode.ALREADY_CHOSEN_ANSWER);
         }
     }
-
 
 
     //Answer가 null이면 예외발생
