@@ -35,7 +35,7 @@ public class QuestionController {
     }
 
     //질문 작성 기능
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionPostDto) {
         Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionPostDto));
 
@@ -45,7 +45,7 @@ public class QuestionController {
     }
 
     //질문 수정 기능
-    @PatchMapping(("/{question_id}/edit"))
+    @PatchMapping(("/{question_id}"))
     public ResponseEntity patchQuestion(@PathVariable("question_id") @Positive long questionId,
                                         @Valid @RequestBody QuestionPatchDto questionPatchDto) {
         questionPatchDto.setQuestionId(questionId);

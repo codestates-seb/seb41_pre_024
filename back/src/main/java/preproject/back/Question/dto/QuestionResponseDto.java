@@ -32,4 +32,8 @@ public class QuestionResponseDto {
     private String email; //TODO 작성자 email보이게
 
     private List<AnswerResponseDto> answers;
+
+    public QuestionResponseDto(String title) {
+        this.title = title;
+    }
 }
