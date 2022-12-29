@@ -18,7 +18,8 @@ export default function EditAnswerPage() {
   useEffect(() => {
     async function request() {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/questions/${questionId}`
+        // `${process.env.REACT_APP_API_URL}/questions/${questionId}`
+        `/questions/${questionId}`
       );
       const { data } = response; // 답변 속한 질문 데이터 전체
 
@@ -57,7 +58,8 @@ export default function EditAnswerPage() {
 
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        // `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        `/questions/${questionId}`,
         { answers: [...editedAnswerList, editedAnswer] }
       );
       navigate(`/questions/${questionId}`);

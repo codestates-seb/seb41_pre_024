@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FaCheck } from 'react-icons/fa';
 
-export default function AnswerList({ data }) {
+export default function AnswerList({ isMyQuestion, data }) {
   const { questionId } = useParams();
   console.log(data);
 
+  // 채택된 답변 있는지
   const checked = data.filter((answer) => answer.choose === true).length === 1;
 
   function handleAnswerDelete(e, answerId) {
@@ -19,7 +20,8 @@ export default function AnswerList({ data }) {
 
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        // `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        `/questions/${questionId}`,
         { answers: newAnswerList }
       );
       window.location.reload();
@@ -30,7 +32,8 @@ export default function AnswerList({ data }) {
   const handleAdopt = ({ answerId }) => {
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=yes`
+        // `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=yes`
+        `/api/answers/adoption/${answerId}?adiptStatus=yes`
       );
       console.log('unliked');
       window.location.reload();
@@ -43,12 +46,12 @@ export default function AnswerList({ data }) {
       {data &&
         data.map((answer) => (
           <DetailContainer key={answer.answerId}>
-            <AdditionalFunction answer={answer} />
+            <AdditionalFunction answer={answer} isMyQuestion={isMyQuestion} />
             <DetailBody>
               <DetailText>{answer.content}</DetailText>
               <DetailFooter>
                 <Menu>
-                  {checked ? null : (
+                  {!checked && isMyQuestion ? ( // 채택된 답변 없고 내가 작성한 질문일 경우에만
                     <button
                       className="menu adopt"
                       onClick={() => handleAdopt(answer.answerId)}
@@ -56,7 +59,7 @@ export default function AnswerList({ data }) {
                       <FaCheck className="icon check" />
                       Accept
                     </button>
-                  )}
+                  ) : null}
                   <button className="menu">Share</button>
                   <button className="menu">Follow</button>
                   <Link to={`/posts/${questionId}/edit/${answer.answerId}`}>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AdditionalFunction from './AdditionalFunc';
 
-export default function Question({ data }) {
+export default function Question({ isMyQuestion, data }) {
   return (
     <>
       {data && (
@@ -25,8 +25,12 @@ export default function Question({ data }) {
               <Menu>
                 <button className="menu">Share</button>
                 <button className="menu">Follow</button>
-                <button className="menu">Edit</button>
-                <button className="menu">Delete</button>
+                {isMyQuestion && (
+                  <>
+                    <button className="menu">Edit</button>
+                    <button className="menu">Delete</button>
+                  </>
+                )}
               </Menu>
               <Author>
                 <div className="createdAt">asked {data.createdAt}</div>
@@ -37,7 +41,7 @@ export default function Question({ data }) {
                     alt="userIcon"
                   ></img>
                   <div className="userInfoText">
-                    <div className="userName userInfo">Martin Thompson</div>
+                    <div className="userName userInfo">{data.member_id}</div>
                     <div className="userreputation userInfo">3,205</div>
                   </div>
                 </div>

@@ -25,7 +25,8 @@ export default function AnswerSubmit({ data }) {
 
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        // `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        `/questions/${questionId}`,
         { answers: [...data, newAnswer] }
       );
       window.location.reload();

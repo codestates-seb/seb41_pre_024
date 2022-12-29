@@ -13,14 +13,15 @@ import {
 } from '../detail/bookmarkSlice';
 import axios from 'axios';
 
-export default function AdditionalFunc({ question, answer }) {
+export default function AdditionalFunc({ question, answer, isMyQuestion }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLike = ({ answerId }) => {
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=up`
+        // `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=up`
+        `/api/answers/recommend/${answerId}?recommendStatus=up`
       );
       console.log('liked!');
     }
@@ -30,7 +31,8 @@ export default function AdditionalFunc({ question, answer }) {
   const handleUnlike = ({ answerId }) => {
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=down`
+        // `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=down`
+        `/api/answers/recommend/${answerId}?recommendStatus=down`
       );
       console.log('unliked');
     }
@@ -38,13 +40,18 @@ export default function AdditionalFunc({ question, answer }) {
   };
 
   const handleCancelAdopt = ({ answerId }) => {
-    async function request() {
-      await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=no`
-      );
-      console.log('unliked');
+    if (isMyQuestion) {
+      async function request() {
+        await axios.patch(
+          // `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=no`
+          `/api/answers/adoption/${answerId}?adoptStatus=no`
+        );
+        console.log('unliked');
+      }
+      request();
+    } else {
+      alert('본인이 작성한 질문만 답변 채택을 취소할 수 있습니다.');
     }
-    request();
   };
 
   return (
