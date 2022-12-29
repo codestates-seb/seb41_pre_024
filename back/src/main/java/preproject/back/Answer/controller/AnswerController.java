@@ -35,18 +35,18 @@ public class AnswerController {
     }
 
     //답변 작성 기능 0 t -0
-    @PostMapping("/answers/add")
-    public ResponseEntity postAnswer( //@PathVariable("question-id") @Positive long questionId,
+    @PostMapping("questions/{question_id}/answers")
+    public ResponseEntity postAnswer( @PathVariable("question_id") @Positive long questionId,
             @Valid @RequestBody AnswerPostDto answerPostDto){
 
-        Answer answer =this.answerService.createAnswer(this.mapper.AnswerPostToAnswer(answerPostDto));
+        Answer answer =this.answerService.createAnswer(this.mapper.AnswerPostToAnswer(questionId,answerPostDto));
         return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer),HttpStatus.CREATED);
 
     }
 
 
     //답변 수정 기능0 t-0
-    @PatchMapping("/answers/edit/{answer_id}")
+    @PatchMapping("/answers/{answer_id}")
     public ResponseEntity patchAnswer(@PathVariable("answer_id") @Positive long answerId,
                                       @Valid @RequestBody AnswerPatchDto answerPatchDto){
         Answer answer = this.answerService.updateAnswer(answerId, this.mapper.AnswerPatchToAnswer(answerPatchDto));

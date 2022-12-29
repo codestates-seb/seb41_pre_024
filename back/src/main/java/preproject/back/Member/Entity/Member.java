@@ -45,4 +45,7 @@ public class Member {
         myAnswerList.add(answer);
     }
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>(); //사용자 권한 등록
+
 }
