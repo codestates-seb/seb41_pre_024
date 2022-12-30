@@ -1,31 +1,47 @@
 package preproject.back.Member.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 import preproject.back.Member.Entity.Member;
 import preproject.back.Member.repository.MemberRepository;
+import preproject.back.auth.utils.CustomAuthorityUtils;
 import preproject.back.exception.BusinessLogicException;
 import preproject.back.exception.ExceptionCode;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final CustomAuthorityUtils authorityUtils;
 
-    public MemberService(MemberRepository memberRepository) {
+    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.authorityUtils = authorityUtils;
     }
 
     /*email 중복체크후 회원 생성*/
     public Member createMember(Member member){
         verifyExistsEmail(member.getEmail());
+
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword); //password 암호화
+
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
+        member.setRoles(roles); //db에 user role 저장
+
         return memberRepository.save(member);
     }
     /*회원이 존재하는지 확인후 회원정보 수정*/
     public Member updateMember(Member member){
+
 //        Member findMember = findVerifiedMember(member.getMemberId());
 //
 //        Optional.ofNullable(member.getName())

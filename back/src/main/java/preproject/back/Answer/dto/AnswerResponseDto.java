@@ -28,6 +28,7 @@ public class AnswerResponseDto {
     public AnswerResponseDto(String title) {
         this.title = title;
     }
+    private String email; ///todo response에 member email값 리턴하도록 수정
+}
 
-    private String email; }//todo response에 member email값 리턴하도록 수정
 

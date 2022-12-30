@@ -50,6 +50,7 @@ public class MemberController {
         MemberResponseDto stubMember = new MemberResponseDto(1L,"kim@gmail.com","김수정");
         return new ResponseEntity<>(stubMember, HttpStatus.OK);
     }
+
     //회원정보 보기
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId){
@@ -78,7 +79,6 @@ public class MemberController {
         return ResponseEntity.ok(stubQuestions);
     }
     //작정답변 리스트
-
     @GetMapping("/answers/{member-id}")
     public ResponseEntity getAnswer(){
 
