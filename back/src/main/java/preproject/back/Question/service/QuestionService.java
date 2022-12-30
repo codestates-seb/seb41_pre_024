@@ -10,7 +10,6 @@ import preproject.back.Question.Entity.Question;
 import preproject.back.Question.repository.QuestionRepository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -62,5 +61,25 @@ public class QuestionService {
     public void deleteQuestion(long questionId) {
         Question question = findVerifiedQuestion(questionId);
         questionRepository.delete(question);
+    }
+
+    //질문 추천 기능
+    public Question recommendQuestion(long questionId, String recommendStatus){
+        Question findQuestion = findVerifiedQuestion(questionId);
+        if(recommendStatus.equals("up")){
+            findQuestion.setRecommend(findQuestion.getRecommend()+1);
+        }
+        else if(recommendStatus.equals("down")){
+            findQuestion.setRecommend(findQuestion.getRecommend()-1);
+        }
+        else throw new BusinessLogicException(ExceptionCode.RECOMMEND_STATUS_ONLY_UPDOWN);
+        return questionRepository.save(findQuestion);
+
+    }
+
+    //질문 검색 기능
+    public Page<Question> searchQuestion(String title, String content, int page, int size) {
+        return questionRepository.findAllByTitleOrContent(title, content,
+                PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 }

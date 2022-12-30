@@ -10,11 +10,9 @@ public enum ExceptionCode {
     ALREADY_CHOSEN_ANSWER(400, "already chosen answer in this question"),
     QUESTION_NOT_FOUND(404, "Question not found"),
 
-
     RECOMMEND_STATUS_ONLY_UPDOWN(412,"recommendStatus only up/down"),
 
     ADOPT_STATUS_ONLY_YESORNO(412,"adoptStatus only yes/no");
-
 
     @Getter
     private int status;

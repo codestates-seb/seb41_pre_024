@@ -112,7 +112,6 @@ public class AnswerService {
 //    }
 
 
-
 /*답변 채택 기능 -> 채택 취소기능 추가 ver
 //    public Answer adoptAnswer(long answerId,String adoptStatus){
 //        Answer findAnswer = verifyAnswer(answerId);

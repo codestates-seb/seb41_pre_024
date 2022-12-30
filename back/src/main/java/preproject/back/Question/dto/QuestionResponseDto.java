@@ -24,7 +24,7 @@ public class QuestionResponseDto {
 
     private int totalRecommend;
 
-  //todo  private int recommend;
+    private int recommend;
 
     private LocalDateTime createdAt;
 

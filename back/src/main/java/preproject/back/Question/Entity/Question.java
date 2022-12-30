@@ -31,6 +31,9 @@ public class Question {
 
     //태그?!?!
 
+    @Column(name = "total_answers")
+    private int totalAnswers;
+
     @Column(name = "question_recommend")
     private int recommend;
 
