@@ -4,14 +4,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import preproject.back.Answer.Entity.Answer;
 import preproject.back.exception.ExceptionCode;
 import preproject.back.exception.BusinessLogicException;
 import preproject.back.Question.Entity.Question;
 import preproject.back.Question.repository.QuestionRepository;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -77,5 +75,11 @@ public class QuestionService {
         else throw new BusinessLogicException(ExceptionCode.RECOMMEND_STATUS_ONLY_UPDOWN);
         return questionRepository.save(findQuestion);
 
+    }
+
+    //질문 검색 기능
+    public Page<Question> searchQuestion(String title, String content, int page, int size) {
+        return questionRepository.findAllByTitleOrContent(title, content,
+                PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 }

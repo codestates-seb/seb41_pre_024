@@ -26,13 +26,18 @@ public class MemberService {
     }
     /*회원이 존재하는지 확인후 회원정보 수정*/
     public Member updateMember(Member member){
-        Member findMember = findVerifiedMember(member.getMemberId());
-
+//        Member findMember = findVerifiedMember(member.getMemberId());
+//
+//        Optional.ofNullable(member.getName())
+//                .ifPresent(name -> findMember.setName(name));
+//        Optional.ofNullable(member.getPassword())
+//                .ifPresent(password -> findMember.setPassword(password));
+//        return memberRepository.save(findMember);
         Optional.ofNullable(member.getName())
-                .ifPresent(name -> findMember.setName(name));
+                .ifPresent(name -> member.setName(name));
         Optional.ofNullable(member.getPassword())
-                .ifPresent(password -> findMember.setPassword(password));
-        return memberRepository.save(findMember);
+                .ifPresent(password -> member.setPassword(password));
+        return memberRepository.save(member);
     }
     /*회원정보 가져오기*/
     public Member findMember(long memberId){
