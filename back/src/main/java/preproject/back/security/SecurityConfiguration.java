@@ -15,6 +15,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import preproject.back.auth.filter.JwtAuthenticationFilter;
 import preproject.back.auth.filter.JwtVerificationFilter;
+import preproject.back.auth.handler.MemberAuthenticationSuccessHandler;
 import preproject.back.auth.jwt.JwtTokenizer;
 import preproject.back.auth.utils.CustomAuthorityUtils;
 
@@ -27,11 +28,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
     private final JwtTokenizer jwtTokenizer;
-    private final CustomAuthorityUtils customAuthorityUtils;
+    private final CustomAuthorityUtils authorityUtils;
 
-    public SecurityConfiguration(JwtTokenizer jwtTokenizer, CustomAuthorityUtils customAuthorityUtils) {
+    public SecurityConfiguration(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils) {
         this.jwtTokenizer = jwtTokenizer;
-        this.customAuthorityUtils = customAuthorityUtils;
+        this.authorityUtils = authorityUtils;
     }
 
     @Bean
@@ -51,24 +52,24 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers(HttpMethod.POST, "/*/api/members").permitAll()
-                        .antMatchers(HttpMethod.PATCH,"/*/api/members/**").hasRole("User")
+                        .antMatchers(HttpMethod.PATCH,"/*/api/members/**").hasRole("USER")
                         .antMatchers(HttpMethod.GET, "/*/api/members/**").hasAnyRole("USER", "ADMIN")
                         .antMatchers(HttpMethod.DELETE, "/*/api/members/**").hasRole("USER")
                         .antMatchers(HttpMethod.GET, "/*/api/members/questions/**").hasRole("USER")
                         .antMatchers(HttpMethod.GET, "/*/api/members/answers/**").hasRole("USER")
 
-                        .antMatchers(HttpMethod.POST,"/*/api/questions").hasRole("User")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/questions/**").hasRole("User")
+                        .antMatchers(HttpMethod.POST,"/*/api/questions").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH,"/*/api/questions/**").hasRole("USER")
                         .antMatchers(HttpMethod.GET, "/*/api/questions/**").permitAll()
                         .antMatchers(HttpMethod.DELETE, "/*/api/questions/**").hasRole("USER")
                         // TODO: 질문 리스트 조회 기능
-                        .antMatchers(HttpMethod.POST,"/*/api/answers").hasRole("User")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/**").hasRole("User")
+                        .antMatchers(HttpMethod.POST,"/*/api/answers").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/**").hasRole("USER")
                         .antMatchers(HttpMethod.GET, "/*/api/answers/**").permitAll()
                         .antMatchers(HttpMethod.DELETE, "/*/api/answers/**").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/recommend/down/**").hasRole("User")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/recommend/up/**").hasRole("User")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/adoption/**").hasRole("User")
+                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/recommend/down/**").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/recommend/up/**").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/adoption/**").hasRole("USER")
 
 
                         .anyRequest().permitAll()
@@ -99,12 +100,14 @@ public class SecurityConfiguration {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
-
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
-//            jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login");
+            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
+            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
+//            jwtAuthenticationFilter.setFilterProcessesUrl("/api/login");
 
 
-            builder.addFilter(jwtAuthenticationFilter);
+            builder.addFilter(jwtAuthenticationFilter)
+                    .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);;
         }
     }
 }

@@ -1,6 +1,5 @@
 package preproject.back.auth.filter;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 import java.io.IOException;
-import org.springframework.security.core.AuthenticationException;
 import javax.servlet.ServletException;
+
 //권한부여 필터
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
