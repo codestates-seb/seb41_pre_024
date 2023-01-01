@@ -16,6 +16,7 @@ import preproject.back.Question.dto.QuestionResponseDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,8 +65,9 @@ public class MemberController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     //작성질문 리스트
-    @GetMapping("/questions/{member-id}")
+    @GetMapping("/questions/{memeber_id}")
     public ResponseEntity getQuestion(){
+
         QuestionResponseDto stub1 = new QuestionResponseDto("stub question title1");
         QuestionResponseDto stub2 = new QuestionResponseDto("stub question title2");
         QuestionResponseDto stub3 = new QuestionResponseDto("stub question title3");
@@ -79,7 +81,7 @@ public class MemberController {
         return ResponseEntity.ok(stubQuestions);
     }
     //작정답변 리스트
-    @GetMapping("/answers/{member-id}")
+    @GetMapping("/answers/{member_id}")
     public ResponseEntity getAnswer(){
 
         AnswerResponseDto stub1 = new AnswerResponseDto("stub answer title1");

@@ -34,7 +34,7 @@ public interface QuestionMapper {
         questionResponseDto.setTotalRecommend(question.getAnswers().stream().mapToInt(n -> {
             return n.getRecommend();
         }).sum());
-//        questionResponseDto.setEmail(question.getMember().getEmail());
+        questionResponseDto.setEmail(question.getMember().getEmail());
         List<AnswerResponseDto> list = question.getAnswers()
                 .stream().map(
                        answer -> {
@@ -48,7 +48,7 @@ public interface QuestionMapper {
                                    .content(answer.getContent())
                                    .createdAt(answer.getCreatedAt())
                                    .recommend(answer.getRecommend())
-//                                   .email(answer.getMember().getEmail())
+                                   .email(answer.getMember().getEmail())
                                    .build();
                            return responseDto;
                        }

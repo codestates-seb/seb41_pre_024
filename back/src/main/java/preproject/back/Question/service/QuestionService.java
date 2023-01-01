@@ -4,6 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import preproject.back.Member.Entity.Member;
+import preproject.back.Member.repository.MemberRepository;
 import preproject.back.exception.ExceptionCode;
 import preproject.back.exception.BusinessLogicException;
 import preproject.back.Question.Entity.Question;
@@ -16,13 +18,20 @@ import java.util.Optional;
 @Service
 public class QuestionService {
     private final QuestionRepository questionRepository;
+    private final MemberRepository memberRepository;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository,MemberRepository memberRepository) {
         this.questionRepository = questionRepository;
+        this.memberRepository = memberRepository;
     }
 
     //질문 작성 기능
-    public Question createQuestion(Question question) {
+    public Question createQuestion(Question question,String email) {
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+        Member findMember = optionalMember.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        question.addMember(findMember);
+        findMember.addQuestion(question);
         return questionRepository.save(question);
     }
 
