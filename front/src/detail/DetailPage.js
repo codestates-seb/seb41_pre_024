@@ -6,19 +6,29 @@ import Contents from './Contents';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 import { QuestionsSub } from '../home/QuestionsSub';
 
 export default function DetailPage() {
   const [questionData, setQuestionData] = useState();
-  const { id } = useParams();
-  console.log(id);
+  const { questionId } = useParams();
+  const location = useLocation();
+  const params = useParams();
+  const navigate = useNavigate();
+
+  // console.log(location);
+  console.log(params);
+  // console.log(navigate);
 
   useEffect(() => {
     async function request() {
-      const response = await axios.get(`http://localhost:3001/questions/${id}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`
+        // `/api/questions/${questionId}`
+      );
       const { data } = response;
+      console.log(data);
       setQuestionData(data);
     }
     request();
@@ -46,24 +56,18 @@ export default function DetailPage() {
 
 const DetailContainer = styled.div`
   width: 900px;
-  /* border: 1px solid blue; */
 `;
 
 const ContentsAndSideBox = styled.div`
-  /* border: 3px solid aliceblue; */
   display: flex;
   justify-content: space-between;
 `;
 
 const ContentsContainer = styled.div`
   width: 780px;
-  /* height: 700px;
-  border: 3px solid yellowgreen; */
 `;
 
 const SideBox = styled.div`
   width: 320px;
-  /* height: 700px; */
   margin: 24px;
-  /* border: 3px solid sandybrown; */
 `;

@@ -5,38 +5,117 @@ import { GoTriangleDown } from 'react-icons/go';
 import { FiBookmark } from 'react-icons/fi';
 import { FaCheck } from 'react-icons/fa';
 import { RxCounterClockwiseClock } from 'react-icons/rx';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+  add_answer_bookmark,
+  add_question_bookmark,
+} from '../detail/bookmarkSlice';
+import axios from 'axios';
 
-export default function AdditionalFunc({ likes, checked }) {
-  // 추천 수, 채택 여부
-  console.log('likes', likes);
+export default function AdditionalFunc({ question, answer, isMyQuestion }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLike = ({ answerId }) => {
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=up`
+        // `/api/answers/recommend/${answerId}?recommendStatus=up`
+      );
+      console.log('liked!');
+    }
+    request();
+  };
+
+  const handleUnlike = ({ answerId }) => {
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=down`
+        // `/api/answers/recommend/${answerId}?recommendStatus=down`
+      );
+      console.log('unliked');
+    }
+    request();
+  };
+
+  const handleCancelAdopt = ({ answerId }) => {
+    if (isMyQuestion) {
+      async function request() {
+        await axios.patch(
+          `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=no`
+          // `/api/answers/adoption/${answerId}?adoptStatus=no`
+        );
+        console.log('unliked');
+      }
+      request();
+    } else {
+      alert('본인이 작성한 질문만 답변 채택을 취소할 수 있습니다.');
+    }
+  };
+
+
   return (
-    <Container>
-      <Up>
-        <GoTriangleUp className="vote" />
-      </Up>
-      <Likes>{likes}</Likes>
-      <Down>
-        <GoTriangleDown className="vote" />
-      </Down>
-      <Icons>
-        <FiBookmark className="icon" />
-      </Icons>
-      {checked && (
-        <Icons>
-          <FaCheck className="icon check" />
-        </Icons>
+    <>
+      {question && (
+        <Container>
+          <Up>
+            <GoTriangleUp className="vote" />
+          </Up>
+          <Likes>{question.totalRecommend}</Likes>
+          <Down>
+            <GoTriangleDown className="vote" />
+          </Down>
+          <Icons>
+            <FiBookmark
+              className="icon"
+              onClick={() => {
+                dispatch(add_question_bookmark(question));
+                navigate('/bookmark');
+              }}
+            />
+          </Icons>
+          <Icons>
+            <RxCounterClockwiseClock className="icon" />
+          </Icons>
+        </Container>
       )}
-      <Icons>
-        <RxCounterClockwiseClock className="icon" />
-      </Icons>
-    </Container>
+      {answer && (
+        <Container>
+          <Up onClick={() => handleLike(answer.answerId)}>
+            <GoTriangleUp className="vote" />
+          </Up>
+          <Likes>{answer.recommend}</Likes>
+          <Down onClick={() => handleUnlike(answer.answerId)}>
+
+            <GoTriangleDown className="vote" />
+          </Down>
+          <Icons>
+            <FiBookmark
+              className="icon"
+              onClick={() => {
+                dispatch(add_answer_bookmark(answer));
+                navigate('/bookmark');
+              }}
+            />
+          </Icons>
+          {answer.choose && (
+            <Icons onClick={() => handleCancelAdopt(answer.answerId)}>
+              <FaCheck className="icon check" />
+            </Icons>
+          )}
+          <Icons>
+            <RxCounterClockwiseClock className="icon" />
+          </Icons>
+        </Container>
+      )}
+    </>
   );
 }
 
 const Container = styled.div`
   width: 100px;
   height: 200px;
-  /* border: 3px solid green; */
 
   display: flex;
   flex-direction: column;

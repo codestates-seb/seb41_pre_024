@@ -1,67 +1,81 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import styled from 'styled-components';
 import AdditionalFunction from './AdditionalFunc';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { FaCheck } from 'react-icons/fa';
 
-export default function AnswerList({ data }) {
-  const { id } = useParams();
+export default function AnswerList({ isMyQuestion, data }) {
+  const { questionId } = useParams();
 
-  function handleAnswerDelete(e, answer_id) {
-    const newAnswerList = data.filter((el) => el.answer_id !== answer_id);
+  console.log('data', data);
+
+  // 채택된 답변 있는지
+  const checked = data.filter((answer) => answer.choose === true).length === 1;
+
+  function handleAnswerDelete(e, answerId) {
+    const newAnswerList = data.filter((el) => el.answerId !== answerId);
     e.preventDefault();
-    fetch(`http://localhost:3001/questions/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        answers: newAnswerList,
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error('could not fetch the data for that resource');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
 
-        window.location.reload(); // 새로고침
-      })
-      .catch((err) => {
-        console.error('Error', err);
-      });
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        // `/api/questions/${questionId}`,
+        { answers: newAnswerList }
+      );
+      window.location.reload();
+    }
+    request();
+
   }
+
+  const handleAdopt = ({ answerId }) => {
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=yes`
+        // `/api/answers/adoption/${answerId}?adiptStatus=yes`
+      );
+      console.log('unliked');
+      window.location.reload();
+    }
+    request();
+  };
 
   return (
     <div>
       {data &&
         data.map((answer) => (
-          <DetailContainer key={answer.answer_id}>
-            <AdditionalFunction
-              likes={answer.answer_recommend}
-              checked={answer.answer_choose}
-            />
+          <DetailContainer key={answer.answerId}>
+            <AdditionalFunction answer={answer} isMyQuestion={isMyQuestion} />
             <DetailBody>
-              <DetailText>{answer.answer_content}</DetailText>
+              <DetailText>{answer.content}</DetailText>
               <DetailFooter>
                 <Menu>
+                  {!checked && isMyQuestion ? ( // 채택된 답변 없고 내가 작성한 질문일 경우에만
+                    <button
+                      className="menu adopt"
+                      onClick={() => handleAdopt(answer.answerId)}
+                    >
+                      <FaCheck className="icon check" />
+                      Accept
+                    </button>
+                  ) : null}
                   <button className="menu">Share</button>
                   <button className="menu">Follow</button>
-                  <Link to={`/posts/${id}/edit/${answer.answer_id}`}>
+                  <Link to={`/posts/${questionId}/edit/${answer.answerId}`}>
                     <button className="menu">Edit</button>
                   </Link>
                   <button
-                    onClick={(e) => handleAnswerDelete(e, answer.answer_id)}
+                    onClick={(e) => handleAnswerDelete(e, answer.answerId)}
                     className="menu"
                   >
                     Delete
                   </button>
                 </Menu>
                 <Author>
-                  <div className="createdAt">asked {answer.answer_time}</div>
+                  <div className="createdAt">answered {answer.createdAt}</div>
                   <div className="user">
                     <img
                       src={`${process.env.PUBLIC_URL}/assets/userIcon_02.png`}
@@ -89,16 +103,13 @@ const DetailContainer = styled.div`
   display: flex;
   justify-content: space-between;
   color: #3b4044;
-  /* border: 3px solid gold; */
 `;
 
 const DetailBody = styled.div`
   flex: 1;
-  /* border: 3px solid gray; */
 `;
 
 const DetailText = styled.div`
-  /* border: 3px solid gray; */
   padding: 10px 0;
   line-height: 24px;
 `;
@@ -106,13 +117,11 @@ const DetailText = styled.div`
 const DetailFooter = styled.div`
   display: flex;
   justify-content: space-between;
-  /* border: 3px solid gray; */
+
   padding: 20px 0;
 `;
 
 const Menu = styled.div`
-  /* border: 3px solid gray; */
-
   .menu {
     border: none;
     margin-right: 20px;
@@ -122,6 +131,14 @@ const Menu = styled.div`
     :hover {
       cursor: pointer;
     }
+  }
+
+  .adopt {
+    padding: 5px;
+    border-radius: 3px;
+    color: #0995ff;
+    /* background-color: #0995ff; */
+    border: 1px solid #0995ff;
   }
 `;
 

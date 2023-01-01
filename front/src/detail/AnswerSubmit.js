@@ -3,49 +3,40 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export default function AnswerSubmit({ data }) {
   const [answer, answerBind] = useInput();
   const navigate = useNavigate();
-  const { id } = useParams();
-
-  console.log('submit', data);
+  const { questionId } = useParams();
 
   const newAnswer = {
-    answer_id: data.length + 1,
-    answer_content: answer,
-    answer_recommend: 0,
-    answer_time: new Date().toLocaleDateString('ko-KR'),
-    answer_choose: false,
+    answerId: data.length + 1,
+    content: answer,
+    recommend: 0,
+    createdAt: new Date().toLocaleDateString('ko-KR'),
+    choose: false,
     member_id: 'Pika', // 로그인한 user_id 필요
-    question_id: id,
+    questionId: questionId,
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3001/questions/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        answers: [...data, newAnswer],
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error('could not fetch the data for that resource');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
 
-        window.location.reload(); // 새로고침
-      })
-      .catch((err) => {
-        console.error('Error', err);
-      });
+    const regExp = /^.{4,1000}$/;
+    if (regExp.test(answer)) {
+      async function request() {
+        await axios.patch(
+          `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+          // `/api/questions/${questionId}`,
+          { answers: [...data, newAnswer] }
+        );
+        window.location.reload();
+      }
+      request();
+    } else {
+      alert('답변은 4글자 이상 입력해야 합니다');
+    }
   };
 
   return (
