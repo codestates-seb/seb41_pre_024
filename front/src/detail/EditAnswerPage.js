@@ -11,15 +11,18 @@ import { QuestionsSub } from '../home/QuestionsSub';
 export default function EditAnswerPage() {
   const [answerData, setAnswerData] = useState();
   const { questionId, answerId } = useParams();
+  const params = useParams();
 
   const [edited, editedBind] = useInput();
   const navigate = useNavigate();
 
+  console.log(params);
+
   useEffect(() => {
     async function request() {
       const response = await axios.get(
-        // `${process.env.REACT_APP_API_URL}/questions/${questionId}`
-        `/questions/${questionId}`
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`
+        // `/api/questions/${questionId}`
       );
       const { data } = response; // 답변 속한 질문 데이터 전체
 
@@ -58,8 +61,8 @@ export default function EditAnswerPage() {
 
     async function request() {
       await axios.patch(
-        // `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
-        `/questions/${questionId}`,
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        // `/api/questions/${questionId}`,
         { answers: [...editedAnswerList, editedAnswer] }
       );
       navigate(`/questions/${questionId}`);

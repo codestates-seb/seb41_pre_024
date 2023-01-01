@@ -5,13 +5,10 @@ import Question from './Question';
 import AnswerList from './AnswerList';
 import AnswerSubmit from './AnswerSubmit';
 
-// axios!
-
 export default function Contents({ data }) {
   const [isLogin, setIsLogin] = useState(false);
   const [isMyQuestion, setIsMyQuestion] = useState(false);
 
-  console.log(data);
   useEffect(() => {
     // 로그인 상태인지
     if (localStorage.access_token) {
@@ -41,7 +38,7 @@ export default function Contents({ data }) {
         <div>
           <Question isMyQuestion={isMyQuestion} data={data} />
           <AnswerHeader>
-            <div className="answer">{data.answers.length} Answer</div>
+            <div className="answer">{data.answers.totalAnswers} Answer</div>
             <div>
               <span className="sortedBy">Sorted by:</span>
               <select className="select">

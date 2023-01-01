@@ -9,7 +9,8 @@ import { FaCheck } from 'react-icons/fa';
 
 export default function AnswerList({ isMyQuestion, data }) {
   const { questionId } = useParams();
-  console.log(data);
+
+  console.log('data', data);
 
   // 채택된 답변 있는지
   const checked = data.filter((answer) => answer.choose === true).length === 1;
@@ -20,8 +21,8 @@ export default function AnswerList({ isMyQuestion, data }) {
 
     async function request() {
       await axios.patch(
-        // `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
-        `/questions/${questionId}`,
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        // `/api/questions/${questionId}`,
         { answers: newAnswerList }
       );
       window.location.reload();
@@ -32,8 +33,8 @@ export default function AnswerList({ isMyQuestion, data }) {
   const handleAdopt = ({ answerId }) => {
     async function request() {
       await axios.patch(
-        // `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=yes`
-        `/api/answers/adoption/${answerId}?adiptStatus=yes`
+        `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=yes`
+        // `/api/answers/adoption/${answerId}?adiptStatus=yes`
       );
       console.log('unliked');
       window.location.reload();

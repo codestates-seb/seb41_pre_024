@@ -23,15 +23,20 @@ export default function AnswerSubmit({ data }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    async function request() {
-      await axios.patch(
-        // `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
-        `/questions/${questionId}`,
-        { answers: [...data, newAnswer] }
-      );
-      window.location.reload();
+    const regExp = /^.{4,1000}$/;
+    if (regExp.test(answer)) {
+      async function request() {
+        await axios.patch(
+          `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+          // `/api/questions/${questionId}`,
+          { answers: [...data, newAnswer] }
+        );
+        window.location.reload();
+      }
+      request();
+    } else {
+      alert('답변은 4글자 이상 입력해야 합니다');
     }
-    request();
   };
 
   return (
