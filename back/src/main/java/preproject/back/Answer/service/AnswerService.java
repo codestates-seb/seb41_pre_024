@@ -72,11 +72,6 @@ public class AnswerService {
 //    public List<Answer> findAnswerList() {
 //        return answerRepository.findAll(); }
 
-    //페이지네이션 버전 postman ok
-    public Page<Answer> findAnswers(int page, int size) {
-        return answerRepository.findAll(PageRequest.of(page, size,
-                Sort.by("answerId").descending())); //최신순 정렬
-    }
 
     //답변 삭제 기능 postman ok
     public void deleteAnswer(long answerId){
@@ -86,7 +81,7 @@ public class AnswerService {
     }
 
 
-    //답변 추천(up) 기능 postman ok
+//    //답변 추천(up) 기능 postman ok
     public Answer recommendAnswer(long answerId,String recommendStatus){
         Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
         if(recommendStatus.equals("up")){
@@ -101,33 +96,22 @@ public class AnswerService {
     }
 
 
-//    답변 추천(down) 기능 postman ok
-//    public Answer recommendDownAnswer(long answerId){
-//        Answer findAnswer = verifyAnswer(answerId); //존재하는 답변인지 확인
-//
-//        findAnswer.setRecommend(findAnswer.getRecommend()-1);
-//
-//        return answerRepository.save(findAnswer);
+//답변 채택 기능 -> 채택 취소기능 추가 ver
+    public Answer adoptAnswer(long answerId,String adoptStatus){
+        Answer findAnswer = verifyAnswer(answerId);
 
-//    }
+        if(adoptStatus.equals("yes")){
+        verifyChosenAnswer(findAnswer);
+        findAnswer.setChoose(true);
+        }
+        else if(adoptStatus.equals("no")){
+            findAnswer.setChoose(false);
+        }
+        else throw new BusinessLogicException(ExceptionCode.ADOPT_STATUS_ONLY_YESORNO);
 
+        return answerRepository.save(findAnswer);
 
-/*답변 채택 기능 -> 채택 취소기능 추가 ver
-//    public Answer adoptAnswer(long answerId,String adoptStatus){
-//        Answer findAnswer = verifyAnswer(answerId);
-//
-//        if(adoptStatus.equals("yes")){
-//        verifyChosenAnswer(findAnswer);
-//        findAnswer.setChoose(true);
-//        }
-//        else if(adoptStatus.equals("no")){
-//            findAnswer.setChoose(false);
-//        }
-//        else throw new BusinessLogicException(ExceptionCode.ADOPT_STATUS_ONLY_YESORNO);
-//
-//        return answerRepository.save(findAnswer);
-//
-//    }*/
+    }
 
 
     public Answer adoptAnswer(long answerId){

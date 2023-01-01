@@ -4,20 +4,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import preproject.back.Answer.Entity.Answer;
+import preproject.back.Member.Entity.Member;
+import preproject.back.Member.repository.MemberRepository;
+import preproject.back.Member.service.MemberService;
 import preproject.back.Question.Entity.Question;
 import preproject.back.Question.dto.QuestionPatchDto;
 import preproject.back.Question.dto.QuestionPostDto;
 import preproject.back.Question.dto.QuestionResponseDto;
 import preproject.back.Question.mapper.QuestionMapper;
+import preproject.back.auth.utils.MemberDetailsService;
 import preproject.back.pagedto.MultiResponseDto;
 import preproject.back.pagedto.SingleResponseDto;
 import preproject.back.Question.service.QuestionService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,21 +33,29 @@ import java.util.stream.Collectors;
 @Validated
 @Slf4j
 public class QuestionController {
+    private final MemberRepository memberRepository;
     private QuestionService questionService;
     private QuestionMapper mapper;
 
-    public QuestionController(QuestionService questionService, QuestionMapper questionMapper) {
+
+    public QuestionController(QuestionService questionService, QuestionMapper questionMapper,
+                              MemberRepository memberRepository) {
         this.questionService = questionService;
         this.mapper = questionMapper;
+        this.memberRepository = memberRepository;
     }
 
     //질문 작성 기능
     @PostMapping()
-    public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionPostDto) {
+    public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionPostDto,
+                                      @AuthenticationPrincipal Member member
+    ) {
         Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionPostDto));
+        QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
+
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question)),
+                new SingleResponseDto<>(response),
                 HttpStatus.CREATED);
     }
 

@@ -67,15 +67,7 @@ public class AnswerController {
 //        }).collect(Collectors.toList());
 //        return new ResponseEntity(responseAnswerList, HttpStatus.OK);
 //    }
-//
-//        //페이지네이션 버전
-//            Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
-//            List<Answer> answers = pageAnswers.getContent();
-//            return new ResponseEntity<>(
-//                    new MultiResponseDto<>(mapper.AnswersToAnswerResponses(answers),
-//                            pageAnswers),
-//                    HttpStatus.OK);
-//        }
+
 
     //답변 삭제 기능0 t-o
     @DeleteMapping("/answers/{answer_id}")
@@ -89,37 +81,23 @@ public class AnswerController {
     //답변 추천 기능0
 
     @PatchMapping("/answers/recommend/{answer_id}")
-    public ResponseEntity recommendUpAnswer(@PathVariable("answer_id") @Positive long answerId,
+    public ResponseEntity recommendAnswer(@PathVariable("answer_id") @Positive long answerId,
                                             @RequestParam String recommendStatus){
         Answer answer = this.answerService.recommendAnswer(answerId,recommendStatus);
 
         return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer), HttpStatus.OK);
     }
 
-//    //답변 추천(down) 기능0
-//    @PatchMapping("/answers/recommend/down/{answer_id}")
-//    public ResponseEntity recommendDownAnswer(@PathVariable("answer_id") @Positive long answerId){
-//        Answer answer = this.answerService.recommendDownAnswer(answerId);
-//
-//        return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer), HttpStatus.OK);
-//    }
 
 
-    //답변 채택 기능0 //답변채택 취소 ver
-//    @PatchMapping("/answers/adoption/{answer_id}")
-//    public ResponseEntity adoptAnswer(@PathVariable("answer_id") @Positive long answerId,
-//                                      @RequestParam String adoptStatus){
-//        Answer answer = this.answerService.adoptAnswer(answerId,adoptStatus);
-//
-//        return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer),HttpStatus.OK);
-//    }
-//
-//}
+   // 답변 채택 기능0 //답변채택 취소 ver
     @PatchMapping("/answers/adoption/{answer_id}")
-    public ResponseEntity adoptAnswer(@PathVariable("answer_id") @Positive long answerId){
-        Answer answer = this.answerService.adoptAnswer(answerId);
+    public ResponseEntity adoptAnswer(@PathVariable("answer_id") @Positive long answerId,
+                                      @RequestParam String adoptStatus){
+        Answer answer = this.answerService.adoptAnswer(answerId,adoptStatus);
 
         return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer),HttpStatus.OK);
     }
 
 }
+
