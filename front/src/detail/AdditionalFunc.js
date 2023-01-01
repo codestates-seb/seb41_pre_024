@@ -54,6 +54,7 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
     }
   };
 
+
   return (
     <>
       {question && (
@@ -86,6 +87,7 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
           </Up>
           <Likes>{answer.recommend}</Likes>
           <Down onClick={() => handleUnlike(answer.answerId)}>
+
             <GoTriangleDown className="vote" />
           </Down>
           <Icons>

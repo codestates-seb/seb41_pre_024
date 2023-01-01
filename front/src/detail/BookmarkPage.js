@@ -20,12 +20,14 @@ export const BookmarkItem = ({ question, answer }) => {
       <DetailText>
         {question && question.content}
         {answer && answer.content}
+
       </DetailText>
       <DetailFooter>
         <Author>
           <div className="createdAt">
             asked {question && question.createdAt}
             {answer && answer.createdAt}
+
           </div>
           <div className="user">
             <div className="userInfoText">

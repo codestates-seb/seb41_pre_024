@@ -28,6 +28,7 @@ export default function AnswerList({ isMyQuestion, data }) {
       window.location.reload();
     }
     request();
+
   }
 
   const handleAdopt = ({ answerId }) => {
