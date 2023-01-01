@@ -23,7 +23,6 @@ public class MemberAuthenticationFailureHandler implements AuthenticationFailure
 
         sendErrorResponse(response);
     }
-
     private void sendErrorResponse(HttpServletResponse response) throws IOException {
         Gson gson = new Gson();
         ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.UNAUTHORIZED); //인증 실패 코드를 전달

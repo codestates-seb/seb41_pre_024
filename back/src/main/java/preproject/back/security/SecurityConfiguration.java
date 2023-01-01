@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,6 +16,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import preproject.back.auth.filter.JwtAuthenticationFilter;
 import preproject.back.auth.filter.JwtVerificationFilter;
+import preproject.back.auth.handler.MemberAccessDeniedHandler;
+import preproject.back.auth.handler.MemberAuthenticationEntryPoint;
+import preproject.back.auth.handler.MemberAuthenticationFailureHandler;
 import preproject.back.auth.handler.MemberAuthenticationSuccessHandler;
 import preproject.back.auth.jwt.JwtTokenizer;
 import preproject.back.auth.utils.CustomAuthorityUtils;
@@ -42,36 +46,36 @@ public class SecurityConfiguration {
                 .and()
                 .csrf().disable() //CSRF 공격에 대한 설정
                 .cors(withDefaults()) //CorsFilter를 사용해서 cors처리
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .formLogin().disable() //폼로그인 안씀
                 .httpBasic().disable() // 이것도 안씀
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new MemberAuthenticationEntryPoint())  // 추가
-//                .accessDeniedHandler(new MemberAccessDeniedHandler())
-//                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new MemberAuthenticationEntryPoint())
+                .accessDeniedHandler(new MemberAccessDeniedHandler())
+                .and()
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers(HttpMethod.POST, "/*/api/members").permitAll()
-                        .antMatchers(HttpMethod.PATCH,"/*/api/members/**").hasRole("USER")
-                        .antMatchers(HttpMethod.GET, "/*/api/members/**").hasAnyRole("USER", "ADMIN")
-                        .antMatchers(HttpMethod.DELETE, "/*/api/members/**").hasRole("USER")
-                        .antMatchers(HttpMethod.GET, "/*/api/members/questions/**").hasRole("USER")
-                        .antMatchers(HttpMethod.GET, "/*/api/members/answers/**").hasRole("USER")
+                        .antMatchers(HttpMethod.POST, "/*/members").permitAll()
+                        .antMatchers(HttpMethod.PATCH,"/*/members/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.GET, "/*/members/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.DELETE, "/*/members/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.GET, "/*/members/questions/**").hasRole("USER")
+                        .antMatchers(HttpMethod.GET, "/*/members/answers/**").hasRole("USER")
 
-                        .antMatchers(HttpMethod.POST,"/*/api/questions").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/questions/**").hasRole("USER")
-                        .antMatchers(HttpMethod.GET, "/*/api/questions/**").permitAll()
-                        .antMatchers(HttpMethod.DELETE, "/*/api/questions/**").hasRole("USER")
+                        .antMatchers(HttpMethod.POST,"/*/questions").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH,"/*/questions/**").hasRole("USER")
+                        .antMatchers(HttpMethod.GET, "/*/questions/**").permitAll()
+                        .antMatchers(HttpMethod.DELETE, "/*/questions/**").hasAnyRole("USER", "ADMIN")
                         // TODO: 질문 리스트 조회 기능
-                        .antMatchers(HttpMethod.POST,"/*/api/answers").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/**").hasRole("USER")
-                        .antMatchers(HttpMethod.GET, "/*/api/answers/**").permitAll()
-                        .antMatchers(HttpMethod.DELETE, "/*/api/answers/**").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/recommend/down/**").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/recommend/up/**").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH,"/*/api/answers/adoption/**").hasRole("USER")
-
-
+                        .antMatchers(HttpMethod.POST,"/*/answers").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH,"/*/answers/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.GET, "/*/answers/**").permitAll()
+                        .antMatchers(HttpMethod.DELETE, "/*/answers/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.PATCH,"/*/answers/recommend/down/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.PATCH,"/*/answers/recommend/up/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.PATCH,"/*/answers/adoption/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().permitAll()
                 );
         return http.build();
@@ -87,10 +91,10 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
+        configuration.setAllowedOrigins(Arrays.asList("*")); //모든 출처(Origin)에 대해 스크립트 기반의 HTTP 통신을 허용하도록 설정
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE")); //파라미터로 지정한 HTTP Method에 대한 HTTP 통신을 허용
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", configuration); //모든 URL에 앞에서 구성한 CORS 정책(CorsConfiguration)을 적용
         return source;
     }
 
@@ -102,6 +106,7 @@ public class SecurityConfiguration {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
+            jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
 //            jwtAuthenticationFilter.setFilterProcessesUrl("/api/login");
 
