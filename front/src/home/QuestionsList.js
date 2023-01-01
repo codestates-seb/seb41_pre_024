@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { IoIosHelpCircle } from "react-icons/io";
 import { ImUser } from "react-icons/im";
+import { formatDistanceToNow, format } from 'date-fns'
 
 const List = styled.div`
   margin-left: -24px;
@@ -99,22 +100,22 @@ const List = styled.div`
   }
 `;
 
-export const QuestionsList = () => {
+export const QuestionsList = ({el}) => {
+const time = formatDistanceToNow( new Date(el.createdAt));
+
   return (
     <>
       <List>
         <div className="head">
           <div>
             <div>
-              {/* 투표수에따른 값변화 */}
-              <span>8</span>
+              <span>{el.totalRecommend}</span>
               <span>votes</span>
             </div>
           </div>
           <div>
             <div>
-              {/* 답변에따른 값변화 */}
-              <span>1</span>
+              <span>{el.totalAnswers}</span>
               <span>answer</span>
             </div>
           </div>
@@ -131,16 +132,10 @@ export const QuestionsList = () => {
             <span>
               <IoIosHelpCircle size={"20px"} />
             </span>
-            <a href="#" alt="#">
-              Python3 unexpected visual interaction with input function and CJK
-            </a>
+            <a href="#" alt="#">{el.title}</a>
           </div>
           <div className="content">
-            <p>
-              type sssssssssssssssssssssafterwards looks like 가나다 This seems to be only a visual
-              issue, as if I were to type and hit backspace until
-              there was no change shown, I would be left with there was no change shown, I would be left with there was no change shown, I would be left with
-             </p>
+            <p>{el.content}</p>
           </div>
           <div className="info">
             <div className="tagpoint">
@@ -153,10 +148,9 @@ export const QuestionsList = () => {
               </ul>
             </div>
             <div className="users">
-              {/* 태그 내용에 따른 위치변화 ? */}
               <span><ImUser></ImUser></span>
-              <span>user3757849</span>
-              <span>asked 31 secs ago</span>
+              <span>{el.email === null ? "UserId" : el.email}</span>
+              <span>{`${time} ago`}</span>
             </div>
           </div>
         </div>
@@ -164,3 +158,4 @@ export const QuestionsList = () => {
     </>
   );
 };
+

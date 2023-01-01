@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { QuestionsList } from "./QuestionsList";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Tap = styled.div`
   display: flex;
@@ -11,7 +12,6 @@ const Tap = styled.div`
   align-items: center;
   .tapCount {
   }
-
   .tapBtn {
     display: flex;
     color: #6a737c;
@@ -35,46 +35,96 @@ const Tap = styled.div`
 const Pagecount = styled.div`
   display: flex;
   justify-content: space-between;
+
+  margin-top: 40px;
+
+  a {
+    background-color: white;
+    border: 1px solid hsl(210, 8%, 90%);
+    padding: 6px 12px;
+    margin: 0 2px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  span {
+    margin-left: 10px;
+  }
+
+  .current {
+    background-color: #f48225;
+    color: #ffffff;
+  }
 `;
 
 export const QuestionsTap = () => {
-  // 페이지네이션 테스트용
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-  const [startList, setStartlist] = useState(0);
-  const [endList, setEndlist] = useState(15);
-  const [currentPage, setCurrentpage] = useState(1);
   const [countList, setCountlist] = useState(15);
+  const [currentPage, setCurrentpage] = useState(1);
+  const [listData, setListdata] = useState([]);
   const page = [];
-  
-  for (let i = 1; i <= Math.ceil(arr.length / countList); i++) {
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/api/questions?page=${currentPage}&size=${countList}`
+      )
+      .then((res) => setListdata(res.data));
+  }, [currentPage, countList]);
+
+  for (
+    let i = 1;
+    i <= Math.ceil(listData.pageInfo?.totalElements / countList);
+    i++
+  ) {
     page.push(i);
   }
 
-  useEffect(() => {
-    setStartlist((currentPage - 1) * countList);
-    setEndlist(currentPage * countList);
-  }, [currentPage, countList]);
+  const Nextbtn = () => {
+    if (page.length === currentPage) {
+      return undefined;
+    }
+    return (
+      <a 
+      href="#top"
+      onClick={() => setCurrentpage(currentPage + 1)}
+      >Next</a>
+    );
+  };
 
-const Nextbtn = ()=>{
-    if(page.length === currentPage){
-    return null
-  }
-  return <button onClick={Nextcount}> Next</button>
-};
+  const Listcont = () => {
+    const listChange = [15, 30, 50];
+    const listNumber = [];
 
-const Nextcount = () =>{
-  setCurrentpage(currentPage + 1);
-}
+    for (let i of listChange) {
+      listNumber.push(
+        <a
+          href="#top"
+          key={i}
+          className={countList === i ? "current" : undefined}
+          onClick={() => {
+            setCountlist(i);
+            setCurrentpage(1);
+          }}
+        >
+          {i}
+        </a>
+      );
+    }
 
-const Listcont = (e)=>{
-  setCountlist(Number(e.target.innerText))
-};
+    return (
+      <>
+        {listNumber}
+        <span>per page</span>
+      </>
+    );
+  };
 
   return (
     <div>
       <Tap>
         <div>
-          <span>{arr.length} questions</span>
+          <span>{listData.pageInfo?.totalElements} questions</span>
         </div>
         <div>
           <ul className="tapBtn">
@@ -85,25 +135,37 @@ const Listcont = (e)=>{
         </div>
       </Tap>
       <div>
-        <QuestionsList />
-        {arr.slice(startList, endList).map((e, idx) => {
-          return <div key={idx}>{e}</div>;
+        {listData?.data?.map((el) => {
+          return <QuestionsList key={el.questionId} el={el} />;
         })}
       </div>
       <Pagecount>
         <div className="count">
           {currentPage > 1 ? (
-            <button onClick={() => setCurrentpage(currentPage - 1)}>pre</button>) : null}
-          {page.length <= 1 ? null : page.map((e, idx)=>{
-
-            return ( <button key={idx} onClick={()=> setCurrentpage(e)}>{e}</button>)})}
-          {page.length > 1 ? Nextbtn() : undefined}
+            <a 
+            onClick={() => setCurrentpage(currentPage - 1)}
+            href="#top"
+            >
+              prev
+            </a>
+          ) : undefined}
+          {listData.pageInfo?.totalPages <= 1
+            ? undefined
+            : page.map((e, idx) => {
+                return (
+                  <a
+                    href="#top"
+                    key={idx}
+                    onClick={() => setCurrentpage(e)}
+                    className={currentPage === e ? "current" : undefined}
+                  >{e}
+                  </a>
+                );
+              })}
+          {listData.pageInfo?.totalPages > 1 ? Nextbtn() : undefined}
         </div>
         <div className="listcount">
-          <button onClick={(e)=> Listcont(e)}>15</button>
-          <button onClick={(e)=> Listcont(e)}>30</button>
-          <button onClick={(e)=> Listcont(e)}>50</button>
-          <span>per page</span>
+          {listData.pageInfo?.totalPages > 1 ? Listcont() : undefined}
         </div>
       </Pagecount>
     </div>

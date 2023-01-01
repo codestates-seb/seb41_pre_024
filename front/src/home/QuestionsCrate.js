@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Layout = styled.div`
-
   .title {
     background: url(https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368)
       no-repeat right/500px;
@@ -32,68 +34,79 @@ const Layout = styled.div`
   }
 `;
 
-
 const Form = styled.form`
   width: 851px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 
+  .conPs {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid rgb(220, 244, 226);
 
-.conPs{
-  display:flex;
-  flex-direction: column;
-  padding: 20px;
-  border: 1px solid rgb(220,244,226);
-  
-  p{
-    font-size: 12px;
+    p {
+      font-size: 12px;
+    }
+
+    & > * {
+      margin: 2px 0;
+    }
+
+    .isCon {
+      padding: 5px;
+      flex: 1;
+      flex-basis: 33px;
+    }
   }
 
-  & > *{
-    margin: 2px 0;
+  .content {
+    padding: 20px;
+    border: 1px solid rgb(220, 244, 226);
+
+    & > * {
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 13px;
+    }
   }
 
-  .isCon{
-    padding:5px;
-    flex:1;
-    flex-basis: 33px;
-  }
-}
-
-.content{
-  padding: 20px;
-  border: 1px solid rgb(220,244,226);
-
-  & > *{
-    margin-bottom: 5px;
+  textarea {
+    width: 100%;
+    resize: vertical;
+    height: 256px;
   }
 
-  p{
-    font-size: 13px;
+  button {
+    padding: 10px 13px;
+    background-color: #0a95ff;
+    border-radius: 3px;
+    color: white;
+    border: none;
+    box-shadow: 0px 0px 3px 0px white inset;
+    cursor: pointer;
   }
-}
-
-textarea {
-  width: 100%;
-  resize: vertical;
-  height: 256px;
-}
-
-button{
-  padding: 10px 13px;
-  background-color:#0a95ff;
-  border-radius: 3px;
-  color: white;
-  border:none;
-  box-shadow: 0px 0px 3px 0px white inset;
-}
-`
+`;
 
 export const QuestionsCrate = () => {
+  const [title, settitle] = useState("");
+  const [content, setcontent] = useState("");
+  const navigate = useNavigate();
 
+  const next = (e) => {
+    e.preventDefault();
 
-  
+    axios.post("http://localhost:8080/api/questions/add", {
+      title,
+      content,
+    });
+
+    navigate("/");
+  };
+
   return (
     <>
       <Layout>
@@ -126,22 +139,35 @@ export const QuestionsCrate = () => {
             </ul>
           </div>
         </div>
-        <Form>
+        <Form onSubmit={next}>
           <div className="conPs">
             <h5>Title</h5>
             <p>
               Be specific and imagine you’re asking a question to another
               person.
             </p>
-            <input type="text" className="isCon" placeholder="e.g is there an R function fpr finding the index of an element in a vector"/>
+            <input
+              type="text"
+              className="isCon"
+              placeholder="e.g is there an R function fpr finding the index of an element in a vector"
+              name="title"
+              vlaue={title}
+              onChange={(e) => settitle(e.target.value)}
+            />
           </div>
 
           <div className="conPs">
             <h5>Tags</h5>
             <p>
-              Add up to 5 tags to describe what your question is about. start typing to see suggestions
+              Add up to 5 tags to describe what your question is about. start
+              typing to see suggestions
             </p>
-            <input type="text" className="isCon" placeholder="e.g. (asp.net wordpress mongodb)"/>
+            <input
+              type="text"
+              className="isCon"
+              placeholder="e.g. (asp.net wordpress mongodb)"
+              disabled
+            />
           </div>
 
           <div className="content">
@@ -150,9 +176,15 @@ export const QuestionsCrate = () => {
               Introduce the problem and expand on what you put in the title.
               Minimum 20 characters.
             </p>
-            <textarea/>
+            <textarea
+              type="text"
+              name="content"
+              vlaue={content}
+              onChange={(e) => setcontent(e.target.value)}
+            />
+            {/* 포커스에 따른 버튼보이기 & 컨텐트 내용이 20글자이상 버튼활성화 */}
             <div>
-              <button type="submit">Next</button>
+              <button type="submit">Review your question</button>
             </div>
           </div>
         </Form>

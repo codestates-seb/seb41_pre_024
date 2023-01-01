@@ -71,8 +71,8 @@ function App() {
       <main id="main">
         <Routes>
           <Route element={<OverlapHssf />}>
-            <Route path="/" element={<Question />} />
-            <Route path="/questions/:id" element={<DetailPage />} />
+            {/* <Route path="/" element={<Question />} /> */}
+            <Route path="/" element={<DetailPage />} />
             <Route
               path="/posts/:id/edit/:answer_id"
               element={<EditAnswerPage />}
