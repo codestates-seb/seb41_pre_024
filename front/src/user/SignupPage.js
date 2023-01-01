@@ -1,27 +1,11 @@
-import Header from '../Header';
-import styled from 'styled-components';
-import { FcGoogle } from 'react-icons/fc';
-import { BsGithub } from 'react-icons/bs';
-import { FaFacebookSquare } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { RiQuestionnaireFill } from 'react-icons/ri';
-import { TiArrowUnsorted } from 'react-icons/ti';
-import { BsTagsFill } from 'react-icons/bs';
-import { AiFillTrophy } from 'react-icons/ai';
-
-const HeaderContainer = styled.header`
-  background-color: rgb(247, 247, 247);
-  height: 50px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  border-top: 3px solid #f48225;
-  display: flex;
-  justify-content: center;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
-`;
+import styled from "styled-components";
+import { FcGoogle } from "react-icons/fc";
+import { BsGithub } from "react-icons/bs";
+import { FaFacebookSquare } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import SignupInfo from "./SignupInfo";
+import axios from "axios";
 
 const Main = styled.div`
   background-color: #f1f2f3;
@@ -30,32 +14,6 @@ const Main = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  .script {
-    width: 410px;
-    height: 285px;
-
-    h1 {
-      font-size: x-large;
-      margin-bottom: 24px;
-    }
-
-    div {
-      display: flex;
-      margin-bottom: 24px;
-      gap: 10px;
-
-      .icon {
-        color: #0a95ff;
-        font-size: 26px;
-      }
-    }
-
-    .bottom {
-      font-size: small;
-      margin-bottom: 5px;
-    }
-  }
 
   .signup-form {
     display: flex;
@@ -100,6 +58,11 @@ const SignupContainer = styled.form`
   border-radius: 7px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
   padding: 20px;
+
+  .err {
+    font-size: small;
+    color: #ea4335;
+  }
 
   div {
     font-weight: 600;
@@ -146,38 +109,91 @@ const Script = styled.div`
 `;
 
 const SignupPage = () => {
+  const [nameValue, setNameValue] = useState("");
+  const [emailValue, setEmailValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+
+  const [nameErr, setNameErr] = useState(false);
+  const [emailErr, setEmailErr] = useState(false);
+  const [passwordErr, setPasswordErr] = useState(false);
+
+  const navigate = useNavigate();
+
+  const onChangeName = (e) => {
+    setNameValue(e.target.value);
+    const nameRegex = /^[a-zA-Z가-힣0-9]{3,}$/;
+    if (!nameValue || !nameRegex.test(nameValue)) {
+      setNameErr(true);
+      return false;
+    } else {
+      setNameErr(false);
+      return true;
+    }
+  };
+
+  const onChangeEmail = (e) => {
+    setEmailValue(e.target.value);
+    const emailRegexp = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (!emailValue || !emailRegexp.test(emailValue)) {
+      setEmailErr(true);
+      return false;
+    } else {
+      setEmailErr(false);
+      return true;
+    }
+  };
+
+  const onChangePassword = (e) => {
+    setPasswordValue(e.target.value);
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
+    if (!passwordValue || !passwordRegex.test(passwordValue)) {
+      setPasswordErr(true);
+      return false;
+    } else {
+      setPasswordErr(false);
+      return true;
+    }
+  };
+
+  function checkValidation() {
+    if (!nameErr && !emailErr && !passwordErr) {
+      console.log("Go to login!");
+      return true;
+    }
+    return false;
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (checkValidation()) {
+      signup();
+      alert("회원가입이 완료되었습니다.");
+      navigate("/login");
+    }
+  };
+
+  const signup = () => {
+    const body = {
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+    };
+    axios
+      .post(`http://localhost:8080/api/members`, body, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error("Error :", err);
+      });
+  };
+
   return (
     <>
-      <HeaderContainer>
-        <Header />
-      </HeaderContainer>
-
       <Main>
-        <div className="script">
-          <h1>Join the Stack Overflow Community</h1>
-          <div>
-            <RiQuestionnaireFill className="icon" />
-            <p>Get unstuck — ask a question</p>
-          </div>
-          <div>
-            <TiArrowUnsorted className="icon" />
-            <p>Unlock new privileges like voting and commenting</p>
-          </div>
-          <div>
-            <BsTagsFill className="icon" />
-            <p>Save your favorite tags, filters, and jobs</p>
-          </div>
-          <div>
-            <AiFillTrophy className="icon" />
-            <p>Earn reputation and badges</p>
-          </div>
-          <p className="bottom">
-            Collaborate and share knowledge with a private group for FREE.
-          </p>
-          <p className="bottom">
-            Get Stack Overflow for Teams free for up to 50 users.
-          </p>
-        </div>
+        <SignupInfo />
         <div className="signup-form">
           <ButtonContainer>
             <Google>
@@ -194,38 +210,39 @@ const SignupPage = () => {
             </Facebook>
           </ButtonContainer>
 
-          <SignupContainer>
+          <SignupContainer onSubmit={onSubmit}>
             <div>
               <label>Display Name</label>
-              <input type="text" />
+              <input type="text" value={nameValue} onChange={onChangeName} />
+              {nameErr && (
+                <p className="err">특수문자 없이 3자 이상 입력해주세요.</p>
+              )}
             </div>
             <div>
               <label>Email</label>
-              <input type="text" />
+              <input type="text" value={emailValue} onChange={onChangeEmail} />
+              {emailErr && <p className="err">이메일 형식에 맞지 않습니다.</p>}
             </div>
             <div>
               <label>Password</label>
-              <input type="password" />
-              <p>
-                Passwords must contain at least eight characters, including at
-                least 1 letter and 1 number.
-              </p>
+              <input
+                type="password"
+                value={passwordValue}
+                onChange={onChangePassword}
+              />
+              {passwordErr && (
+                <p className="err">
+                  영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.
+                </p>
+              )}
             </div>
-            <button>Sign up</button>
-            <p>
-              By clicking “Sign up”, you agree to our terms of service, privacy
-              policy and cookie policy
-            </p>
+            <button type="submit">Sign up</button>
           </SignupContainer>
 
           <Script>
             <div>
               <p>Already have an account?</p>
               <Link to="/login">Log in</Link>
-            </div>
-            <div>
-              <p>Are you an employer?</p>
-              <Link to="#">Sign up on Talent</Link>
             </div>
           </Script>
         </div>

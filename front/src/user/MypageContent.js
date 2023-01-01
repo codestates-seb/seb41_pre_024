@@ -35,13 +35,17 @@ const Content = styled.div`
   padding: 10px;
 `;
 
-const MypageContent = () => {
+const MypageContent = ({ userInfo, setUserInfo }) => {
+  console.log(userInfo);
   const [currentTab, setCurrentTab] = useState(0);
 
   const menuArr = [
-    { name: "Questions", content: <Questions /> },
-    { name: "Answers", content: <Answers /> },
-    { name: "Edit", content: <Edit /> },
+    { name: "Questions", content: <Questions userInfo={userInfo} /> },
+    { name: "Answers", content: <Answers userInfo={userInfo} /> },
+    {
+      name: "Edit",
+      content: <Edit userInfo={userInfo} setUserInfo={setUserInfo} />,
+    },
   ];
 
   const selectMenuHandler = (index) => {
