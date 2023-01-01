@@ -18,7 +18,7 @@ import java.util.*;
 import java.io.IOException;
 import javax.servlet.ServletException;
 
-//권한부여 필터
+//로그인 엔트리 포인트 토큰 생성
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenizer jwtTokenizer;
