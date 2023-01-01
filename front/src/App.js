@@ -10,13 +10,16 @@ import Footer from "./Footer";
 import { Route, Routes, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import UserPage from "./user/UserPage";
+import EditAnswerPage from "./detail/EditAnswerPage";
+import BookmarkPage from "./detail/BookmarkPage";
+import { Provider } from "react-redux";
+import store from "./store";
 import { useEffect, useState } from "react";
 
 const Common = styled.div`
   display: flex;
   width: 1264px;
   margin: 0 auto;
-
   & > div {
     flex: 1;
     padding: 24px;
@@ -80,25 +83,32 @@ function App() {
   };
 
   return (
-    <div id="app">
-      <Header isLogin={isLogin} setIsLogin={setIsLogin} />
-      <main id="main">
-        <Routes>
-          <Route element={<OverlapHssf />}>
-            <Route path="/" element={<Question />} />
-            <Route path="/questions/:id" element={<DetailPage />} />
-            <Route path="/user" element={<UserPage />} />
-          </Route>
-          <Route element={<OverlapHsf />}>
-            <Route path="/ask" element={<QuestionsCrate />} />
-          </Route>
-          <Route element={<OverlapSs />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-          </Route>
-        </Routes>
-      </main>
-    </div>
+    <Provider store={store}>
+      <div id="app">
+        <Header isLogin={isLogin} setIsLogin={setIsLogin} />
+        <main id="main">
+          <Routes>
+            <Route element={<OverlapHssf />}>
+              <Route path="/" element={<Question />} />
+              <Route path="/questions/:questionId" element={<DetailPage />} />
+              <Route
+                path="/posts/:questionId/edit/:answerId"
+                element={<EditAnswerPage />}
+              />
+              <Route path="/bookmark" element={<BookmarkPage />} />
+              <Route path="/user" element={<UserPage />} />
+            </Route>
+            <Route element={<OverlapHsf />}>
+              <Route path="/ask" element={<QuestionsCrate />} />
+            </Route>
+            <Route element={<OverlapSs />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+            </Route>
+          </Routes>
+        </main>
+      </div>
+    </Provider>
   );
 }
 
