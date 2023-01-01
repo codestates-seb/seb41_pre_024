@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IoEarthSharp } from "react-icons/io5";
+import { useEffect, useState } from "react";
 
 const Container = styled.ol`
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   margin-left: 15px;
@@ -19,7 +19,6 @@ const Container = styled.ol`
     }
 
     li {
-      /* margin-left: 15px; */
       color: #525960;
       padding: 10px 0 10px 10px;
     }
@@ -33,7 +32,21 @@ const Container = styled.ol`
 `;
 
 const SideNavbar = () => {
-  if (window.location.pathname === "/login") return null;
+  const [isLogin, setIsLogin] = useState(true);
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  // localStorage 에 토큰 저장되어있으면, 로그인 상태 변경
+  const checkLogin = () => {
+    if (localStorage.getItem("access_token")) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -48,9 +61,11 @@ const SideNavbar = () => {
                 <IoEarthSharp /> Questions
               </li>
             </Link>
-            <Link to="/user">
-              <li>User</li>
-            </Link>
+            {isLogin && (
+              <Link to="/user">
+                <li>User</li>
+              </Link>
+            )}
           </ol>
         </li>
       </Container>

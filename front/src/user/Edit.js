@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { useUser } from "../hooks/useUser";
 
 const Container = styled.div`
   display: flex;
@@ -74,8 +75,10 @@ const DeleteProfile = styled.div`
 `;
 
 const Edit = () => {
-  const { id } = useParams;
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  // const { userInfo } = useUser(localStorage.getItem("access_token"));
+  // console.log(userInfo);
+  const memberId = localStorage.getItem("user_id");
 
   const [nameValue, setnameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
@@ -124,54 +127,73 @@ const Edit = () => {
   };
 
   const onClickToEdit = () => {
-    // name / password 수정
     console.log("nameValue :", nameValue);
     console.log("passwordValue :", passwordValue);
     console.log("passwordCheckValue :", passwordCheckValue);
   };
 
-  // const patchUserData = () => {
-  //   let body = {
-  //     userName: nameValue,
-  //     usesrPassword: passwordValue,
-  //   };
-
-  //   axios
-  //     .patch(`/members/${id}`, body, {
-  //       headers: { "Content-Type": "application/json" },
-  //     })
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.log(err));
-  // };
-
-  const onClickToDelete = () => {
-    // e.preventDefault();
-    alert("정말 계정을 삭제하시겠습니까?");
-
-    console.log(`${id}`); // undefined
+  const patchUserData = () => {
+    const token = localStorage.getItem("access_token");
+    const body = {
+      name: nameValue,
+      password: passwordValue,
+    };
+    console.log(body);
 
     axios
-      .delete(`/members/${id}`) // 이렇게 아이디 값으로 주면 안 됨 -> 왜 ? 지금 회원 조회를 안해서 ??
+      .patch(`http://localhost:8080/api/members/${memberId}`, body, {
+        headers: { "Content-Type": "application/json" },
+        Authorization: token,
+      })
       .then((res) => {
+        const { name } = res.data;
         console.log(res);
-        // 로그아웃 시키기 (-> 홈으로 이동?)
+        // 수정된 이름 다시 저장
+        localStorage.setItem("user_name", name);
+        alert("회원정보 수정이 완료되었습니다.");
+        setnameValue("");
+        setPasswordValue("");
+        setPasswordCheckValue("");
       })
       .catch((err) => console.log(err));
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // console.log("저장되었습니다.");
+
     checkName();
     checkPassword();
     checkPasswordCheck();
 
     if (!nameErr && !passwordErr && !passwordCheckErr) {
-      console.log("No Err");
-      // patchUserData()
+      patchUserData();
     } else {
       console.log("Here is the Err");
     }
+  };
+
+  // 회원 탈퇴
+  const withdrawal = () => {
+    localStorage.removeItem("access_token");
+  };
+
+  const onClickToDelete = (e) => {
+    e.preventDefault();
+    alert("정말 계정을 삭제하시겠습니까?");
+    const token = localStorage.getItem("access_token");
+
+    axios
+      .delete(`http://localhost:8080/api/members/${memberId}`, {
+        headers: { "Content-Type": "application/json" },
+        Authorization: token,
+      })
+      .then((res) => {
+        console.log(res);
+        alert("회원탈퇴가 완료되었습니다.");
+        withdrawal();
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -208,7 +230,9 @@ const Edit = () => {
               <p className="err">비밀번호가 일치하지 않습니다.</p>
             )}
           </div>
-          <button onClick={onClickToEdit}>Save</button>
+          <button type="submit" onClick={onClickToEdit}>
+            Save
+          </button>
         </EditForm>
         <DeleteProfile>
           Delete Profile

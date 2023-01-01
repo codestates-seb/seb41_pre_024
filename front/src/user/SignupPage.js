@@ -121,7 +121,6 @@ const SignupPage = () => {
 
   const onChangeName = (e) => {
     setNameValue(e.target.value);
-    // console.log(e.target.value);
     const nameRegex = /^[a-zA-Z가-힣0-9]{3,}$/;
     if (!nameValue || !nameRegex.test(nameValue)) {
       setNameErr(true);
@@ -168,26 +167,26 @@ const SignupPage = () => {
     e.preventDefault();
     if (checkValidation()) {
       signup();
+      alert("회원가입이 완료되었습니다.");
       navigate("/login");
     }
   };
 
   const signup = () => {
     const body = {
-      userName: nameValue,
-      userEmail: emailValue,
-      userPassword: passwordValue,
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
     };
     axios
-      .post(`http://localhost:8080/members`, body, {
+      .post(`http://localhost:8080/api/members`, body, {
         headers: { "Content-Type": "application/json" },
       })
-
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => {
-        console.error("Error", err);
+        console.error("Error :", err);
       });
   };
 
@@ -215,9 +214,9 @@ const SignupPage = () => {
             <div>
               <label>Display Name</label>
               <input type="text" value={nameValue} onChange={onChangeName} />
-              {nameErr ? (
+              {nameErr && (
                 <p className="err">특수문자 없이 3자 이상 입력해주세요.</p>
-              ) : null}
+              )}
             </div>
             <div>
               <label>Email</label>

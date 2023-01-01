@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import { IoSearchOutline } from "react-icons/io5";
-// import { VscAccount } from "react-icons/vsc";
-// import { BsFillInboxFill } from "react-icons/bs";
-// import { AiFillTrophy } from "react-icons/ai";
-// import { AiFillQuestionCircle } from "react-icons/ai";
-// import { FaRegSnowflake } from "react-icons/fa";
-// import { BsFillChatSquareTextFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -84,30 +77,17 @@ const SignupButton = styled(Button)`
   border: none;
 `;
 
-// const IconContainer = styled.div`
-//   display: flex;
-//   gap: 20px;
-//   margin-left: 20px;
-
-//   .icon {
-//     font-size: 24px;
-//     color: #525960;
-//   }
-// `;
-
-const Header = () => {
-  const [isLogin, setIsLogin] = useState(false);
-
-  const onClick = () => {
-    setIsLogin(!isLogin);
+const Header = ({ isLogin, setIsLogin }) => {
+  const onClickLogout = () => {
+    // 로그아웃 버튼 누르면 accessToken 삭제하고, 로그인 상태 false로 변경
+    localStorage.removeItem("access_token");
+    setIsLogin(false);
   };
 
   return (
     <Container>
       <Link to="/">
-        <Logo
-          src={`${process.env.PUBLIC_URL}/assets/logo-stackoverflow.png`}
-        ></Logo>
+        <Logo src={`${process.env.PUBLIC_URL}/assets/logo-stackoverflow.png`} />
       </Link>
       <SearchForm>
         <div>
@@ -116,26 +96,16 @@ const Header = () => {
         </div>
       </SearchForm>
       {isLogin ? (
-        // <IconContainer>
-        //   <VscAccount className="icon" onClick={onClick} />
-        //   <BsFillInboxFill className="icon" />
-        //   <AiFillTrophy className="icon" />
-        //   <AiFillQuestionCircle className="icon" />
-        //   <FaRegSnowflake className="icon" />
-        //   <BsFillChatSquareTextFill className="icon" />
-        // </IconContainer>
         <>
           <Link to="/user">
-            <Button onClick={onClick}>My page</Button>
+            <Button>My page</Button>
           </Link>
-          <Link to="/">
-            <SignupButton>Log out</SignupButton>
-          </Link>
+          <SignupButton onClick={onClickLogout}>Log out</SignupButton>
         </>
       ) : (
         <>
           <Link to="/login">
-            <Button onClick={onClick}>Log in</Button>
+            <Button>Log in</Button>
           </Link>
           <Link to="/signup">
             <SignupButton>Sign up</SignupButton>

@@ -3,7 +3,8 @@ import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import { FaFacebookSquare } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useDispatch } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 const Main = styled.div`
   background-color: #f1f2f3;
@@ -70,10 +71,6 @@ const LoginContainer = styled.form`
     }
   }
 
-  .emailErr {
-    border: 2px solid #de4f54;
-  }
-
   input {
     width: 240px;
     height: 33px;
@@ -108,27 +105,33 @@ const Script = styled.div`
 `;
 
 const LoginPage = () => {
+  // access token 이 만료됐을 때 ?
+  // access token 이 만료되면 서버가 만료됐다는 response 보내줌
+  // 클리아언트는 해당 response 를 받으면 refresh token 보낸다
+  // 서버는 refresh token 유효성 체크하고, 새로는 access token 발급
+  // 클라이언트는 새롭게 받은 access token 을 기존의 access token 에 덮어씀
+
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  // 이메일 유효성 검사
-  const [isEmail, setIsEmail] = useState(false);
-  const [isEmailErr, setIsEmailErr] = useState("");
-  // 이메일, 비밀번호 일치 검사
-  // const [isValidate, setIsValidate] = useState(false);
 
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const [emailErr, setEmailErr] = useState(false);
+  const [passwordErr, setPasswordErr] = useState(false);
+
+  const [isValidate, setIsValidate] = useState(false);
+
+  const navigate = useNavigate();
 
   const onChangeEmail = (e) => {
     setEmailValue(e.target.value);
-    const emailRegex =
-      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    if (!emailRegex.test(e.target.value)) {
-      setIsEmailErr("올바른 이메일 형식이 아닙니다.");
-      setIsEmail(true);
+  };
+
+  const checkEmail = () => {
+    if (!emailValue) {
+      setEmailErr(true);
+      return false;
     } else {
-      setIsEmailErr("올바른 이메일 형식입니다.");
-      setIsEmail(false);
+      setEmailErr(false);
+      return true;
     }
   };
 
@@ -136,18 +139,63 @@ const LoginPage = () => {
     setPasswordValue(e.target.value);
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    // let body = {
-    //   email: emailValue,
-    //   password: passwordValue,
-    // };
-    // dispatch(loginUser(body));
+  const checkPassword = () => {
+    if (!passwordValue) {
+      setPasswordErr(true);
+      return false;
+    } else {
+      setPasswordErr(false);
+      return true;
+    }
   };
 
-  const onClick = () => {
-    console.log("Email : ", emailValue);
-    console.log("Password : ", passwordValue);
+  const validation = () => {
+    checkEmail();
+    checkPassword();
+    if (checkEmail() && checkPassword()) {
+      return true;
+    } else return false;
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (validation()) {
+      console.log("로그인 성공");
+      onLogin();
+      // 로그인 성공 후 홈 화면으로 이동
+      navigate("/");
+    }
+  };
+
+  const onLogin = () => {
+    const body = {
+      email: emailValue,
+      password: passwordValue,
+    };
+    console.log("body: ", body);
+    axios
+      .post("http://localhost:8080/api/login", body, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        // 이메일, 이름, 유저아이디, 토큰 localStorage에 저장 (쿠키에 저장하자 ,,,)
+        const { email, name, memberId, accessToken, refreshToken } = res.data;
+        // 바디에 이메일 + 패스워드 보내고
+        // 백엔드 리스폰스로 토큰이이랑 개인정보들이 오고
+        localStorage.setItem("access_token", accessToken);
+        localStorage.setItem("refresh_token", refreshToken);
+        localStorage.setItem("user_name", name);
+        localStorage.setItem("user_email", email);
+        localStorage.setItem("user_id", memberId);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsValidate(true);
+      });
   };
 
   return (
@@ -155,7 +203,7 @@ const LoginPage = () => {
       <Main>
         <Logo
           src={`${process.env.PUBLIC_URL}/assets/stackoverflow_small.png`}
-        ></Logo>
+        />
         <ButtonContainer>
           <Google>
             <FcGoogle />
@@ -174,18 +222,13 @@ const LoginPage = () => {
         <LoginContainer onSubmit={onSubmit}>
           <div>
             <label>Email</label>
-            <input
-              type="text"
-              onChange={onChangeEmail}
-              value={emailValue}
-              className={isEmail ? "emailErr" : undefined}
-            />
-            <p className={isEmail ? "emailErrMsg" : undefined}>{isEmailErr}</p>
-            {/* {isValidate && (
+            <input type="text" onChange={onChangeEmail} value={emailValue} />
+            {emailErr && <p className="emailErrMsg">이메일을 입력해주세요.</p>}
+            {isValidate && (
               <p className="errMessage">
-                The email or password is incorrect
+                이메일 또는 비밀번호가 일치하지 않습니다.
               </p>
-            )} */}
+            )}
           </div>
           <div>
             <label>Password</label>
@@ -194,8 +237,11 @@ const LoginPage = () => {
               onChange={onChangePassword}
               value={passwordValue}
             />
+            {passwordErr && (
+              <p className="emailErrMsg">비밀번호를 입력해주세요</p>
+            )}
           </div>
-          <button onClick={onClick}>Log in</button>
+          <button type="submit">Log in</button>
         </LoginContainer>
 
         <Script>

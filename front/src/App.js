@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import { Route, Routes, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import UserPage from "./user/UserPage";
+import { useEffect, useState } from "react";
 
 const Common = styled.div`
   display: flex;
@@ -62,9 +63,25 @@ const OverlapSs = () => {
 };
 
 function App() {
+  // 원래 초기 상태는 false
+  const [isLogin, setIsLogin] = useState(true);
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  // localStorage 에 토큰 저장되어있으면, 로그인 상태 변경
+  const checkLogin = () => {
+    if (localStorage.getItem("access_token")) {
+      setIsLogin(true);
+      return;
+    }
+    setIsLogin(false);
+  };
+
   return (
     <div id="app">
-      <Header />
+      <Header isLogin={isLogin} setIsLogin={setIsLogin} />
       <main id="main">
         <Routes>
           <Route element={<OverlapHssf />}>

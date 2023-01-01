@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useUser } from "../hooks/useUser";
 
 const UserContainer = styled.div`
   display: flex;
@@ -21,8 +22,12 @@ const UserName = styled.div`
   justify-content: space-around;
 `;
 
-const UserInfo = ({ userInfo }) => {
-  console.log(userInfo);
+const UserInfo = () => {
+  const { userInfo } = useUser(localStorage.getItem("access_token"));
+
+  console.log(userInfo); // email + name
+  // const { email, name } = userInfo;
+
   return (
     <UserContainer>
       <UserProfile
@@ -31,8 +36,8 @@ const UserInfo = ({ userInfo }) => {
       <UserName>
         <div>Hello, I'm User</div>
         <div>User@google.com</div>
-        {/* <div>Hello, {userInfo.userName}</div>
-        <div>{userInfo.userEmail}</div> */}
+        {/* <div>name</div>
+        <div>email</div> */}
       </UserName>
     </UserContainer>
   );
