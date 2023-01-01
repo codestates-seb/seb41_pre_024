@@ -1,9 +1,7 @@
 package preproject.back.Answer.service;
 
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import preproject.back.Member.repository.MemberRepository;
 import preproject.back.Question.repository.QuestionRepository;
 import preproject.back.exception.ExceptionCode;
 import preproject.back.exception.BusinessLogicException;
@@ -27,21 +25,26 @@ public class AnswerService {
 
 
    private final MemberService memberService;
-    public AnswerService(AnswerRepository answerRepository,MemberService memberService,QuestionRepository questionRepository){
+    private final MemberRepository memberRepository;
+
+    public AnswerService(AnswerRepository answerRepository,MemberService memberService,QuestionRepository questionRepository,
+                         MemberRepository memberRepository){
         this.answerRepository = answerRepository;
        this.memberService =memberService;
        this.questionRepository =questionRepository;
+        this.memberRepository = memberRepository;
     }
 
     //답변 생성기능 postman ok
-    public Answer createAnswer(Answer answer){
-
+    public Answer createAnswer(Answer answer,String email){
+    Optional<Member> optionalMember = memberRepository.findByEmail(email);
+        Member findMember = optionalMember.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         //멤버값 찾아서 넣어주고
 
 //              Member findMember = memberService.findVerifiedMember(answer.getMember().getMemberId());
 //        answer.addMember(findMember);
-
-
+        answer.addMember(findMember);
         Answer savedAnswer = answerRepository.save(answer);
 
         return savedAnswer;

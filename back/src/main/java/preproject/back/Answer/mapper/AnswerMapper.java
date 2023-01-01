@@ -56,6 +56,7 @@ public interface AnswerMapper {
         answerResponseDto.setCreatedAt(answer.getCreatedAt());
         answerResponseDto.setChoose(answer.isChoose());
         answerResponseDto.setQuestionId(answer.getQuestion().getQuestionId());
+        answerResponseDto.setEmail(answer.getMember().getEmail());
 
         return answerResponseDto;
 

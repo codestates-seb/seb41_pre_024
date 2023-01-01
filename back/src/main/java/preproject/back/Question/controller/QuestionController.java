@@ -48,14 +48,13 @@ public class QuestionController {
     //질문 작성 기능
     @PostMapping()
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionPostDto,
-                                      @AuthenticationPrincipal Member member
+                                      Principal principal
     ) {
-        Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionPostDto));
-        QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
-
+        String email = principal.getName();
+        Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionPostDto),email);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(response),
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question)),
                 HttpStatus.CREATED);
     }
 

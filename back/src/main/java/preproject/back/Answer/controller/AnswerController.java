@@ -18,6 +18,7 @@ import preproject.back.pagedto.MultiResponseDto;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,10 +40,12 @@ public class AnswerController {
 
     //답변 작성 기능 0 t -0
     @PostMapping("questions/{question_id}/answers")
-    public ResponseEntity postAnswer( @PathVariable("question_id") @Positive long questionId,
-            @Valid @RequestBody AnswerPostDto answerPostDto){
+    public ResponseEntity postAnswer(@PathVariable("question_id") @Positive long questionId,
+                                     @Valid @RequestBody AnswerPostDto answerPostDto, Principal principal){
 
-        Answer answer =this.answerService.createAnswer(this.mapper.AnswerPostToAnswer(questionId,answerPostDto));
+        String email = principal.getName();
+        Answer answer =this.answerService.createAnswer(this.mapper.AnswerPostToAnswer(questionId,answerPostDto),email);
+
         return new ResponseEntity<>(this.mapper.AnswerToAnswerResponseDto(answer),HttpStatus.CREATED);
 
     }

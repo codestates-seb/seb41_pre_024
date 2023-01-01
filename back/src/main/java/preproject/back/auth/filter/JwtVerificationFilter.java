@@ -61,7 +61,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     }
 
     private void setAuthenticationToContext(Map<String, Object> claims) {
-        String username = (String) claims.get("email");
+        String username = (String) claims.get("email"); //JWT에서 파싱한 Claim에서 username을 얻습니다.
         List<GrantedAuthority> authorities = authorityUtils.createAuthorities((List)claims.get("roles"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);

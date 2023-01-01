@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import preproject.back.Member.Entity.Member;
 import preproject.back.Member.repository.MemberRepository;
+import preproject.back.Question.repository.QuestionRepository;
 import preproject.back.auth.utils.CustomAuthorityUtils;
 import preproject.back.exception.BusinessLogicException;
 import preproject.back.exception.ExceptionCode;
@@ -20,11 +21,14 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils authorityUtils;
+    private final QuestionRepository questionRepository;
 
-    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
+    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils,
+                         QuestionRepository questionRepository) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityUtils = authorityUtils;
+        this.questionRepository = questionRepository;
     }
 
     /*email 중복체크후 회원 생성*/
@@ -65,8 +69,8 @@ public class MemberService {
         memberRepository.delete(findMember);
     }
     /*회원이 작성한 질문불러오기*/
-    public Member findQuestion(long memberId){
-        return null;
+    public Member findQuestion(String email){
+    return null;
     }
     /*회원이 작성한 답변불러오기*/
     public Member findAnswer(long memberId){
@@ -86,5 +90,11 @@ public class MemberService {
         Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent())
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
+    }
+    public Member findMember(String email) {
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+        Member findMember = optionalMember.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        return findMember;
     }
 }
