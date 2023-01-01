@@ -73,11 +73,8 @@ function App() {
           <Routes>
             <Route element={<OverlapHssf />}>
               <Route path="/" element={<Question />} />
-              <Route path="/questions/:id" element={<DetailPage />} />
-              <Route
-                path="/posts/:id/edit/:answer_id"
-                element={<EditAnswerPage />}
-              />
+              <Route path="/questions/:questionId" element={<DetailPage />} />
+              <Route path="/posts/:questionId/edit/:answerId" element={<EditAnswerPage />} />
               <Route path="/bookmark" element={<BookmarkPage />} />
               <Route path="/user" element={<UserPage />} />
             </Route>

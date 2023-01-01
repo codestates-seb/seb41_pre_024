@@ -10,74 +10,64 @@ import { QuestionsSub } from '../home/QuestionsSub';
 
 export default function EditAnswerPage() {
   const [answerData, setAnswerData] = useState();
-  const { id, answer_id } = useParams(); // question id와 answer id 가져옴
-
-  console.log(id);
+  const { questionId, answerId } = useParams();
+  const params = useParams();
 
   const [edited, editedBind] = useInput();
   const navigate = useNavigate();
 
+  console.log(params);
+
   useEffect(() => {
     async function request() {
-      const response = await axios.get(`http://localhost:3001/questions/${id}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`
+        // `/api/questions/${questionId}`
+      );
       const { data } = response; // 답변 속한 질문 데이터 전체
 
       // answer 데이터 id 순으로 정렬
       const sortedAnswerData = data.answers.sort(function (a, b) {
-        if (a.answer_id > b.answer_id) {
+        if (a.answerId > b.answerId) {
           return 1;
         }
-        if (a.answer_id < b.answer_id) {
+        if (a.answerId < b.answerId) {
           return -1;
         }
         return 0;
       });
-
-      console.log(sortedAnswerData);
 
       setAnswerData(sortedAnswerData);
     }
     request();
   }, []);
 
-  const handleEditSubmit = (e, answer_id) => {
+  const handleEditSubmit = (e, answerId) => {
     const editedAnswerList = answerData.filter(
-      (el) => el.answer_id !== Number(answer_id)
+      (el) => el.answerId !== Number(answerId)
     ); // 수정할 answer만 뺀 answers 리스트
 
     const editedAnswer = {
-      answer_id: Number(answer_id), // params로 받아옴
-      answer_content: edited, // useInput 이용해서 받아옴
-      answer_recommend: answerData[answer_id - 1].answer_recommend,
-      answer_time: answerData[answer_id - 1].answer_time,
-      answer_choose: answerData[answer_id - 1].answer_choose,
-      member_id: answerData[answer_id - 1].member_id,
-      question_id: Number(id), // params로 받아옴
+      answerId: Number(answerId), // params로 받아옴
+      content: edited, // useInput 이용해서 받아옴
+      recommend: answerData[answerId - 1].recommend,
+      createdAt: answerData[answerId - 1].createdAt,
+      choose: answerData[answerId - 1].choose,
+      member_id: answerData[answerId - 1].member_id,
+      questionId: Number(questionId), // params로 받아옴
     };
 
     e.preventDefault();
-    fetch(`http://localhost:3001/questions/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        answers: [...editedAnswerList, editedAnswer],
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error('could not fetch the data for that resource');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        navigate(`/questions/${id}`);
-        window.location.reload(); // 새로고침
-      })
-      .catch((err) => {
-        console.error('Error', err);
-      });
+
+    async function request() {
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+        // `/api/questions/${questionId}`,
+        { answers: [...editedAnswerList, editedAnswer] }
+      );
+      navigate(`/questions/${questionId}`);
+    }
+    request();
   };
 
   return (
@@ -86,11 +76,11 @@ export default function EditAnswerPage() {
         <ContentsAndSideBox>
           <ContentsContainer>
             <AnswerFormHeader>Answer</AnswerFormHeader>
-            <form onSubmit={(e) => handleEditSubmit(e, answer_id)}>
+            <form onSubmit={(e) => handleEditSubmit(e, answerId)}>
               <Textarea
                 required
                 {...editedBind}
-                placeholder={answerData[answer_id - 1].answer_content}
+                placeholder={answerData[answerId - 1].content}
               ></Textarea>
               <Guideline>
                 Thanks for contributing an answer to Stack Overflow!

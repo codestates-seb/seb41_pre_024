@@ -6,19 +6,29 @@ import Contents from './Contents';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 import { QuestionsSub } from '../home/QuestionsSub';
 
 export default function DetailPage() {
   const [questionData, setQuestionData] = useState();
-  const { id } = useParams();
-  console.log(id);
+  const { questionId } = useParams();
+  const location = useLocation();
+  const params = useParams();
+  const navigate = useNavigate();
+
+  // console.log(location);
+  console.log(params);
+  // console.log(navigate);
 
   useEffect(() => {
     async function request() {
-      const response = await axios.get(`http://localhost:3001/questions/${id}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}`
+        // `/api/questions/${questionId}`
+      );
       const { data } = response;
+      console.log(data);
       setQuestionData(data);
     }
     request();
