@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IoSearchOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -78,12 +78,14 @@ const SignupButton = styled(Button)`
 `;
 
 const Header = ({ isLogin, setIsLogin }) => {
+  const navigate = useNavigate();
+
   const onClickLogout = () => {
     // 로그아웃 버튼 누르면 accessToken 삭제하고, 로그인 상태 false로 변경
     localStorage.removeItem("access_token");
     setIsLogin(false);
+    navigate("/");
   };
-
   return (
     <Container>
       <Link to="/">

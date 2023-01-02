@@ -103,53 +103,48 @@
       ]
     }
   ],
-  "members": [
+  "user": [
     {
       "id": 0,
-      "userName": "이쁜이",
-      "userEmail": "keonho@naver.com",
-      "userPassword": "prettygirl97@"
+      "userId": 0,
+      "userName": "김현정",
+      "userEmail": "cowguswjd@naver.com",
+      "userPassword": "rlaguswjd97@"
     },
     {
       "id": 1,
+      "userId": 1,
       "userName": "김영희",
-      "userEmail": "keonho@naver.com",
-      "userPassword": "rlarjsgh96@"
+      "userEmail": "dooly1255@naver.com",
+      "userPassword": "rladudgml99@"
     },
     {
       "id": 2,
+      "userId": 2,
       "userName": "김건호",
       "userEmail": "keonho@naver.com",
       "userPassword": "rlarjsgh96@"
     },
     {
       "id": 3,
+      "userId": 3,
       "userName": "김재택",
       "userEmail": "김재택@naver.com",
       "userPassword": "rlarjsgh96@"
     },
     {
-      "userName": "김아무개",
-      "userEmail": "kimamugae@naver.com",
-      "userPassword": "dkanro97@",
-      "id": 4
+      "id": 4,
+      "userId": 4,
+      "userName": "",
+      "userEmail": "",
+      "userPassword": ""
     },
     {
-      "userName": "이혜정",
-      "userEmail": "dlgPwjd@naver.com",
-      "userPassword": "gPwjd98@2",
-      "id": 5
-    },
-    {
-      "userName": "졸리다요",
-      "userEmail": "whfflekdy@gmail.com",
-      "userPassword": "whfflekdy99#3",
-      "id": 6
-    },
-    {
-      "email": "cowguswjd@naver.com",
-      "password": "rlaguswjd97@",
-      "id": 7
+      "id": 5,
+      "userId": 5,
+      "userName": "",
+      "userEmail": "",
+      "userPassword": ""
     }
   ]
 }

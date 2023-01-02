@@ -178,10 +178,15 @@ const SignupPage = () => {
       email: emailValue,
       password: passwordValue,
     };
+    console.log(body);
     axios
-      .post(`http://localhost:8080/api/members`, body, {
-        headers: { "Content-Type": "application/json" },
-      })
+      .post(
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/members`,
+        body,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       .then((res) => {
         console.log(res.data);
       })
@@ -232,7 +237,7 @@ const SignupPage = () => {
               />
               {passwordErr && (
                 <p className="err">
-                  영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.
+                  영문 대, 소문자, 숫자, 특수문자 포함 8자 이상 입력해주세요.
                 </p>
               )}
             </div>

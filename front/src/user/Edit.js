@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useUser } from "../hooks/useUser";
 
 const Container = styled.div`
   display: flex;
@@ -76,8 +75,6 @@ const DeleteProfile = styled.div`
 
 const Edit = () => {
   const navigate = useNavigate();
-  // const { userInfo } = useUser(localStorage.getItem("access_token"));
-  // console.log(userInfo);
   const memberId = localStorage.getItem("user_id");
 
   const [nameValue, setnameValue] = useState("");
@@ -141,13 +138,19 @@ const Edit = () => {
     console.log(body);
 
     axios
-      .patch(`http://localhost:8080/api/members/${memberId}`, body, {
-        headers: { "Content-Type": "application/json" },
-        Authorization: token,
-      })
+      .patch(
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/members/${memberId}`,
+        body,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
       .then((res) => {
-        const { name } = res.data;
         console.log(res);
+        const { name } = res.data;
         // 수정된 이름 다시 저장
         localStorage.setItem("user_name", name);
         alert("회원정보 수정이 완료되었습니다.");
@@ -169,6 +172,9 @@ const Edit = () => {
       patchUserData();
     } else {
       console.log("Here is the Err");
+      console.log("nErr :", nameErr);
+      console.log("pwErr :", passwordErr);
+      console.log("pwCheckErr :", passwordCheckErr);
     }
   };
 
@@ -183,10 +189,15 @@ const Edit = () => {
     const token = localStorage.getItem("access_token");
 
     axios
-      .delete(`http://localhost:8080/api/members/${memberId}`, {
-        headers: { "Content-Type": "application/json" },
-        Authorization: token,
-      })
+      .delete(
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/members/${memberId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
         alert("회원탈퇴가 완료되었습니다.");
@@ -215,7 +226,7 @@ const Edit = () => {
             />
             {passwordErr && (
               <p className="err">
-                영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.
+                영문 대, 소문자, 숫자, 특수문자 포함 8자 이상 입력해주세요.
               </p>
             )}
           </div>
