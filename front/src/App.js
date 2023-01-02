@@ -17,6 +17,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 const Common = styled.div`
+  flex:1;
   display: flex;
   width: 1264px;
   margin: 0 auto;
@@ -52,7 +53,9 @@ const OverlapHssf = () => {
 const OverlapHsf = () => {
   return (
     <>
+    <Common>
       <Outlet />
+    </Common>
       <Footer />
     </>
   );

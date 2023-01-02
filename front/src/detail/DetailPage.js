@@ -24,11 +24,14 @@ export default function DetailPage() {
   useEffect(() => {
     async function request() {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/questions/${questionId}`
-        // `/api/questions/${questionId}`
+        `${process.env.REACT_APP_API_URL}/api/questions/${questionId}`
       );
+<<<<<<< HEAD
       const { data } = response;
+=======
+      const { data } = response.data;
       console.log(data);
+>>>>>>> bd4cbfb0b6d205b158973f46f1cfb83988b51bfe
       setQuestionData(data);
     }
     request();

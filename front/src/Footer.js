@@ -69,7 +69,7 @@ export default function Footer() {
 }
 
 const FooterContainer = styled.div`
-  height: 322px;
+  padding: 31px 0;
   background-color: rgb(35 38 41);
   color: #9199a1;
   display: flex;

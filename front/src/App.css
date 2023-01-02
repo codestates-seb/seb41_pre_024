@@ -6,22 +6,26 @@
 
 * {
   font-family: 'Apple SD Sandol Gothic Neo';
+  
 }
 
 #app {
-  margin-top: 50px;
+  height: 100%;
 }
 
 #main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
   background-color: rgba(255, 255, 255);
 }
 
 #aside {
   background-color: rgba(255, 255, 255);
   flex-basis: 164px;
-  min-height: calc(100vh - 372px);
   position: relative;
-  border-right: 1px solid black;
+  border-right: 1px solid rgb(206,207,212);
 }
 
 #scroll {
@@ -30,4 +34,5 @@
   height: 100px;
   position: sticky;
   top: 74px;
+  
 }

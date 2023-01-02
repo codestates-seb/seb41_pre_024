@@ -1,3 +1,13 @@
+html,body{
+    height: 100%;
+}
+
+#root{
+    height: 100%;
+}
+
+
+
 html,body,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,button,p{
     margin: 0;
     padding: 0;
@@ -5,6 +15,7 @@ html,body,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,button,p{
 
 ul,ol{
     list-style: none;
+    
 }
 
 a{

@@ -16,28 +16,34 @@ export default function AnswerList({ isMyQuestion, data }) {
   const checked = data.filter((answer) => answer.choose === true).length === 1;
 
   function handleAnswerDelete(e, answerId) {
-    const newAnswerList = data.filter((el) => el.answerId !== answerId);
-    e.preventDefault();
+    // const newAnswerList = data.filter((el) => el.answerId !== answerId);
+    // e.preventDefault();
 
     async function request() {
-      await axios.patch(
-        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
-        // `/api/questions/${questionId}`,
-        { answers: newAnswerList }
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/answers/${answerId}`,
+        {
+          headers: {
+            Authorization: localStorage.access_token,
+          },
+        }
       );
       window.location.reload();
     }
     request();
-
   }
 
   const handleAdopt = ({ answerId }) => {
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=yes`
-        // `/api/answers/adoption/${answerId}?adiptStatus=yes`
+        `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adoptStatus=yes`,
+        {
+          headers: {
+            Authorization: localStorage.access_token,
+          },
+        }
       );
-      console.log('unliked');
+      console.log('adopted!');
       window.location.reload();
     }
     request();
@@ -75,7 +81,9 @@ export default function AnswerList({ isMyQuestion, data }) {
                   </button>
                 </Menu>
                 <Author>
-                  <div className="createdAt">answered {answer.createdAt}</div>
+                  <div className="createdAt">
+                    answered {answer.createdAt.slice(0, 10)}
+                  </div>
                   <div className="user">
                     <img
                       src={`${process.env.PUBLIC_URL}/assets/userIcon_02.png`}
@@ -83,9 +91,7 @@ export default function AnswerList({ isMyQuestion, data }) {
                       alt="userIcon"
                     ></img>
                     <div className="userInfoText">
-                      <div className="userName userInfo">
-                        {answer.member_id}
-                      </div>
+                      <div className="userName userInfo">{answer.email}</div>
                       <div className="userreputation userInfo">3,205</div>
                     </div>
                   </div>

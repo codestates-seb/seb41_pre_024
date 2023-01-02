@@ -4,15 +4,21 @@ import { ImPencil, ImBubble, ImCommand } from "react-icons/im";
 
 const Layout = styled.div`
     text-align: left;
-    border: 1px solid black;
-    
+    border: 1px solid hsl(47,65%,84%);
+    box-shadow: 0px 0px 1px 0px gray;
+
+    & li:nth-child(3){
+        border-bottom: 1px solid hsl(47,65%,84%);
+    }
 
     .title{
         background-color: rgba(251, 243, 213, 0.939);
         padding: 11px;
         font-size: 14px;
         font-weight: bolder;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid hsl(47,65%,84%);
+        
+        
     }
 
     .list{
@@ -20,6 +26,7 @@ const Layout = styled.div`
         background-color: hsl(47,87%,94%);
         padding: 12px;
         font-size: 14px;
+        align-items: center;
         
         span{
             margin-right: 8px;
