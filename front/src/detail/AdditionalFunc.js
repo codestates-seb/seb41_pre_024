@@ -20,8 +20,12 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
   const handleLike = ({ answerId }) => {
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=up`
-        // `/api/answers/recommend/${answerId}?recommendStatus=up`
+        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=up`,
+        {
+          headers: {
+            Authorization: localStorage.access_token,
+          },
+        }
       );
       console.log('liked!');
     }
@@ -32,7 +36,6 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
     async function request() {
       await axios.patch(
         `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=down`
-        // `/api/answers/recommend/${answerId}?recommendStatus=down`
       );
       console.log('unliked');
     }
@@ -44,7 +47,6 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
       async function request() {
         await axios.patch(
           `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=no`
-          // `/api/answers/adoption/${answerId}?adoptStatus=no`
         );
         console.log('unliked');
       }
@@ -53,7 +55,6 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
       alert('본인이 작성한 질문만 답변 채택을 취소할 수 있습니다.');
     }
   };
-
 
   return (
     <>
@@ -87,7 +88,6 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
           </Up>
           <Likes>{answer.recommend}</Likes>
           <Down onClick={() => handleUnlike(answer.answerId)}>
-
             <GoTriangleDown className="vote" />
           </Down>
           <Icons>

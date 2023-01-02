@@ -1,8 +1,8 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import { useUser } from "../hooks/useUser";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { useUser } from '../hooks/useUser';
 
 const Container = styled.div`
   display: flex;
@@ -31,11 +31,11 @@ const TextContainer = styled.div`
 `;
 
 const Questions = () => {
-  const { userInfo } = useUser(localStorage.getItem("access_token"));
+  const { userInfo } = useUser(localStorage.getItem('access_token'));
   console.log(userInfo);
 
   // localStorage 에 있는 유저 아이디 조회해서
-  const memberId = localStorage.getItem("user_id");
+  const memberId = localStorage.getItem('user_id');
 
   const [questions, setQuestions] = useState([]);
 
@@ -52,18 +52,18 @@ const Questions = () => {
   }, []);
 
   const question = [
-    { title: "예시 질문입니다", name: "누구일까요" },
-    { title: "연습용 예시 질문입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 질문입니다", name: "누구신지" },
-    { title: "어떻게 하는 건가요", name: "누구신지" },
-    { title: "예시 질문입니다", name: "누구일까요" },
-    { title: "연습용 예시 질문입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 질문입니다", name: "누구신지" },
-    { title: "어떻게 하는 건가요", name: "누구신지" },
-    { title: "예시 질문입니다", name: "누구일까요" },
-    { title: "연습용 예시 질문입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 질문입니다", name: "누구신지" },
-    { title: "어떻게 하는 건가요", name: "누구신지" },
+    { title: '예시 질문입니다', name: '누구일까요' },
+    { title: '연습용 예시 질문입니다', name: '누구세요' },
+    { title: '아무렇게나 작성한 질문입니다', name: '누구신지' },
+    { title: '어떻게 하는 건가요', name: '누구신지' },
+    { title: '예시 질문입니다', name: '누구일까요' },
+    { title: '연습용 예시 질문입니다', name: '누구세요' },
+    { title: '아무렇게나 작성한 질문입니다', name: '누구신지' },
+    { title: '어떻게 하는 건가요', name: '누구신지' },
+    { title: '예시 질문입니다', name: '누구일까요' },
+    { title: '연습용 예시 질문입니다', name: '누구세요' },
+    { title: '아무렇게나 작성한 질문입니다', name: '누구신지' },
+    { title: '어떻게 하는 건가요', name: '누구신지' },
   ];
 
   // questions = [

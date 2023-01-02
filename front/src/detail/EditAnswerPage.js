@@ -11,59 +11,73 @@ import { QuestionsSub } from '../home/QuestionsSub';
 export default function EditAnswerPage() {
   const [answerData, setAnswerData] = useState();
   const { questionId, answerId } = useParams();
-  const params = useParams();
 
   const [edited, editedBind] = useInput();
   const navigate = useNavigate();
 
-  console.log(params);
-
   useEffect(() => {
     async function request() {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/questions/${questionId}`
+        `${process.env.REACT_APP_API_URL}/api/questions/${questionId}`
         // `/api/questions/${questionId}`
       );
-      const { data } = response; // 답변 속한 질문 데이터 전체
+      const { data } = response.data; // 답변 속한 질문 데이터 전체
+      console.log(data);
+
+      const thisAnswer = data.answers.filter(
+        (el) => el.answerId === Number(answerId)
+      )[0];
 
       // answer 데이터 id 순으로 정렬
-      const sortedAnswerData = data.answers.sort(function (a, b) {
-        if (a.answerId > b.answerId) {
-          return 1;
-        }
-        if (a.answerId < b.answerId) {
-          return -1;
-        }
-        return 0;
-      });
+      // const sortedAnswerData = data.answers.sort(function (a, b) {
+      //   if (a.answerId > b.answerId) {
+      //     return 1;
+      //   }
+      //   if (a.answerId < b.answerId) {
+      //     return -1;
+      //   }
+      //   return 0;
+      // });
 
-      setAnswerData(sortedAnswerData);
+      console.log(thisAnswer);
+      setAnswerData(thisAnswer);
     }
     request();
   }, []);
 
   const handleEditSubmit = (e, answerId) => {
-    const editedAnswerList = answerData.filter(
-      (el) => el.answerId !== Number(answerId)
-    ); // 수정할 answer만 뺀 answers 리스트
+    // const editedAnswerList = answerData.filter(
+    //   (el) => el.answerId !== Number(answerId)
+    // ); // 수정할 answer만 뺀 answers 리스트
+
+    // const editedAnswer = {
+    //   answerId: Number(answerId), // params로 받아옴
+    //   title: edited,
+    //   content: edited, // useInput 이용해서 받아옴
+    //   recommend: answerData[answerId - 1].recommend,
+    //   createdAt: answerData[answerId - 1].createdAt,
+    //   choose: answerData[answerId - 1].choose,
+    //   member_id: answerData[answerId - 1].member_id,
+    //   questionId: Number(questionId), // params로 받아옴
+    // };
 
     const editedAnswer = {
-      answerId: Number(answerId), // params로 받아옴
+      title: edited,
       content: edited, // useInput 이용해서 받아옴
-      recommend: answerData[answerId - 1].recommend,
-      createdAt: answerData[answerId - 1].createdAt,
-      choose: answerData[answerId - 1].choose,
-      member_id: answerData[answerId - 1].member_id,
-      questionId: Number(questionId), // params로 받아옴
     };
 
     e.preventDefault();
 
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
-        // `/api/questions/${questionId}`,
-        { answers: [...editedAnswerList, editedAnswer] }
+        `${process.env.REACT_APP_API_URL}/api/answers/${answerId}`,
+        editedAnswer,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.access_token,
+          },
+        }
       );
       navigate(`/questions/${questionId}`);
     }
@@ -80,7 +94,7 @@ export default function EditAnswerPage() {
               <Textarea
                 required
                 {...editedBind}
-                placeholder={answerData[answerId - 1].content}
+                placeholder={answerData.content}
               ></Textarea>
               <Guideline>
                 Thanks for contributing an answer to Stack Overflow!
