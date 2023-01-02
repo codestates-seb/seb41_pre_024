@@ -1,11 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useUser } from '../hooks/useUser';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
