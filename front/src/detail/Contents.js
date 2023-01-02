@@ -19,7 +19,8 @@ export default function Contents({ data }) {
     return 0;
   });
 
-  console.log('sorted', sortedAnswerData);
+  console.log('data', data);
+  console.log('sortedAnswerData', sortedAnswerData);
 
   return (
     <div>

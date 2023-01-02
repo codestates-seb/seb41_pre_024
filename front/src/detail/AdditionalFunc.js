@@ -5,38 +5,80 @@ import { GoTriangleDown } from 'react-icons/go';
 import { FiBookmark } from 'react-icons/fi';
 import { FaCheck } from 'react-icons/fa';
 import { RxCounterClockwiseClock } from 'react-icons/rx';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+  add_answer_bookmark,
+  add_question_bookmark,
+} from '../detail/bookmarkSlice';
 
-export default function AdditionalFunc({ likes, checked }) {
-  // 추천 수, 채택 여부
-  console.log('likes', likes);
+export default function AdditionalFunc({ question, answer }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  console.log('answer', answer);
+
   return (
-    <Container>
-      <Up>
-        <GoTriangleUp className="vote" />
-      </Up>
-      <Likes>{likes}</Likes>
-      <Down>
-        <GoTriangleDown className="vote" />
-      </Down>
-      <Icons>
-        <FiBookmark className="icon" />
-      </Icons>
-      {checked && (
-        <Icons>
-          <FaCheck className="icon check" />
-        </Icons>
+    <>
+      {question && (
+        <Container>
+          <Up>
+            <GoTriangleUp className="vote" />
+          </Up>
+          <Likes>{question.question_recommend}</Likes>
+          <Down>
+            <GoTriangleDown className="vote" />
+          </Down>
+          <Icons>
+            <FiBookmark
+              className="icon"
+              onClick={() => {
+                dispatch(add_question_bookmark(question));
+                navigate('/bookmark');
+              }}
+            />
+          </Icons>
+          <Icons>
+            <RxCounterClockwiseClock className="icon" />
+          </Icons>
+        </Container>
       )}
-      <Icons>
-        <RxCounterClockwiseClock className="icon" />
-      </Icons>
-    </Container>
+      {answer && (
+        <Container>
+          <Up>
+            <GoTriangleUp className="vote" />
+          </Up>
+          <Likes>{answer.answer_recommend}</Likes>
+          <Down>
+            <GoTriangleDown className="vote" />
+          </Down>
+          <Icons>
+            <FiBookmark
+              className="icon"
+              onClick={() => {
+                dispatch(add_answer_bookmark(answer));
+
+                navigate('/bookmark');
+              }}
+            />
+          </Icons>
+          {answer.answer_choose && (
+            <Icons>
+              <FaCheck className="icon check" />
+            </Icons>
+          )}
+          <Icons>
+            <RxCounterClockwiseClock className="icon" />
+          </Icons>
+        </Container>
+      )}
+    </>
   );
 }
 
 const Container = styled.div`
   width: 100px;
   height: 200px;
-  /* border: 3px solid green; */
 
   display: flex;
   flex-direction: column;

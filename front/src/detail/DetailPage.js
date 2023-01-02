@@ -13,7 +13,7 @@ import { QuestionsSub } from '../home/QuestionsSub';
 export default function DetailPage() {
   const [questionData, setQuestionData] = useState();
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     async function request() {
@@ -46,24 +46,18 @@ export default function DetailPage() {
 
 const DetailContainer = styled.div`
   width: 900px;
-  /* border: 1px solid blue; */
 `;
 
 const ContentsAndSideBox = styled.div`
-  /* border: 3px solid aliceblue; */
   display: flex;
   justify-content: space-between;
 `;
 
 const ContentsContainer = styled.div`
   width: 780px;
-  /* height: 700px;
-  border: 3px solid yellowgreen; */
 `;
 
 const SideBox = styled.div`
   width: 320px;
-  /* height: 700px; */
   margin: 24px;
-  /* border: 3px solid sandybrown; */
 `;

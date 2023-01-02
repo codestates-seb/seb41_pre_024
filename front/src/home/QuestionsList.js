@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { IoIosHelpCircle } from "react-icons/io";
 import { ImUser } from "react-icons/im";
-import { formatDistanceToNow, format } from 'date-fns'
+import { formatDistanceToNow} from 'date-fns'
 
 const List = styled.div`
   margin-left: -24px;
@@ -102,7 +102,6 @@ const List = styled.div`
 
 export const QuestionsList = ({el}) => {
 const time = formatDistanceToNow( new Date(el.createdAt));
-
   return (
     <>
       <List>
@@ -132,7 +131,7 @@ const time = formatDistanceToNow( new Date(el.createdAt));
             <span>
               <IoIosHelpCircle size={"20px"} />
             </span>
-            <a href="#" alt="#">{el.title}</a>
+            <a href={`/questions/${el.questionId}`} alt="#">{el.title}</a>
           </div>
           <div className="content">
             <p>{el.content}</p>

@@ -11,6 +11,9 @@ import { Route, Routes, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import UserPage from './user/UserPage';
 import EditAnswerPage from './detail/EditAnswerPage';
+import BookmarkPage from './detail/BookmarkPage';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const Common = styled.div`
   flex:1;
@@ -66,29 +69,33 @@ const OverlapSs = () => {
 
 function App() {
   return (
-    <div id="app">
-      <Header />
-      <main id="main">
-        <Routes>
-          <Route element={<OverlapHssf />}>
-            {/* <Route path="/" element={<Question />} /> */}
-            <Route path="/" element={<DetailPage />} />
-            <Route
-              path="/posts/:id/edit/:answer_id"
-              element={<EditAnswerPage />}
-            />
-            <Route path="/user" element={<UserPage />} />
-          </Route>
-          <Route element={<OverlapHsf />}>
-            <Route path="/ask" element={<QuestionsCrate />} />
-          </Route>
-          <Route element={<OverlapSs />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-          </Route>
-        </Routes>
-      </main>
-    </div>
+    <Provider store={store}>
+      <div id="app">
+        <Header />
+        <main id="main">
+          <Routes>
+            <Route element={<OverlapHssf />}>
+              <Route path="/" element={<Question />} />
+              <Route path="/page/:pagenumber" element={<Question />} />
+              <Route path="/questions/:id" element={<DetailPage />} />
+              <Route
+                path="/posts/:id/edit/:answer_id"
+                element={<EditAnswerPage />}
+              />
+              <Route path="/bookmark" element={<BookmarkPage />} />
+              <Route path="/user" element={<UserPage />} />
+            </Route>
+            <Route element={<OverlapHsf />}>
+              <Route path="/ask" element={<QuestionsCrate />} />
+            </Route>
+            <Route element={<OverlapSs />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+            </Route>
+          </Routes>
+        </main>
+      </div>
+    </Provider>
   );
 }
 

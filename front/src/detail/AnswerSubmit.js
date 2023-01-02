@@ -9,8 +9,6 @@ export default function AnswerSubmit({ data }) {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  console.log('submit', data);
-
   const newAnswer = {
     answer_id: data.length + 1,
     answer_content: answer,

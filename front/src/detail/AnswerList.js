@@ -27,7 +27,6 @@ export default function AnswerList({ data }) {
       })
       .then((data) => {
         console.log(data);
-
         window.location.reload(); // 새로고침
       })
       .catch((err) => {
@@ -40,10 +39,7 @@ export default function AnswerList({ data }) {
       {data &&
         data.map((answer) => (
           <DetailContainer key={answer.answer_id}>
-            <AdditionalFunction
-              likes={answer.answer_recommend}
-              checked={answer.answer_choose}
-            />
+            <AdditionalFunction answer={answer} />
             <DetailBody>
               <DetailText>{answer.answer_content}</DetailText>
               <DetailFooter>
@@ -89,16 +85,13 @@ const DetailContainer = styled.div`
   display: flex;
   justify-content: space-between;
   color: #3b4044;
-  /* border: 3px solid gold; */
 `;
 
 const DetailBody = styled.div`
   flex: 1;
-  /* border: 3px solid gray; */
 `;
 
 const DetailText = styled.div`
-  /* border: 3px solid gray; */
   padding: 10px 0;
   line-height: 24px;
 `;
@@ -106,13 +99,11 @@ const DetailText = styled.div`
 const DetailFooter = styled.div`
   display: flex;
   justify-content: space-between;
-  /* border: 3px solid gray; */
+
   padding: 20px 0;
 `;
 
 const Menu = styled.div`
-  /* border: 3px solid gray; */
-
   .menu {
     border: none;
     margin-right: 20px;

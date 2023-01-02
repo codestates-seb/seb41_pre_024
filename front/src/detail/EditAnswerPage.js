@@ -40,17 +40,6 @@ export default function EditAnswerPage() {
     request();
   }, []);
 
-  // // answer 데이터 id 순으로 정렬
-  // const sortedAnswerData = data.answers.sort(function (a, b) {
-  //   if (a.answer_id > b.answer_id) {
-  //     return 1;
-  //   }
-  //   if (a.answer_id < b.answer_id) {
-  //     return -1;
-  //   }
-  //   return 0;
-  // });
-
   const handleEditSubmit = (e, answer_id) => {
     const editedAnswerList = answerData.filter(
       (el) => el.answer_id !== Number(answer_id)
@@ -136,7 +125,6 @@ export default function EditAnswerPage() {
 }
 
 const ContentsAndSideBox = styled.div`
-  /* border: 3px solid aliceblue; */
   width: 900px;
   display: flex;
   justify-content: space-between;
@@ -144,8 +132,6 @@ const ContentsAndSideBox = styled.div`
 
 const ContentsContainer = styled.div`
   width: 780px;
-  /* height: 700px;
-  border: 3px solid yellowgreen; */
 `;
 
 const AnswerFormHeader = styled.div`
@@ -195,8 +181,5 @@ const SubmitBtn = styled.button`
 
 const SideBox = styled.div`
   width: 320px;
-  /* height: 700px; */
   margin: 24px;
-  /* border: 3px solid sandybrown; */
-  /* background-color: #fbf3d5; */
 `;

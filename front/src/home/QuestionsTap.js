@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { QuestionsList } from "./QuestionsList";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ImAppleinc } from "react-icons/im";
 
 const Tap = styled.div`
   display: flex;
@@ -59,18 +61,25 @@ const Pagecount = styled.div`
 `;
 
 export const QuestionsTap = () => {
+  
+
   const [countList, setCountlist] = useState(15);
   const [currentPage, setCurrentpage] = useState(1);
   const [listData, setListdata] = useState([]);
   const page = [];
 
+
   useEffect(() => {
+    // axios
+    //   .get(
+    //     `http://localhost:8080/api/questions?page=${currentPage}&size=${countList}`
+    //   )
+    //   .then((res) => setListdata(res.data));
+
     axios
-      .get(
-        `http://localhost:8080/api/questions?page=${currentPage}&size=${countList}`
-      )
-      .then((res) => setListdata(res.data));
-  }, [currentPage, countList]);
+      .get("http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/questions?page=1&size=10")
+      .then((res) => console.log(res));
+  }, []);
 
   for (
     let i = 1;
