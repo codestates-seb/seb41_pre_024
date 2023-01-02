@@ -33,7 +33,9 @@ export default function Question({ isMyQuestion, data }) {
                 )}
               </Menu>
               <Author>
-                <div className="createdAt">asked {data.createdAt}</div>
+                <div className="createdAt">
+                  asked {data.createdAt.slice(0, 10)}
+                </div>
                 <div className="user">
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/userIcon.png`}

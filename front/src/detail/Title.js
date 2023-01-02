@@ -9,7 +9,7 @@ export default function Title({ data }) {
         <TitleText>{data.title}</TitleText>
         <QuestionInfo>
           <span className="infoTitle">
-            Asked<span className="infoText">{data.createdAt}</span>
+            Asked<span className="infoText">{data.createdAt.slice(0, 10)}</span>
           </span>
           <span className="infoTitle">
             Modified<span className="infoText">4 days ago</span>

@@ -11,13 +11,8 @@ export default function AnswerSubmit({ data }) {
   const { questionId } = useParams();
 
   const newAnswer = {
-    answerId: data.length + 1,
+    title: answer,
     content: answer,
-    recommend: 0,
-    createdAt: new Date().toLocaleDateString('ko-KR'),
-    choose: false,
-    member_id: 'Pika', // 로그인한 user_id 필요
-    questionId: questionId,
   };
 
   const handleSubmit = (e) => {
@@ -26,10 +21,14 @@ export default function AnswerSubmit({ data }) {
     const regExp = /^.{4,1000}$/;
     if (regExp.test(answer)) {
       async function request() {
-        await axios.patch(
-          `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
-          // `/api/questions/${questionId}`,
-          { answers: [...data, newAnswer] }
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/questions/${questionId}/answers`,
+          newAnswer,
+          {
+            headers: {
+              Authorization: localStorage.access_token,
+            },
+          }
         );
         window.location.reload();
       }

@@ -24,10 +24,9 @@ export default function DetailPage() {
   useEffect(() => {
     async function request() {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/questions/${questionId}`
-        // `/api/questions/${questionId}`
+        `${process.env.REACT_APP_API_URL}/api/questions/${questionId}`
       );
-      const { data } = response;
+      const { data } = response.data;
       console.log(data);
       setQuestionData(data);
     }
