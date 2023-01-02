@@ -32,11 +32,11 @@ const Container = styled.ol`
 `;
 
 const SideNavbar = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     checkLogin();
-  }, []);
+  }, [isLogin]);
 
   // localStorage 에 토큰 저장되어있으면, 로그인 상태 변경
   const checkLogin = () => {

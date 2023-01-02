@@ -10,14 +10,11 @@ import Footer from "./Footer";
 import { Route, Routes, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import UserPage from "./user/UserPage";
-<<<<<<< HEAD
-=======
+import { useEffect, useState } from "react";
 import EditAnswerPage from "./detail/EditAnswerPage";
 import BookmarkPage from "./detail/BookmarkPage";
 import { Provider } from "react-redux";
 import store from "./store";
-import { useEffect, useState } from "react";
->>>>>>> 155de8aa4022e3b29717ab7d25484a85e5d4c6cc
 
 const Common = styled.div`
   display: flex;
@@ -70,11 +67,10 @@ const OverlapSs = () => {
 
 function App() {
   // 원래 초기 상태는 false
-  const [isLogin, setIsLogin] = useState(true);
-
+  const [isLogin, setIsLogin] = useState(false);
   useEffect(() => {
     checkLogin();
-  }, []);
+  }, [isLogin]);
 
   // localStorage 에 토큰 저장되어있으면, 로그인 상태 변경
   const checkLogin = () => {

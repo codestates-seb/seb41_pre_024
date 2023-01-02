@@ -3,11 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import { FaFacebookSquare } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import { useRef, useState } from "react";
-=======
 import { useState } from "react";
->>>>>>> 155de8aa4022e3b29717ab7d25484a85e5d4c6cc
 import SignupInfo from "./SignupInfo";
 import axios from "axios";
 
@@ -122,18 +118,10 @@ const SignupPage = () => {
   const [passwordErr, setPasswordErr] = useState(false);
 
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const nextId = useRef(3);
-
-  const onChangeName = (e) => {
-    setNameValue(e.target.value);
-    const nameRegex = /^[a-zA-Z가-헿0-9]{3,}$/;
-=======
 
   const onChangeName = (e) => {
     setNameValue(e.target.value);
     const nameRegex = /^[a-zA-Z가-힣0-9]{3,}$/;
->>>>>>> 155de8aa4022e3b29717ab7d25484a85e5d4c6cc
     if (!nameValue || !nameRegex.test(nameValue)) {
       setNameErr(true);
       return false;
@@ -169,11 +157,7 @@ const SignupPage = () => {
 
   function checkValidation() {
     if (!nameErr && !emailErr && !passwordErr) {
-<<<<<<< HEAD
-      console.log("ok");
-=======
       console.log("Go to login!");
->>>>>>> 155de8aa4022e3b29717ab7d25484a85e5d4c6cc
       return true;
     }
     return false;
@@ -183,34 +167,6 @@ const SignupPage = () => {
     e.preventDefault();
     if (checkValidation()) {
       signup();
-<<<<<<< HEAD
-      navigate("/");
-    }
-  };
-
-  const signup = async () => {
-    nextId.current++;
-    let body = {
-      id: nextId.current,
-      userId: nextId.current,
-      userName: nameValue,
-      userEmail: emailValue,
-      userPassword: passwordValue,
-    };
-
-    await axios
-      .post("http://localhost:8080/user", body, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-  };
-
-  const onClick = () => {
-    setNameValue("");
-    setEmailValue("");
-    setPasswordValue("");
-=======
       alert("회원가입이 완료되었습니다.");
       navigate("/login");
     }
@@ -222,17 +178,21 @@ const SignupPage = () => {
       email: emailValue,
       password: passwordValue,
     };
+    console.log(body);
     axios
-      .post(`http://localhost:8080/api/members`, body, {
-        headers: { "Content-Type": "application/json" },
-      })
+      .post(
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/members`,
+        body,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => {
         console.error("Error :", err);
       });
->>>>>>> 155de8aa4022e3b29717ab7d25484a85e5d4c6cc
   };
 
   return (
@@ -259,15 +219,9 @@ const SignupPage = () => {
             <div>
               <label>Display Name</label>
               <input type="text" value={nameValue} onChange={onChangeName} />
-<<<<<<< HEAD
-              {nameErr ? (
-                <p className="err">특수문자 없이 3자 이상 입력해주세요.</p>
-              ) : null}
-=======
               {nameErr && (
                 <p className="err">특수문자 없이 3자 이상 입력해주세요.</p>
               )}
->>>>>>> 155de8aa4022e3b29717ab7d25484a85e5d4c6cc
             </div>
             <div>
               <label>Email</label>
@@ -283,15 +237,11 @@ const SignupPage = () => {
               />
               {passwordErr && (
                 <p className="err">
-                  영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.
+                  영문 대, 소문자, 숫자, 특수문자 포함 8자 이상 입력해주세요.
                 </p>
               )}
             </div>
-<<<<<<< HEAD
-            <button onClick={onClick}>Sign up</button>
-=======
             <button type="submit">Sign up</button>
->>>>>>> 155de8aa4022e3b29717ab7d25484a85e5d4c6cc
           </SignupContainer>
 
           <Script>
