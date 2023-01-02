@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { FcGoogle } from "react-icons/fc";
-import { BsGithub } from "react-icons/bs";
-import { FaFacebookSquare } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
+import styled from 'styled-components';
+import { FcGoogle } from 'react-icons/fc';
+import { BsGithub } from 'react-icons/bs';
+import { FaFacebookSquare } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
 
 const Main = styled.div`
   background-color: #f1f2f3;
@@ -111,8 +111,8 @@ const LoginPage = () => {
   // 서버는 refresh token 유효성 체크하고, 새로는 access token 발급
   // 클라이언트는 새롭게 받은 access token 을 기존의 access token 에 덮어씀
 
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
 
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
@@ -161,10 +161,10 @@ const LoginPage = () => {
     e.preventDefault();
 
     if (validation()) {
-      console.log("로그인 성공");
+      console.log('로그인 성공');
       onLogin();
       // 로그인 성공 후 홈 화면으로 이동
-      navigate("/");
+      navigate('/');
     }
   };
 
@@ -173,27 +173,25 @@ const LoginPage = () => {
       email: emailValue,
       password: passwordValue,
     };
-    console.log("body: ", body);
+    console.log('body: ', body);
     axios
-      .post("http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/login", body, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/login`,
+        body,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
       .then((res) => {
-  
+        console.log(res);
+        const { email, name, memberId } = res.data;
         const accessToken = res.headers.authorization;
-        // 이메일, 이름, 유저아이디, 토큰 localStorage에 저장 (쿠키에 저장하자 ,,,)
-        const { email, name, memberId, refreshToken} = res.data;
-        // 바디에 이메일 + 패스워드 보내고
-        // 백엔드 리스폰스로 토큰이이랑 개인정보들이 오고
-        console.log(accessToken)
-        
-        localStorage.setItem("access_token", accessToken);
-        localStorage.setItem("refresh_token", refreshToken);
-        localStorage.setItem("user_name", name);
-        localStorage.setItem("user_email", email);
-        localStorage.setItem("user_id", memberId)
+        localStorage.setItem('access_token', accessToken);
+        localStorage.setItem('user_name', name);
+        localStorage.setItem('user_email', email);
+        localStorage.setItem('user_id', memberId);
       })
       .catch((err) => {
         console.log(err);

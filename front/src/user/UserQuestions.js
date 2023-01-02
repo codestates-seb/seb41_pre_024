@@ -1,8 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import { useUser } from "../hooks/useUser";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useUser } from '../hooks/useUser';
 
 const Container = styled.div`
   display: flex;
@@ -31,39 +30,49 @@ const TextContainer = styled.div`
 `;
 
 const Questions = () => {
-  const { userInfo } = useUser(localStorage.getItem("access_token"));
+  const { userInfo } = useUser(localStorage.getItem('access_token'));
   console.log(userInfo);
 
   // localStorage 에 있는 유저 아이디 조회해서
-  const memberId = localStorage.getItem("user_id");
+  const memberId = localStorage.getItem('user_id');
 
   const [questions, setQuestions] = useState([]);
 
-  // 유저가 작성한 질문 리스트 조회 요청
+  // // 유저가 작성한 질문 리스트 조회 요청
   useEffect(() => {
+    const token = localStorage.getItem('access_token');
+
     axios
-      .get(`http://localhost:8080/api/members/questions/${memberId}`)
+      .get(
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/members/questions/${memberId}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        }
+      )
       .then((res) => {
-        console.log(res);
-        setQuestions(res.data ?? []);
-        console.log(questions);
+        console.log('res :', res.data);
+        setQuestions(res.data);
+        console.log('questions :', questions);
       })
       .catch((err) => console.log(err));
   }, []);
 
   const question = [
-    { title: "예시 질문입니다", name: "누구일까요" },
-    { title: "연습용 예시 질문입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 질문입니다", name: "누구신지" },
-    { title: "어떻게 하는 건가요", name: "누구신지" },
-    { title: "예시 질문입니다", name: "누구일까요" },
-    { title: "연습용 예시 질문입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 질문입니다", name: "누구신지" },
-    { title: "어떻게 하는 건가요", name: "누구신지" },
-    { title: "예시 질문입니다", name: "누구일까요" },
-    { title: "연습용 예시 질문입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 질문입니다", name: "누구신지" },
-    { title: "어떻게 하는 건가요", name: "누구신지" },
+    { title: '예시 질문입니다', name: '누구일까요' },
+    { title: '연습용 예시 질문입니다', name: '누구세요' },
+    { title: '아무렇게나 작성한 질문입니다', name: '누구신지' },
+    { title: '어떻게 하는 건가요', name: '누구신지' },
+    { title: '예시 질문입니다', name: '누구일까요' },
+    { title: '연습용 예시 질문입니다', name: '누구세요' },
+    { title: '아무렇게나 작성한 질문입니다', name: '누구신지' },
+    { title: '어떻게 하는 건가요', name: '누구신지' },
+    { title: '예시 질문입니다', name: '누구일까요' },
+    { title: '연습용 예시 질문입니다', name: '누구세요' },
+    { title: '아무렇게나 작성한 질문입니다', name: '누구신지' },
+    { title: '어떻게 하는 건가요', name: '누구신지' },
   ];
 
   // questions = [
@@ -108,13 +117,13 @@ const Questions = () => {
 
   return (
     <Container>
-      <h1>{question.length} Questions</h1>
+      <h1>{questions.length} Questions</h1>
       <TextContainer>
         <div className="head">
-          {question.map((title, index) => {
+          {questions.map((question, index) => {
             return (
               <div className="body" key={index}>
-                <p>{title.title}</p>
+                <p>{question.title}</p>
               </div>
             );
           })}

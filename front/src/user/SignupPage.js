@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { FcGoogle } from "react-icons/fc";
-import { BsGithub } from "react-icons/bs";
-import { FaFacebookSquare } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import SignupInfo from "./SignupInfo";
-import axios from "axios";
+import styled from 'styled-components';
+import { FcGoogle } from 'react-icons/fc';
+import { BsGithub } from 'react-icons/bs';
+import { FaFacebookSquare } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import SignupInfo from './SignupInfo';
+import axios from 'axios';
 
 const Main = styled.div`
   background-color: #f1f2f3;
@@ -109,9 +109,9 @@ const Script = styled.div`
 `;
 
 const SignupPage = () => {
-  const [nameValue, setNameValue] = useState("");
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const [nameValue, setNameValue] = useState('');
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
 
   const [nameErr, setNameErr] = useState(false);
   const [emailErr, setEmailErr] = useState(false);
@@ -157,7 +157,7 @@ const SignupPage = () => {
 
   function checkValidation() {
     if (!nameErr && !emailErr && !passwordErr) {
-      console.log("Go to login!");
+      console.log('Go to login!');
       return true;
     }
     return false;
@@ -167,8 +167,8 @@ const SignupPage = () => {
     e.preventDefault();
     if (checkValidation()) {
       signup();
-      alert("회원가입이 완료되었습니다.");
-      navigate("/login");
+      alert('회원가입이 완료되었습니다.');
+      navigate('/login');
     }
   };
 
@@ -178,19 +178,20 @@ const SignupPage = () => {
       email: emailValue,
       password: passwordValue,
     };
-
+    console.log(body);
     axios
-      .post(`http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/members`,
-       body, 
-       {
-         headers: { "Content-Type": "application/json" },
+      .post(
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/members`,
+        body,
+        {
+          headers: { 'Content-Type': 'application/json' },
         }
-        )
+      )
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => {
-        console.error("Error :", err);
+        console.error('Error :', err);
       });
   };
 
@@ -237,7 +238,7 @@ const SignupPage = () => {
               />
               {passwordErr && (
                 <p className="err">
-                  영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.
+                  영문 대, 소문자, 숫자, 특수문자 포함 8자 이상 입력해주세요.
                 </p>
               )}
             </div>
