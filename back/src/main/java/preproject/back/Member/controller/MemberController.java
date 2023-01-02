@@ -46,10 +46,10 @@ public class MemberController {
     @PatchMapping("/{member_id}")
     public ResponseEntity patchMember(@PathVariable("member_id") @Positive long memberId,
                                       @Valid @RequestBody MemberPatchDto memberPatchDto){
-//        Member response = memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
-//        return new ResponseEntity<>(mapper.memberToMemberResponseDto(response), HttpStatus.OK);
-        MemberResponseDto stubMember = new MemberResponseDto(1L,"kim@gmail.com","김수정");
-        return new ResponseEntity<>(stubMember, HttpStatus.OK);
+        memberPatchDto.setMemberId(memberId);
+        Member member = mapper.memberPatchDtoToMember(memberPatchDto);
+        Member response = memberService.updateMember(member);
+        return new ResponseEntity<>(mapper.memberToMemberResponseDto(response), HttpStatus.OK);
     }
 
     //회원정보 보기

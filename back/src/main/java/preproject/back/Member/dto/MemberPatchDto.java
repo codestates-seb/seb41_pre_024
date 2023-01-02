@@ -17,4 +17,7 @@ public class MemberPatchDto {
             message = "비밀번호는 대, 소문자와 숫자, 특수문자가 최소 1개 이상 포함된 8자 ~ 20자의 비밀번호여야 합니다.")
     private String password;
 
+    public void setMemberId(long memberId) {
+        this.memberId = memberId;
+    }
 }
