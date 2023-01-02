@@ -22,7 +22,7 @@ export default function AnswerSubmit({ data }) {
     if (regExp.test(answer)) {
       async function request() {
         await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/questions/${questionId}/answers`,
+          `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/questions/${questionId}/answers`,
           newAnswer,
           {
             headers: {

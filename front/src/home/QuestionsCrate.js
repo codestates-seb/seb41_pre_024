@@ -3,7 +3,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const Layout = styled.div`
   .title {
     background: url(https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368)

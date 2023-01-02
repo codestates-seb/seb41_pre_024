@@ -21,7 +21,7 @@ export default function AnswerList({ isMyQuestion, data }) {
 
     async function request() {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/answers/${answerId}`,
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/answers/${answerId}`,
         {
           headers: {
             Authorization: localStorage.access_token,
@@ -36,7 +36,7 @@ export default function AnswerList({ isMyQuestion, data }) {
   const handleAdopt = ({ answerId }) => {
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adoptStatus=yes`,
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/answers/adoption/${answerId}?adoptStatus=yes`,
         {
           headers: {
             Authorization: localStorage.access_token,
