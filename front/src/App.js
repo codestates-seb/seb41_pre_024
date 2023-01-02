@@ -10,12 +10,19 @@ import Footer from "./Footer";
 import { Route, Routes, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import UserPage from "./user/UserPage";
+<<<<<<< HEAD
+=======
+import EditAnswerPage from "./detail/EditAnswerPage";
+import BookmarkPage from "./detail/BookmarkPage";
+import { Provider } from "react-redux";
+import store from "./store";
+import { useEffect, useState } from "react";
+>>>>>>> 155de8aa4022e3b29717ab7d25484a85e5d4c6cc
 
 const Common = styled.div`
   display: flex;
   width: 1264px;
   margin: 0 auto;
-
   & > div {
     flex: 1;
     padding: 24px;
@@ -62,26 +69,49 @@ const OverlapSs = () => {
 };
 
 function App() {
+  // 원래 초기 상태는 false
+  const [isLogin, setIsLogin] = useState(true);
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  // localStorage 에 토큰 저장되어있으면, 로그인 상태 변경
+  const checkLogin = () => {
+    if (localStorage.getItem("access_token")) {
+      setIsLogin(true);
+      return;
+    }
+    setIsLogin(false);
+  };
+
   return (
-    <div id="app">
-      <Header />
-      <main id="main">
-        <Routes>
-          <Route element={<OverlapHssf />}>
-            <Route path="/" element={<Question />} />
-            <Route path="/questions/:id" element={<DetailPage />} />
-            <Route path="/user" element={<UserPage />} />
-          </Route>
-          <Route element={<OverlapHsf />}>
-            <Route path="/ask" element={<QuestionsCrate />} />
-          </Route>
-          <Route element={<OverlapSs />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-          </Route>
-        </Routes>
-      </main>
-    </div>
+    <Provider store={store}>
+      <div id="app">
+        <Header isLogin={isLogin} setIsLogin={setIsLogin} />
+        <main id="main">
+          <Routes>
+            <Route element={<OverlapHssf />}>
+              <Route path="/" element={<Question />} />
+              <Route path="/questions/:questionId" element={<DetailPage />} />
+              <Route
+                path="/posts/:questionId/edit/:answerId"
+                element={<EditAnswerPage />}
+              />
+              <Route path="/bookmark" element={<BookmarkPage />} />
+              <Route path="/user" element={<UserPage />} />
+            </Route>
+            <Route element={<OverlapHsf />}>
+              <Route path="/ask" element={<QuestionsCrate />} />
+            </Route>
+            <Route element={<OverlapSs />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+            </Route>
+          </Routes>
+        </main>
+      </div>
+    </Provider>
   );
 }
 

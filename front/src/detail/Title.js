@@ -6,10 +6,10 @@ export default function Title({ data }) {
   return (
     <TitieContainer>
       <TitleAndInfo>
-        <TitleText>{data.question_title}</TitleText>
+        <TitleText>{data.title}</TitleText>
         <QuestionInfo>
           <span className="infoTitle">
-            Asked<span className="infoText">{data.question_time}</span>
+            Asked<span className="infoText">{data.createdAt}</span>
           </span>
           <span className="infoTitle">
             Modified<span className="infoText">4 days ago</span>
@@ -19,7 +19,7 @@ export default function Title({ data }) {
           </span>
         </QuestionInfo>
       </TitleAndInfo>
-      <Link to="/questions/ask">
+      <Link to="/ask">
         <AskQuestionBtn>Ask Question</AskQuestionBtn>
       </Link>
     </TitieContainer>
@@ -29,6 +29,7 @@ export default function Title({ data }) {
 const TitieContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 10px 0;
 `;
 
 const TitleAndInfo = styled.div`
@@ -46,7 +47,7 @@ const QuestionInfo = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 13px;
-  margin-top: 8px;
+  margin: 8px 0;
 
   .infoTitle {
     color: #6a737c;

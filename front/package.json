@@ -7,6 +7,10 @@
     "add": "^2.0.6",
     "axios": "^1.2.1",
     "global": "^4.4.0",
+<<<<<<< HEAD
+=======
+    "http-proxy-middleware": "^2.0.6",
+>>>>>>> 155de8aa4022e3b29717ab7d25484a85e5d4c6cc
     "json-server": "^0.17.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -50,4 +54,5 @@
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0"
   }
+
 }
