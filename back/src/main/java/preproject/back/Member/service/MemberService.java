@@ -46,18 +46,13 @@ public class MemberService {
     /*회원이 존재하는지 확인후 회원정보 수정*/
     public Member updateMember(Member member){
 
-//        Member findMember = findVerifiedMember(member.getMemberId());
-//
-//        Optional.ofNullable(member.getName())
-//                .ifPresent(name -> findMember.setName(name));
-//        Optional.ofNullable(member.getPassword())
-//                .ifPresent(password -> findMember.setPassword(password));
-//        return memberRepository.save(findMember);
+        Member findMember = findVerifiedMember(member.getMemberId());
+
         Optional.ofNullable(member.getName())
-                .ifPresent(name -> member.setName(name));
+                .ifPresent(name -> findMember.setName(name));
         Optional.ofNullable(member.getPassword())
-                .ifPresent(password -> member.setPassword(password));
-        return memberRepository.save(member);
+                .ifPresent(password -> findMember.setPassword(password));
+        return memberRepository.save(findMember);
     }
     /*회원정보 가져오기*/
     public Member findMember(long memberId){
@@ -77,12 +72,10 @@ public class MemberService {
         return null;
     }
     /*회원이 존재하는 체크하는 로직*/
-    public Member findVerifiedMember(long memberId) {
-        Optional<Member> optionalMember =
-                memberRepository.findById(memberId);
-        Member findMember =
-                optionalMember.orElseThrow(() ->
-                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+    public Member findVerifiedMember(long memberId){
+        Optional<Member> optionalMember = memberRepository.findById(memberId);
+        Member findMember = optionalMember.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         return findMember;
     }
     /*email 중복체크 로직*/
@@ -91,10 +84,10 @@ public class MemberService {
         if (member.isPresent())
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
     }
-    public Member findMember(String email) {
-        Optional<Member> optionalMember = memberRepository.findByEmail(email);
-        Member findMember = optionalMember.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-        return findMember;
-    }
+//    public Member findMember(String email) {
+//        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+//        Member findMember = optionalMember.orElseThrow(() ->
+//                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+//        return findMember;
+//    }
 }
