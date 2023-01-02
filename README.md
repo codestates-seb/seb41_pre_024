@@ -4,7 +4,7 @@
 ##  🎄Link
 
 <b>Code States SEB41-024 pre-project: Stack Overflow </b><br>
-<b>배포링크:"http://preproject24.s3-website.ap-northeast-2.amazonaws.com"</b>
+<b>배포링크:"http://namu3710.s3-website.ap-northeast-2.amazonaws.com/"</b>
 <br>
   <br/><br/>
 ## 
