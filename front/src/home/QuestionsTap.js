@@ -3,8 +3,8 @@ import { QuestionsList } from "./QuestionsList";
 import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ImAppleinc } from "react-icons/im";
-import { useUser } from "../hooks/useUser";
+
+
 
 const Tap = styled.div`
   display: flex;

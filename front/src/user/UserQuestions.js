@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useUser } from '../hooks/useUser';
+// import {  } from '../hooks/useUser';
 
 const Container = styled.div`
   display: flex;
@@ -30,8 +30,8 @@ const TextContainer = styled.div`
 `;
 
 const Questions = () => {
-  const { userInfo } = useUser(localStorage.getItem('access_token'));
-  console.log(userInfo);
+  // const { userInfo } = useUser(localStorage.getItem('access_token'));
+  // console.log(userInfo);
 
   // localStorage 에 있는 유저 아이디 조회해서
   const memberId = localStorage.getItem('user_id');
