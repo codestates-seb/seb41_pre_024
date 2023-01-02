@@ -1,19 +1,20 @@
-import './App.css';
-import Header from './Header';
-import Navbar from './Navbar';
-import Question from './home/Questions';
-import LoginPage from './user/LoginPage';
-import DetailPage from './detail/DetailPage';
-import SignupPage from './user/SignupPage';
-import { QuestionsCrate } from './home/QuestionsCrate';
-import Footer from './Footer';
-import { Route, Routes, Outlet } from 'react-router-dom';
-import styled from 'styled-components';
-import UserPage from './user/UserPage';
-import EditAnswerPage from './detail/EditAnswerPage';
-import BookmarkPage from './detail/BookmarkPage';
-import { Provider } from 'react-redux';
-import store from './store';
+import "./App.css";
+import Header from "./Header";
+import Navbar from "./Navbar";
+import Question from "./home/Questions";
+import LoginPage from "./user/LoginPage";
+import DetailPage from "./detail/DetailPage";
+import SignupPage from "./user/SignupPage";
+import { QuestionsCrate } from "./home/QuestionsCrate";
+import Footer from "./Footer";
+import { Route, Routes, Outlet } from "react-router-dom";
+import styled from "styled-components";
+import UserPage from "./user/UserPage";
+import EditAnswerPage from "./detail/EditAnswerPage";
+import BookmarkPage from "./detail/BookmarkPage";
+import { Provider } from "react-redux";
+import store from "./store";
+import { useEffect, useState } from "react";
 
 const Common = styled.div`
   flex:1;
@@ -68,18 +69,33 @@ const OverlapSs = () => {
 };
 
 function App() {
+  // 원래 초기 상태는 false
+  const [isLogin, setIsLogin] = useState(true);
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  // localStorage 에 토큰 저장되어있으면, 로그인 상태 변경
+  const checkLogin = () => {
+    if (localStorage.getItem("access_token")) {
+      setIsLogin(true);
+      return;
+    }
+    setIsLogin(false);
+  };
+
   return (
     <Provider store={store}>
       <div id="app">
-        <Header />
+        <Header isLogin={isLogin} setIsLogin={setIsLogin} />
         <main id="main">
           <Routes>
             <Route element={<OverlapHssf />}>
               <Route path="/" element={<Question />} />
-              <Route path="/page/:pagenumber" element={<Question />} />
-              <Route path="/questions/:id" element={<DetailPage />} />
+              <Route path="/questions/:questionId" element={<DetailPage />} />
               <Route
-                path="/posts/:id/edit/:answer_id"
+                path="/posts/:questionId/edit/:answerId"
                 element={<EditAnswerPage />}
               />
               <Route path="/bookmark" element={<BookmarkPage />} />

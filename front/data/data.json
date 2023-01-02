@@ -2,54 +2,155 @@
 {
   "data": [
     {
+      "id": 1,
       "questionId": 1,
-      "title": "제목1",
-      "content": "내용",
-      "totalRecommend": 0,
-      "totalAnswers": 0,
-      "createdAt": "2022-12-27T17:45:04.346788",
-      "email": "test",
-      "answers": []
-    },
-    {
-      "questionId": 2,
-      "title": "제목2",
-      "content": "내용",
-      "totalRecommend": 2,
-      "totalAnswers": 2,
-      "createdAt": "2022-12-27T17:45:04.346788",
-      "email": "test2",
-      "answers": []
-    },
-    {
-      "questionId": 3,
-      "title": "제목3",
-      "content": "내용",
+      "title": "🌈 Suggestion for Automatically Match Data in MysQL",
+      "content": "🌟 I have limited access to the MySQL database, I just can see a view called customer contains customer_id, name, and their location",
+      "question_tag": [
+        "python",
+        "mysql",
+        "database",
+        "jupyter-notebook"
+      ],
       "totalRecommend": 3,
-      "totalAnswers": 3,
-      "createdAt": "2022-12-27T17:45:04.346788",
-      "email": "test3",
-      "answers": []
+      "createdAt": "Dec 12 at 6:48",
+      "member_id": "Arthur",
+      "answers": [
+        {
+          "answerId": 1,
+          "content": "🦄 This is a very stacked question with lots of steps needed to achieve what you want. So let's dive straight in! First, we should read the data frames from your (uncleaned) customer database and your location database",
+          "recommend": 1,
+          "createdAt": "Dec 15 at 12:06",
+          "choose": false,
+          "member_id": "Luke",
+          "questionId": 1
+        },
+        {
+          "answerId": 2,
+          "content": "🔥 I don't know if I understood correctly here.. [...] I mean if in the raw data there is punctuation or number or typo, it will automatically clean [...] You need some sort of validation method here, you cannot achieve that directly on the database, you need to handle it in your logic before the rows insertion. In these cases, the best solution is to prepare a picklist (multiple choice) from which end users can choose the right values. A free text input will always be error prone.If the multiple choiceis not an applicable solution in your case, then you need to put in place a list of validation rules but you need to think how to prevent every possible issue.",
+          "recommend": 4,
+          "createdAt": "Dec 15 at 12:06",
+          "choose": false,
+          "member_id": "Denis B.",
+          "questionId": 1
+        }
+      ]
     },
     {
-      "questionId": 4,
-      "title": "제목4",
-      "content": "내용",
-      "totalRecommend": 4,
-      "totalAnswers": 4,
-      "createdAt": "2022-12-27T17:45:04.346788",
-      "email": "test4",
-      "answers": []
+      "id": 2,
+      "questionId": 2,
+      "title": "🌿 How to make one Translate button work for translating all the inputs",
+      "content": "✅ I am trying to translate all inputs with their respective translated language outputs. When I click the Translate Button it works but not for the respective languages, the output language gets altered. Each output language from the Selection should be fixed, for Spanish Output, the second selection should be fixed with Spanish, for Dutch Output, the second selection should be fixed with Dutch, and so on. (Each time no bother to select) Second selection for each is the output language which should be fixed for each in the HTML <option> tag",
+      "question_tag": [
+        "javascript",
+        "html",
+        "button"
+      ],
+      "totalRecommend": 6,
+      "createdAt": "Dec 13 at 9:21",
+      "member_id": "Neha Soni",
+      "answers": [
+        {
+          "answerId": 1,
+          "content": "🌈 In TypeScript, you can use the process.env object to access environment variables. However, if you want to make certain variables required for your CDK app, you can use the cdk.App class's node.applyAspect method to apply an aspect to your CDK app that checks for the required environment variables at runtime. Here's an example of how you could use the cdk.App class's node.applyAspect method to apply an aspect that checks for required environment variables:",
+          "recommend": 3,
+          "createdAt": "Dec 18 at 10:21",
+          "choose": false,
+          "member_id": "jrn6270",
+          "questionId": 2
+        },
+        {
+          "answerId": 2,
+          "content": "🐥 This aspect will be applied to every node in the CDK app, so it will check for the required environment variables whenever the app is deployed. If any of the required environment variables are missing, the aspect will throw an error and the deployment will fail.",
+          "recommend": 1,
+          "createdAt": "Dec 15 at 11:02",
+          "choose": true,
+          "member_id": "Marian Bazalik",
+          "questionId": 2
+        },
+        {
+          "answerId": 3,
+          "content": "🚀 The approach I would take is to first decimate the curve using something like Ramer–Douglas–Peucker or Visvalingam–Whyatt. Apply this until you get a few points. You might need to do some adaptation to make these work for closed polylines.",
+          "recommend": 1,
+          "createdAt": "Dec 17 at 8:52",
+          "choose": false,
+          "member_id": "JonasH",
+          "questionId": 2
+        }
+      ]
     },
     {
-      "questionId": 5,
-      "title": "제목5",
-      "content": "내용",
-      "totalRecommend": 5,
-      "totalAnswers": 5,
-      "createdAt": "2022-12-27T17:45:04.346788",
-      "email": "test5",
-      "answers": []
+      "id": 3,
+      "title": "Saving the Antd DatePicker value to the DB by a key",
+      "content": "Antd DatePicker documentation has code examples for onOk, onChange callbacks, and those callbacks essentially just print the value that had been selected by the user. What if in the callback i need to pass some other information besides the value, how can this be achieved? to be specific, i have a Table, with DatePicker element on every row, like in the screen below Table with DatePicker on every row",
+      "question_tag": [
+        "reactjs",
+        "callback",
+        "database"
+      ],
+      "recommend": 2,
+      "createdAt": "Dec 10 at 12:48",
+      "member_id": "roykeane",
+      "answers": [
+        {
+          "answerId": 1,
+          "content": "Have you tried creating a configuration class to create your repository map",
+          "recommend": 0,
+          "createAt": "Dec 19 at 12:06",
+          "choose": false,
+          "member_id": "Dugfsk",
+          "questionId": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "id": 0,
+      "userName": "이쁜이",
+      "userEmail": "keonho@naver.com",
+      "userPassword": "prettygirl97@"
+    },
+    {
+      "id": 1,
+      "userName": "김영희",
+      "userEmail": "keonho@naver.com",
+      "userPassword": "rlarjsgh96@"
+    },
+    {
+      "id": 2,
+      "userName": "김건호",
+      "userEmail": "keonho@naver.com",
+      "userPassword": "rlarjsgh96@"
+    },
+    {
+      "id": 3,
+      "userName": "김재택",
+      "userEmail": "김재택@naver.com",
+      "userPassword": "rlarjsgh96@"
+    },
+    {
+      "userName": "김아무개",
+      "userEmail": "kimamugae@naver.com",
+      "userPassword": "dkanro97@",
+      "id": 4
+    },
+    {
+      "userName": "이혜정",
+      "userEmail": "dlgPwjd@naver.com",
+      "userPassword": "gPwjd98@2",
+      "id": 5
+    },
+    {
+      "userName": "졸리다요",
+      "userEmail": "whfflekdy@gmail.com",
+      "userPassword": "whfflekdy99#3",
+      "id": 6
+    },
+    {
+      "email": "cowguswjd@naver.com",
+      "password": "rlaguswjd97@",
+      "id": 7
     }
   ]
   }

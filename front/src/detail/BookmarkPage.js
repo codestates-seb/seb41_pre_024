@@ -18,14 +18,16 @@ export const BookmarkItem = ({ question, answer }) => {
   return (
     <DetailBody>
       <DetailText>
-        {question && question.question_content}
-        {answer && answer.answer_content}
+        {question && question.content}
+        {answer && answer.content}
+
       </DetailText>
       <DetailFooter>
         <Author>
           <div className="createdAt">
-            asked {question && question.question_time}
-            {answer && answer.answer_time}
+            asked {question && question.createdAt}
+            {answer && answer.createdAt}
+
           </div>
           <div className="user">
             <div className="userInfoText">
@@ -61,11 +63,11 @@ export default function BookmarkPage() {
         <ContentsContainer>
           <Header>Question Bookmark 📚</Header>
           {question_bookmarks.map((question) => (
-            <BookmarkItem question={question} />
+            <BookmarkItem key={question.questionId} question={question} />
           ))}
           <Header>Answer Bookmark 📚</Header>
           {answer_bookmarks.map((answer) => (
-            <BookmarkItem answer={answer} />
+            <BookmarkItem key={answer.answerId} answer={answer} />
           ))}
         </ContentsContainer>
         <SideBox>

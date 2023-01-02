@@ -102,6 +102,7 @@ const List = styled.div`
 
 export const QuestionsList = ({el}) => {
 const time = formatDistanceToNow( new Date(el.createdAt));
+
   return (
     <>
       <List>

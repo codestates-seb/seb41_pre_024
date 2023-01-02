@@ -1,34 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Question from './Question';
 import AnswerList from './AnswerList';
 import AnswerSubmit from './AnswerSubmit';
 
-// axios!
-
 export default function Contents({ data }) {
+  const [isLogin, setIsLogin] = useState(false);
+  const [isMyQuestion, setIsMyQuestion] = useState(false);
+
+  useEffect(() => {
+    // 로그인 상태인지
+    if (localStorage.access_token) {
+      setIsLogin(true);
+    }
+
+    // 내가 쓴 질문인지
+    if (data.member_id === localStorage.email) {
+      setIsMyQuestion(true);
+    }
+  }, []);
+
   // answer 데이터 id 순으로 정렬
   const sortedAnswerData = data.answers.sort(function (a, b) {
-    if (a.answer_id > b.answer_id) {
+    if (a.answerId > b.answerId) {
       return 1;
     }
-    if (a.answer_id < b.answer_id) {
+    if (a.answerId < b.answerId) {
       return -1;
     }
     return 0;
   });
 
-  console.log('data', data);
-  console.log('sortedAnswerData', sortedAnswerData);
-
   return (
     <div>
       {data && (
         <div>
-          <Question data={data} />
+          <Question isMyQuestion={isMyQuestion} data={data} />
           <AnswerHeader>
-            <div className="answer">{data.answers.length} Answer</div>
+            <div className="answer">{data.answers.totalAnswers} Answer</div>
             <div>
               <span className="sortedBy">Sorted by:</span>
               <select className="select">
@@ -40,8 +50,8 @@ export default function Contents({ data }) {
               </select>
             </div>
           </AnswerHeader>
-          <AnswerList data={sortedAnswerData} />
-          <AnswerSubmit data={sortedAnswerData} />
+          <AnswerList isMyQuestion={isMyQuestion} data={sortedAnswerData} />
+          {isLogin && <AnswerSubmit data={sortedAnswerData} />}
         </div>
       )}
     </div>

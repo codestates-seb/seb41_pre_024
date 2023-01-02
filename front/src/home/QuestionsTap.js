@@ -4,6 +4,7 @@ import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ImAppleinc } from "react-icons/im";
+import { useUser } from "../hooks/useUser";
 
 const Tap = styled.div`
   display: flex;
@@ -68,17 +69,11 @@ export const QuestionsTap = () => {
   const [listData, setListdata] = useState([]);
   const page = [];
 
-
   useEffect(() => {
-    // axios
-    //   .get(
-    //     `http://localhost:8080/api/questions?page=${currentPage}&size=${countList}`
-    //   )
-    //   .then((res) => setListdata(res.data));
 
     axios
-      .get("http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/questions?page=1&size=10")
-      .then((res) => console.log(res));
+      .get(`http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/questions?page=1&size=10`)
+      .then((res) => setListdata(res.data));
   }, []);
 
   for (
@@ -129,6 +124,8 @@ export const QuestionsTap = () => {
     );
   };
 
+
+  
   return (
     <div>
       <Tap>

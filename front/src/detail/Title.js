@@ -6,10 +6,10 @@ export default function Title({ data }) {
   return (
     <TitieContainer>
       <TitleAndInfo>
-        <TitleText>{data.question_title}</TitleText>
+        <TitleText>{data.title}</TitleText>
         <QuestionInfo>
           <span className="infoTitle">
-            Asked<span className="infoText">{data.question_time}</span>
+            Asked<span className="infoText">{data.createdAt}</span>
           </span>
           <span className="infoTitle">
             Modified<span className="infoText">4 days ago</span>

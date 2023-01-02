@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AdditionalFunction from './AdditionalFunc';
 
-export default function Question({ data }) {
+export default function Question({ isMyQuestion, data }) {
   return (
     <>
       {data && (
@@ -10,7 +10,7 @@ export default function Question({ data }) {
           <AdditionalFunction question={data} />
           <DetailBody>
             <DetailText>
-              {data.question_content}
+              {data.content}
               {/* Excuse all the Console.WriteLines! Trying to figure out what is
           happening here😀
           <br />
@@ -25,11 +25,15 @@ export default function Question({ data }) {
               <Menu>
                 <button className="menu">Share</button>
                 <button className="menu">Follow</button>
-                <button className="menu">Edit</button>
-                <button className="menu">Delete</button>
+                {isMyQuestion && (
+                  <>
+                    <button className="menu">Edit</button>
+                    <button className="menu">Delete</button>
+                  </>
+                )}
               </Menu>
               <Author>
-                <div className="createdAt">asked Dec 21, 2021 at 19:33</div>
+                <div className="createdAt">asked {data.createdAt}</div>
                 <div className="user">
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/userIcon.png`}
@@ -37,7 +41,7 @@ export default function Question({ data }) {
                     alt="userIcon"
                   ></img>
                   <div className="userInfoText">
-                    <div className="userName userInfo">Martin Thompson</div>
+                    <div className="userName userInfo">{data.member_id}</div>
                     <div className="userreputation userInfo">3,205</div>
                   </div>
                 </div>

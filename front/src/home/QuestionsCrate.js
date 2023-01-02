@@ -2,6 +2,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 
 const Layout = styled.div`
   .title {
@@ -96,13 +97,31 @@ export const QuestionsCrate = () => {
   const [content, setcontent] = useState("");
   const navigate = useNavigate();
 
+
+  
+  
+  
+
+  /*
+  junik@gmail.com
+  junIK3710@@
+  */
+  const access = localStorage.getItem("access_token")
+
+  console.log(access)
+
+
   const next = (e) => {
     e.preventDefault();
-
-    axios.post("http://localhost:8080/api/questions/add", {
+    
+    axios.post(`http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/questions`, {
       title,
       content,
-    });
+    },
+    // {
+    //   headers: access.authorization,
+    // }
+    );
 
     navigate("/");
   };

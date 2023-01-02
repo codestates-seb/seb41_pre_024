@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {QuestionsTap} from "./QuestionsTap";
 import {QuestionsSub} from "./QuestionsSub"
+import { useNavigate } from "react-router-dom";
 
 /* 
   [구현해야할 기능]
@@ -77,6 +78,10 @@ const Layout = styled.div`
 `
 
 export default function Questios() {
+  const access = localStorage.getItem("access_token");
+  const refresh = localStorage.getItem("refresh_token");
+  
+  
   return (
   <Layout>
     {/* 검색에 영향을 받는영역 */}
@@ -84,8 +89,7 @@ export default function Questios() {
       <div className="searchTitle">
         {/* 기본 :  All Questions / 검색시 : Search Results */}
         <h2>All Questions</h2>
-        {/* 회원이아닐시에 로그인 창으로 */}
-        <div className="crateBtn"><a href="/ask">Ask Question</a></div>
+        <div className="crateBtn"><a href={access || refresh === undefined ? "/ask" : "/login" }>Ask Question</a></div>
       </div>
       {/* 검색했을시 보여줄값 */}
       {/* <div className="serachLang">Results for ㄴㄴ</div> */}
@@ -93,8 +97,6 @@ export default function Questios() {
         <QuestionsTap/>
       </div>
     </div>
-
-    {/* 검색과 무관 */}
     <div className="subLine">
       <QuestionsSub/>
     </div>
