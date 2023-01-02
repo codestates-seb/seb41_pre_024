@@ -18,7 +18,7 @@ export default function EditAnswerPage() {
   useEffect(() => {
     async function request() {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/questions/${questionId}`
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/questions/${questionId}`
         // `/api/questions/${questionId}`
       );
       const { data } = response.data; // 답변 속한 질문 데이터 전체
@@ -70,7 +70,7 @@ export default function EditAnswerPage() {
 
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/${answerId}`,
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/answers/${answerId}`,
         editedAnswer,
         {
           headers: {

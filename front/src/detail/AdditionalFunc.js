@@ -20,7 +20,7 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
   const handleLike = ({ answerId }) => {
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=up`,
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/answers/recommend/${answerId}?recommendStatus=up`,
         {
           headers: {
             Authorization: localStorage.access_token,
@@ -35,7 +35,7 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
   const handleUnlike = ({ answerId }) => {
     async function request() {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/answers/recommend/${answerId}?recommendStatus=down`
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/answers/recommend/${answerId}?recommendStatus=down`
       );
       console.log('unliked');
     }
@@ -46,7 +46,7 @@ export default function AdditionalFunc({ question, answer, isMyQuestion }) {
     if (isMyQuestion) {
       async function request() {
         await axios.patch(
-          `${process.env.REACT_APP_API_URL}/api/answers/adoption/${answerId}?adiptStatus=no`
+          `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/answers/adoption/${answerId}?adiptStatus=no`
         );
         console.log('unliked');
       }
