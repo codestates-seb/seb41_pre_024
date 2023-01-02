@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useUser } from "../hooks/useUser";
 
 const Container = styled.div`
   display: flex;
@@ -30,93 +29,41 @@ const TextContainer = styled.div`
 `;
 
 const Answers = () => {
-  const { userInfo } = useUser(localStorage.getItem("access_token"));
-  console.log(userInfo);
-
   // localStorage 에 있는 유저 아이디 조회해서
   const memberId = localStorage.getItem("user_id");
-
-  const [answerss, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState([]);
 
   // 유저가 작성한 질문 리스트 조회 요청
   useEffect(() => {
+    const token = localStorage.getItem("access_token");
+
     axios
-      .get(`http://localhost:8080/api/members/answers/${memberId}`)
+      .get(
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/api/members/answers/${memberId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      )
       .then((res) => {
-        console.log(res);
-        setAnswers(res.data ?? []);
-        console.log(answerss);
+        console.log("res :", res);
+        setAnswers(res.data);
+        console.log("answers :", answers);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const answer = [
-    { title: "예시 답변입니다", name: "누구일까요" },
-    { title: "연습용 예시 답변입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 예시 답변입니다", name: "누구신지" },
-    { title: "예시 답변입니다", name: "누구일까요" },
-    { title: "연습용 예시 답변입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 예시 답변입니다", name: "누구신지" },
-    { title: "예시 답변입니다", name: "누구일까요" },
-    { title: "연습용 예시 답변입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 예시 답변입니다", name: "누구신지" },
-    { title: "예시 답변입니다", name: "누구일까요" },
-    { title: "연습용 예시 답변입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 예시 답변입니다", name: "누구신지" },
-    { title: "예시 답변입니다", name: "누구일까요" },
-    { title: "연습용 예시 답변입니다", name: "누구세요" },
-    { title: "아무렇게나 작성한 예시 답변입니다", name: "누구신지" },
-  ];
-
-  // answers = [
-  //   {
-  //     "answerId": 0,
-  //     "title": "stub answer title1",
-  //     "content": null,
-  //     "recommend": 0,
-  //     "createdAt": null,
-  //     "choose": false,
-  //     "questionId": 0,
-  //     "email": null
-  //   },
-  //   {
-  //     "answerId": 0,
-  //     "title": "stub answer title2",
-  //     "content": null,
-  //     "recommend": 0,
-  //     "createdAt": null,
-  //     "choose": false,
-  //     "questionId": 0,
-  //     "email": null
-  //   }
-  // ]
-
-  // return (
-  //   <Container>
-  //     <h1>{answers.length} Answers</h1>
-  //     <TextContainer>
-  //       <div className="head">
-  //         {answers.map((title, answerId) => {
-  //           return (
-  //             <div className="body" key={answerId}>
-  //               <p>{title}</p>
-  //             </div>
-  //           );
-  //         })}
-  //       </div>
-  //     </TextContainer>
-  //   </Container>
-  // );
-
   return (
     <Container>
-      <h1>{answer.length} Questions</h1>
+      <h1>{answers.length} Questions</h1>
       <TextContainer>
         <div className="head">
-          {answer.map((title, index) => {
+          {answers.map((answer, index) => {
             return (
-              <div className="body">
-                <p key={index}>{title.title}</p>
+              <div className="body" key={index}>
+                <p>{answer.title}</p>
               </div>
             );
           })}
@@ -125,4 +72,5 @@ const Answers = () => {
     </Container>
   );
 };
+
 export default Answers;
