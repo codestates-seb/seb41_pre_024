@@ -176,7 +176,7 @@ const LoginPage = () => {
     console.log('body: ', body);
     axios
       .post(
-        'http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/login',
+        `http://ec2-52-78-191-151.ap-northeast-2.compute.amazonaws.com:8080/login`,
         body,
         {
           headers: {
@@ -186,13 +186,9 @@ const LoginPage = () => {
       )
       .then((res) => {
         console.log(res);
-        // 이메일, 이름, 유저아이디, 토큰 localStorage에 저장 (쿠키에 저장하자 ,,,)
-        const { email, name, memberId, refreshToken } = res.data;
-        // 바디에 이메일 + 패스워드 보내고
-        // 백엔드 리스폰스로 토큰이이랑 개인정보들이 오고
+        const { email, name, memberId } = res.data;
         const accessToken = res.headers.authorization;
         localStorage.setItem('access_token', accessToken);
-        localStorage.setItem('refresh_token', refreshToken);
         localStorage.setItem('user_name', name);
         localStorage.setItem('user_email', email);
         localStorage.setItem('user_id', memberId);

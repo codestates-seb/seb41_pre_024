@@ -35,16 +35,15 @@ const Content = styled.div`
   padding: 10px;
 `;
 
-const MypageContent = ({ userInfo, setUserInfo }) => {
-  console.log(userInfo);
+const MypageContent = () => {
   const [currentTab, setCurrentTab] = useState(0);
 
   const menuArr = [
-    { name: "Questions", content: <Questions userInfo={userInfo} /> },
-    { name: "Answers", content: <Answers userInfo={userInfo} /> },
+    { name: "Questions", content: <Questions /> },
+    { name: "Answers", content: <Answers /> },
     {
       name: "Edit",
-      content: <Edit userInfo={userInfo} setUserInfo={setUserInfo} />,
+      content: <Edit />,
     },
   ];
 
